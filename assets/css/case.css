@@ -1,0 +1,351 @@
+body {
+    background-color: #ebe3f0; /* Matches the background color */
+    font-family: 'Poppins', sans-serif; /* Modern stylish font */
+  }
+  
+  .logo1 {
+    height: auto;
+    width: 120px; /* Adjust width as needed */
+    max-height: 70px; 
+  }
+  
+  /* Navbar wrapper to add margin */
+  .navbar-wrapper {
+    margin: 20px; 
+    border-radius: 15px; 
+    overflow: visible; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  }
+  
+  /* Navbar styles */
+  .custom-navbar {
+    background-color: #eae6f2; /* Light purple */
+    padding: 10px 0;
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.1rem; 
+    font-weight: 500;
+    color: #000;
+    margin-right: 15px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #8f6cf6; 
+    border-bottom: 2px solid #8f6cf6; /* Underline effect */
+  }
+  
+  /* Dropdown styles */
+  .dropdown-menu {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-btn {
+    background-color: #8f6cf6; /* Button color */
+    color: #fff;
+    /* font-weight: 500; */
+    padding: 10px 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 20px; */
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-btn:hover {
+    background-color: #7347d8; 
+  }
+  
+  .contact-number {
+    font-size: 1rem;
+    color: #000;
+  }
+  
+/* Contact us section css */
+
+.contact-section111 {
+    height: 60vh;  
+    background-color: #1c1c2e;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    margin-top: 70px;
+    }
+    .contact-section111 h1 {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: bold;
+    }
+    .contact-section111 p {
+    font-size: 1.25rem;
+    margin-top: 10px;
+    }
+    .contact-section111 .btn {
+    margin-top: 20px;
+    padding: 10px 30px;
+    background-color: #8f6cf6; /* Button color */
+    color: #fff;
+    font-weight: 500;
+    
+    border-radius: 30px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    }
+    .contact-section111 .btn:hover{
+      background-color: #7347d8;
+    }
+  
+  
+  
+    @media (max-width: 576px) {
+    .contact-section111 {
+      height: auto;  
+     
+    }
+    .contact-section111 h1{
+      size: 2rem;
+    }
+    }
+  
+
+
+  /* Footer */
+    /* Footer Css */
+    .footer {
+        background: linear-gradient(135deg, #1c1c2e, #6034ac, #1c1c2e);
+        color: white;
+        padding: 30px 10px;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Poppins', sans-serif;
+        margin-top: 70px;
+    }
+    .footer h3 {
+        font-family: 'Roboto Slab', serif;
+        font-weight: 700;
+        color: #ffb703;
+        margin-bottom: 20px;
+    }
+    .footer p {
+        color: #ffffff;
+        font-size: 1rem;
+        line-height: 2;
+        /* font-weight: bold; */
+    }
+    .footer a {
+        color: #ffffff;
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .footer a:hover {
+        color: #ffb703;
+        transform: translateX(5px);
+    }
+    .footer p:hover {
+        color: #ffb703;
+        transform: translateX(3px);
+    }
+    .footer .social-icons a {
+        font-size: 24px;
+        margin: 10px 10px;
+        color: white;
+        transition: transform 0.3s ease, background 0.3s ease;
+        border: 2px solid white;
+        border-radius: 50%;
+        padding: 10px;
+    }
+    .footer .social-icons a:hover {
+        transform: scale(1.3);
+        background-color: #ffb703;
+        color: #1d3557;
+    }
+    .footer .logo img {
+        width: 200px;
+        height: 150px;
+      
+        animation: float-logo 3s infinite;
+    }
+    .footer-bottom {
+        background-color: rgba(0, 0, 0, 0.2);
+        text-align: center;
+        padding: 15px;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+    /* Animations */
+    @keyframes float-logo {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .footer .row > div {
+        animation: fade-in 1.5s ease;
+    }
+    /* Decorative Elements */
+    .footer:before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        z-index: 1;
+    }
+    .footer:after {
+        content: '';
+        position: absolute;
+        bottom: -30px;
+        left: -30px;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        z-index: 1;
+    }
+    
+
+/* pixel based services css start here */
+.container01{
+    font-family: 'Arial', sans-serif;
+  
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #ffffff;
+  overflow-x: hidden;
+  width: 100%;
+  
+  }
+  
+  .card-section1{
+    padding: 60px;
+  }
+ 
+  
+
+  .card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  .card-img-top {
+  height: 300px;
+  object-fit: cover;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+  }
+  .card:hover .card-img-top {
+  filter: brightness(1);
+  }
+  /* .card-body {
+  padding: 1.5rem;
+  } */
+  .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #262b31;
+  margin-bottom: 1rem;
+  }
+  .card-text {
+    padding: 10px;
+    height: 120px;
+  color: #161414;
+  margin-bottom: 1.5rem;
+  }
+  /* pixel based services css ends here */
+  
+  /* buttons html */
+
+
+  .custom-btn01 {
+    margin-top: 70px;
+    margin-bottom: 70px;
+    width: 180px;
+    height: 55px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.custom-btn01:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Padding */
+#dooh {
+    margin-top: 100px;
+}
+
+.heading1 p {
+  max-width: 1200px; /* Limit the width for better readability */
+  margin: 0 auto; /* Center align the paragraph with equal margins on both sides */
+  text-align: justify; /* Justify text for a cleaner look */
+  line-height: 1.6; /* Improve readability with proper spacing */
+  font-size: 18px; /* Set an appropriate font size */
+  color: #080808; /* Use a dark grey color for better contrast */
+  padding: 10px 20px; /* Add some padding for spacing */
+}
+
+
+
+.heading1 h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center; 
+  position: relative;
+  margin: 0 auto 30px; /* Centered with margin */
+  display: inline-block; 
+  animation: fadeIn 2s ease-in-out;
+}
+
+.heading1 h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0; 
+  width: 0;
+  height: 3px;
+  background-color: #8f6cf6;
+  animation: underlineExpand 1s ease-out 1s forwards;
+}
+
+
+/* Animation Keyframes for Underline */
+@keyframes underlineExpand {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%; 
+  }
+}
