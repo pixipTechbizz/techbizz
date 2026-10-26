@@ -12,106 +12,165 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css?v=3.1">
 
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     body {
       background-color: #0c0a17;
-      color: #f1f5f9;
+      color: #ffffff !important;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
     }
 
     .hr-header {
       background: #151326;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       padding: 16px 24px;
     }
 
     .portal-card {
       background: #18162b;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .nav-pills .nav-link {
-      color: #94a3b8;
-      font-weight: 500;
+      color: #e2e8f0 !important;
+      background: #23203c;
+      font-weight: 600;
       border-radius: 10px;
-      padding: 10px 20px;
-      margin-right: 8px;
+      padding: 11px 22px;
+      margin-right: 10px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.2s ease;
     }
 
-    .nav-pills .nav-link.active {
-      background: linear-gradient(135deg, #8f6cf6, #7347d8);
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(143, 108, 246, 0.4);
+    .nav-pills .nav-link:hover {
+      background: #2f2a50;
+      color: #ffffff !important;
     }
 
+    .nav-pills .nav-link.active {
+      background: linear-gradient(135deg, #8f6cf6, #7347d8) !important;
+      color: #ffffff !important;
+      border-color: #8f6cf6;
+      box-shadow: 0 4px 15px rgba(143, 108, 246, 0.5);
+    }
+
+    /* Form Controls & Dropdown Contrast Fixes */
     .form-control, .form-select {
-      background: #23203c;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #ffffff;
+      background-color: #23203c !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      color: #ffffff !important;
       border-radius: 10px;
-      padding: 10px 14px;
+      padding: 11px 14px;
+      font-size: 0.95rem;
     }
 
     .form-control:focus, .form-select:focus {
-      background: #282445;
-      border-color: #8f6cf6;
-      color: #ffffff;
-      box-shadow: 0 0 0 0.25rem rgba(143, 108, 246, 0.25);
+      background-color: #2b274c !important;
+      border-color: #8f6cf6 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 0 0.25rem rgba(143, 108, 246, 0.3) !important;
+    }
+
+    .form-control::placeholder {
+      color: #94a3b8 !important;
+    }
+
+    /* Fixed: Select dropdown options white-on-white bug */
+    select.form-select option, select option {
+      background-color: #23203c !important;
+      color: #ffffff !important;
+      padding: 12px !important;
     }
 
     .form-label {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: #cbd5e1;
-      margin-bottom: 6px;
+      font-size: 0.92rem;
+      font-weight: 600 !important;
+      color: #ffffff !important;
+      margin-bottom: 7px;
+    }
+
+    .text-muted {
+      color: #cbd5e1 !important; /* Crisp high-contrast silver instead of dark grey */
+    }
+
+    /* High Contrast Table Styling */
+    .table-responsive {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .table {
-      color: #f1f5f9;
-      border-color: rgba(255, 255, 255, 0.1);
+      margin-bottom: 0;
+      color: #ffffff !important;
+      --bs-table-bg: transparent;
+      --bs-table-color: #ffffff;
+      --bs-table-hover-bg: #262145;
+      --bs-table-hover-color: #ffffff;
     }
 
     .table th {
-      background: #201d36;
-      color: #c4b5fd;
-      font-weight: 600;
-      font-size: 0.88rem;
+      background: #29244d !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 0.92rem !important;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 14px 16px;
+      padding: 16px 18px;
+      border-bottom: 2px solid rgba(143, 108, 246, 0.4) !important;
     }
 
     .table td {
-      background: #18162b;
-      padding: 14px 16px;
+      background: #18162b !important;
+      color: #ffffff !important;
+      padding: 16px 18px;
       vertical-align: middle;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .table tr:hover td {
+      background: #252047 !important;
+      color: #ffffff !important;
+    }
+
+    .table td strong {
+      color: #ffffff !important;
+      font-size: 1rem;
+    }
+
+    .table td small {
+      color: #d1d5db !important;
     }
 
     .badge-active {
-      background: rgba(37, 211, 102, 0.2);
+      background: rgba(37, 211, 102, 0.22);
       color: #25D366;
       border: 1px solid #25D366;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
       font-weight: 600;
+      font-size: 0.82rem;
     }
 
     .badge-closed {
-      background: rgba(239, 68, 68, 0.2);
+      background: rgba(239, 68, 68, 0.22);
       color: #ef4444;
       border: 1px solid #ef4444;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
       font-weight: 600;
+      font-size: 0.82rem;
     }
 
-    /* Lock Screen */
+    /* Lock Screen Overlay */
     #lockScreenOverlay {
       position: fixed;
       top: 0;
@@ -128,13 +187,13 @@
 
     .login-box {
       background: #18162b;
-      border: 1px solid rgba(143, 108, 246, 0.3);
+      border: 1px solid rgba(143, 108, 246, 0.35);
       border-radius: 20px;
       padding: 40px;
       max-width: 440px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
     }
   </style>
 </head>
@@ -145,13 +204,13 @@
     <div class="login-box">
       <img src="../assets/img/logo techbizz.png" alt="Techbizz Integrators" style="max-height: 60px;" class="mb-4">
       <h4 class="fw-bold text-white mb-2">HR Careers CMS</h4>
-      <p class="text-muted small mb-4">Enter authorized HR passcode to manage job openings and candidate resumes.</p>
+      <p class="text-muted small mb-4">Enter authorized HR passcode to manage openings and review applications.</p>
       
       <form id="hrLoginForm">
         <div class="mb-3 text-start">
           <label for="hrPasscodeInput" class="form-label">HR Passcode</label>
           <div class="input-group">
-            <span class="input-group-text" style="background: #23203c; border-color: rgba(255,255,255,0.15); color: #8f6cf6;">
+            <span class="input-group-text" style="background: #23203c; border-color: rgba(255,255,255,0.25); color: #8f6cf6;">
               <i class="bi bi-shield-lock"></i>
             </span>
             <input type="password" class="form-control" id="hrPasscodeInput" placeholder="Enter HR PIN (e.g. Techbizz@2026)" required>
@@ -177,12 +236,15 @@
     <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center gap-3">
       <div class="d-flex align-items-center gap-3">
         <img src="../assets/img/logo techbizz.png" alt="Techbizz Integrators" style="max-height: 48px;">
-        <span class="badge px-3 py-2 rounded-pill" style="background: rgba(143, 108, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(143, 108, 246, 0.4);">
+        <span class="badge px-3 py-2 rounded-pill" style="background: rgba(143, 108, 246, 0.25); color: #c4b5fd; border: 1px solid rgba(143, 108, 246, 0.45); font-size: 0.9rem;">
           <i class="bi bi-person-badge me-1"></i> HR Job CMS Portal
+        </span>
+        <span id="cloudStatusBadge" class="badge bg-secondary px-3 py-2 rounded-pill" style="font-size: 0.8rem;">
+          <i class="bi bi-hdd me-1"></i> Checking Sync...
         </span>
       </div>
       <div class="d-flex align-items-center gap-3">
-        <span class="text-muted small d-none d-md-inline" id="portalStatsLabel">Loading stats...</span>
+        <span class="text-white small d-none d-md-inline" id="portalStatsLabel">Loading stats...</span>
         <a href="career.html" target="_blank" class="btn btn-sm btn-outline-light rounded-pill px-3">
           <i class="bi bi-box-arrow-up-right me-1"></i> View Live Site
         </a>
@@ -214,8 +276,13 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-supabase-tab" data-bs-toggle="pill" data-bs-target="#pills-supabase" type="button" role="tab">
+          <i class="bi bi-cloud-arrow-up me-1"></i> Cloud Database (Supabase)
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-backup-tab" data-bs-toggle="pill" data-bs-target="#pills-backup" type="button" role="tab">
-          <i class="bi bi-gear me-1"></i> Backup & Cloud Sync
+          <i class="bi bi-gear me-1"></i> Backup & Export
         </button>
       </li>
     </ul>
@@ -229,7 +296,7 @@
           <div class="col-lg-8">
             <div class="portal-card">
               <h4 class="fw-bold text-white mb-1" id="formHeaderTitle">Create New Job Opening</h4>
-              <p class="text-muted small mb-4">Fill in the details below. Once published, it will appear live on techbizzintegrators.in/pages/career.html immediately.</p>
+              <p class="text-muted small mb-4">Fill in the role details. Once published, it will appear on techbizzintegrators.in/pages/career.html immediately.</p>
 
               <form id="jobPostingForm">
                 <input type="hidden" id="editJobId" name="id">
@@ -292,7 +359,7 @@
                   <div class="col-md-6">
                     <label for="postJobStatus" class="form-label">Initial Status *</label>
                     <select class="form-select" id="postJobStatus">
-                      <option value="active">Active (Visible to Public)</option>
+                      <option value="active">Active (Visible on Website)</option>
                       <option value="closed">Draft / Closed (Hidden)</option>
                     </select>
                   </div>
@@ -326,26 +393,27 @@ Willingness to travel for field installations" required></textarea>
             </div>
           </div>
 
-          <!-- Quick Tips Sidebar -->
+          <!-- Quick Contacts Sidebar -->
           <div class="col-lg-4">
             <div class="portal-card mb-4">
-              <h5 class="fw-bold text-white mb-3"><i class="bi bi-lightbulb text-warning me-2"></i> HR Best Practices</h5>
-              <ul class="text-muted small ps-3 mb-0" style="line-height: 1.8;">
-                <li><strong>Clear Experience Range:</strong> Setting accurate minimum experience helps candidate filtering and self-qualification.</li>
-                <li><strong>Transparent Salary:</strong> Mentioning salary or monthly compensation increases candidate response rate by over 60%.</li>
-                <li><strong>WhatsApp Follow-up:</strong> Candidates can also reach you directly on the HR Desk WhatsApp (+91 9910895095) with pre-filled details.</li>
-              </ul>
+              <h5 class="fw-bold text-white mb-3"><i class="bi bi-whatsapp text-success me-2"></i> HR Direct Routing</h5>
+              <p class="text-muted small mb-3">All candidate submissions and WhatsApp inquiries route directly to:</p>
+              <div class="p-3 rounded mb-2 text-white" style="background: #23203c; border: 1px solid rgba(255,255,255,0.1);">
+                <span class="text-muted small d-block">HR WhatsApp Number:</span>
+                <strong class="text-white fs-6"><i class="bi bi-telephone text-success me-1"></i> +91 78386 66145</strong>
+              </div>
+              <div class="p-3 rounded text-white" style="background: #23203c; border: 1px solid rgba(255,255,255,0.1);">
+                <span class="text-muted small d-block">HR Official Email:</span>
+                <strong class="text-white fs-6"><i class="bi bi-envelope text-primary me-1"></i> hr@techbizzintegrators.com</strong>
+              </div>
             </div>
 
             <div class="portal-card">
-              <h5 class="fw-bold text-white mb-2"><i class="bi bi-whatsapp text-success me-2"></i> HR Direct Channels</h5>
-              <p class="text-muted small mb-3">All candidate submissions also offer one-click WhatsApp and Email to your team:</p>
-              <div class="p-2 rounded bg-dark mb-2 small text-muted">
-                <strong>WhatsApp Desk:</strong> +91 9910895095
-              </div>
-              <div class="p-2 rounded bg-dark small text-muted">
-                <strong>HR Email:</strong> careers@techbizzintegrators.com
-              </div>
+              <h5 class="fw-bold text-white mb-2"><i class="bi bi-lightbulb text-warning me-2"></i> HR Tips</h5>
+              <ul class="text-muted small ps-3 mb-0" style="line-height: 1.9;">
+                <li><strong>Dynamic Updates:</strong> Any job you add or edit is immediately updated for website visitors.</li>
+                <li><strong>One-Click Candidate Chat:</strong> In the Applications tab, click the green WhatsApp icon to directly chat with any applicant.</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -357,7 +425,7 @@ Willingness to travel for field installations" required></textarea>
           <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
               <h4 class="fw-bold text-white mb-1">Active & Closed Openings</h4>
-              <p class="text-muted small mb-0">Toggle status anytime to show or hide openings from the live website.</p>
+              <p class="text-muted small mb-0">Toggle status anytime to instantly show or hide openings from the live website.</p>
             </div>
             <button class="btn btn-sm btn-primary rounded-pill px-3" onclick="document.getElementById('pills-post-tab').click(); resetJobForm();">
               <i class="bi bi-plus-lg me-1"></i> New Opening
@@ -365,7 +433,7 @@ Willingness to travel for field installations" required></textarea>
           </div>
 
           <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table align-middle">
               <thead>
                 <tr>
                   <th>Job Title</th>
@@ -399,16 +467,16 @@ Willingness to travel for field installations" required></textarea>
           </div>
 
           <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table align-middle">
               <thead>
                 <tr>
                   <th>Date</th>
                   <th>Candidate Name</th>
                   <th>Applied Role</th>
                   <th>Experience</th>
-                  <th>Contact</th>
+                  <th>Contact Details</th>
                   <th>Resume</th>
-                  <th class="text-end">Contact Candidate</th>
+                  <th class="text-end">Quick Contact</th>
                 </tr>
               </thead>
               <tbody id="appsTableBody">
@@ -419,7 +487,102 @@ Willingness to travel for field installations" required></textarea>
         </div>
       </div>
 
-      <!-- TAB 4: Backup & Cloud Sync -->
+      <!-- TAB 4: Cloud Database Setup (Supabase) -->
+      <div class="tab-pane fade" id="pills-supabase" role="tabpanel">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="portal-card mb-4">
+              <h4 class="fw-bold text-white mb-2"><i class="bi bi-cloud-check text-primary me-2"></i> Connect Supabase Cloud DB</h4>
+              <p class="text-muted small mb-4">
+                Enter your Supabase Project URL and Public Anon Key below. This enables permanent global database sync and resumes cloud bucket storage!
+              </p>
+
+              <form id="supabaseConfigForm">
+                <div class="mb-3">
+                  <label for="sbUrlInput" class="form-label">Supabase Project URL *</label>
+                  <input type="url" class="form-control" id="sbUrlInput" placeholder="https://xyzcompany.supabase.co" required>
+                </div>
+                <div class="mb-3">
+                  <label for="sbKeyInput" class="form-label">Supabase Anon Public Key *</label>
+                  <textarea class="form-control" id="sbKeyInput" rows="3" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." required></textarea>
+                </div>
+
+                <div id="sbConfigAlert" class="mt-2" style="display: none;"></div>
+
+                <div class="mt-4 d-flex gap-2">
+                  <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold" style="background: linear-gradient(135deg, #8f6cf6, #7347d8); border: none;">
+                    <i class="bi bi-save me-1"></i> Save & Connect Supabase
+                  </button>
+                  <button type="button" class="btn btn-outline-danger rounded-pill px-3" onclick="disconnectSupabase()">
+                    Disconnect
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="portal-card mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="fw-bold text-white mb-0"><i class="bi bi-code-slash text-warning me-2"></i> Supabase SQL Setup Script</h5>
+                <button class="btn btn-sm btn-outline-warning rounded-pill px-3" onclick="copySqlScript()">
+                  <i class="bi bi-clipboard me-1"></i> Copy SQL
+                </button>
+              </div>
+              <p class="text-muted small mb-3">Paste this exact SQL script into your Supabase Dashboard -> <strong>SQL Editor</strong> to create the tables and resume bucket in 10 seconds:</p>
+
+              <textarea class="form-control text-white" id="sqlSetupScriptText" rows="12" readonly style="font-family: monospace; font-size: 0.8rem; background: #121021 !important; color: #a5b4fc !important;">
+-- 1. Create Jobs Table
+create table if not exists public.jobs (
+  id text primary key,
+  title text not null,
+  department text not null,
+  location text not null,
+  type text not null,
+  min_experience int not null default 0,
+  salary text not null,
+  description text not null,
+  requirements jsonb not null default '[]'::jsonb,
+  status text not null default 'active',
+  created_at timestamp with time zone default now()
+);
+
+-- 2. Create Applications Table
+create table if not exists public.applications (
+  id text primary key,
+  job_id text,
+  job_title text not null,
+  full_name text not null,
+  email text not null,
+  phone text not null,
+  city text,
+  experience text not null,
+  notice_period text,
+  note text,
+  resume_url text,
+  resume_file_name text,
+  submitted_at timestamp with time zone default now()
+);
+
+-- 3. Enable Public Access for Reading & Writing
+alter table public.jobs enable row level security;
+create policy "Allow all on jobs" on public.jobs for all using (true) with check (true);
+
+alter table public.applications enable row level security;
+create policy "Allow all on applications" on public.applications for all using (true) with check (true);
+
+-- 4. Create Storage Bucket for Resumes
+insert into storage.buckets (id, name, public) values ('resumes', 'resumes', true)
+on conflict (id) do nothing;
+create policy "Allow public upload to resumes" on storage.objects for insert with check (bucket_id = 'resumes');
+create policy "Allow public read from resumes" on storage.objects for select using (bucket_id = 'resumes');
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: Backup & Export -->
       <div class="tab-pane fade" id="pills-backup" role="tabpanel">
         <div class="row">
           <div class="col-lg-6">
@@ -454,17 +617,15 @@ Willingness to travel for field installations" required></textarea>
   <script>
     const HR_PASSCODE = 'Techbizz@2026';
 
-    // Check Login State
     function checkAuth() {
       if (sessionStorage.getItem('techbizz_hr_authenticated') === 'true') {
         document.getElementById('lockScreenOverlay').style.display = 'none';
-        updateStats();
+        initDashboard();
       } else {
         document.getElementById('lockScreenOverlay').style.display = 'flex';
       }
     }
 
-    // Handle Login
     document.getElementById('hrLoginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const entered = document.getElementById('hrPasscodeInput').value.trim();
@@ -473,7 +634,7 @@ Willingness to travel for field installations" required></textarea>
       if (entered === HR_PASSCODE || entered === 'techbizz' || entered === 'admin123') {
         sessionStorage.setItem('techbizz_hr_authenticated', 'true');
         document.getElementById('lockScreenOverlay').style.display = 'none';
-        updateStats();
+        initDashboard();
       } else {
         err.style.display = 'block';
       }
@@ -484,7 +645,24 @@ Willingness to travel for field installations" required></textarea>
       window.location.reload();
     }
 
-    // Update Stats Badges
+    function initDashboard() {
+      updateSyncBadge();
+      updateStats();
+      loadManageJobsTable();
+      loadSupabaseInputs();
+    }
+
+    function updateSyncBadge() {
+      const badge = document.getElementById('cloudStatusBadge');
+      if (TechbizzCareerEngine.isSupabaseConnected()) {
+        badge.className = 'badge bg-success px-3 py-2 rounded-pill';
+        badge.innerHTML = '<i class="bi bi-cloud-check-fill me-1"></i> Cloud Synced (Supabase)';
+      } else {
+        badge.className = 'badge bg-warning text-dark px-3 py-2 rounded-pill';
+        badge.innerHTML = '<i class="bi bi-hdd-fill me-1"></i> Local Mode (Ready for Cloud)';
+      }
+    }
+
     function updateStats() {
       const jobs = TechbizzCareerEngine.getJobs();
       const apps = TechbizzCareerEngine.getApplications();
@@ -495,13 +673,12 @@ Willingness to travel for field installations" required></textarea>
       document.getElementById('portalStatsLabel').textContent = `${activeJobs.length} Active Openings • ${apps.length} Total Applicants`;
     }
 
-    // Load Manage Jobs Table
-    function loadManageJobsTable() {
+    async function loadManageJobsTable() {
       const tbody = document.getElementById('manageJobsTableBody');
-      const jobs = TechbizzCareerEngine.getJobs();
+      const jobs = await TechbizzCareerEngine.getJobsAsync();
 
-      if (jobs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-muted">No openings created yet. Click "Post New Opening" above!</td></tr>`;
+      if (!jobs || jobs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-white">No openings created yet. Click "Post New Opening" above!</td></tr>`;
         return;
       }
 
@@ -513,11 +690,11 @@ Willingness to travel for field installations" required></textarea>
 
         return `
           <tr>
-            <td><strong>${j.title}</strong></td>
-            <td><span class="text-muted small">${j.department}</span></td>
-            <td><small>${j.location}</small></td>
-            <td><span class="badge bg-dark">${j.minExperience}+ Yrs</span></td>
-            <td><small>${j.salary}</small></td>
+            <td><strong class="text-white">${j.title}</strong></td>
+            <td><span class="text-white small">${j.department}</span></td>
+            <td><span class="text-white small">${j.location}</span></td>
+            <td><span class="badge bg-purple" style="background:#7347d8;">${j.minExperience}+ Yrs</span></td>
+            <td><span class="text-white small">${j.salary}</span></td>
             <td>${badge}</td>
             <td class="text-end">
               <button class="btn btn-sm ${toggleBtnClass} rounded-pill me-1" onclick="toggleJob('${j.id}')">
@@ -536,21 +713,18 @@ Willingness to travel for field installations" required></textarea>
       updateStats();
     }
 
-    // Toggle Job Status
     window.toggleJob = function(id) {
       TechbizzCareerEngine.toggleJobStatus(id);
       loadManageJobsTable();
     };
 
-    // Delete Job
-    window.deleteJob = function(id) {
+    window.deleteJob = async function(id) {
       if (confirm('Are you sure you want to delete this job opening?')) {
-        TechbizzCareerEngine.deleteJob(id);
+        await TechbizzCareerEngine.deleteJobAsync(id);
         loadManageJobsTable();
       }
     };
 
-    // Edit Job
     window.editJob = function(id) {
       const job = TechbizzCareerEngine.getJobById(id);
       if (!job) return;
@@ -569,7 +743,6 @@ Willingness to travel for field installations" required></textarea>
       document.getElementById('formHeaderTitle').textContent = `Edit Opening: ${job.title}`;
       document.getElementById('btnPublishJob').innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Update Opening';
 
-      // Switch to Tab 1
       document.getElementById('pills-post-tab').click();
     };
 
@@ -581,10 +754,10 @@ Willingness to travel for field installations" required></textarea>
       document.getElementById('postAlert').style.display = 'none';
     }
 
-    // Save Job Form Submit
-    document.getElementById('jobPostingForm').addEventListener('submit', function(e) {
+    document.getElementById('jobPostingForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const alertBox = document.getElementById('postAlert');
+      const submitBtn = document.getElementById('btnPublishJob');
 
       const reqsText = document.getElementById('postJobReqs').value;
       const reqsArray = reqsText.split('\n').map(r => r.trim()).filter(r => r.length > 0);
@@ -606,7 +779,13 @@ Willingness to travel for field installations" required></textarea>
         jobData.id = existingId;
       }
 
-      TechbizzCareerEngine.saveJob(jobData);
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Saving...';
+
+      await TechbizzCareerEngine.saveJobAsync(jobData);
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Saved!';
 
       alertBox.className = 'alert alert-success';
       alertBox.innerHTML = `<strong><i class="bi bi-check-circle me-1"></i> Opening Saved Successfully!</strong> It is now live on the career page.`;
@@ -615,44 +794,45 @@ Willingness to travel for field installations" required></textarea>
       setTimeout(() => {
         resetJobForm();
         document.getElementById('pills-manage-tab').click();
-      }, 1200);
+      }, 1000);
     });
 
-    // Load Applications Table
-    function loadApplicationsTable() {
+    async function loadApplicationsTable() {
       const tbody = document.getElementById('appsTableBody');
-      const apps = TechbizzCareerEngine.getApplications();
+      const apps = await TechbizzCareerEngine.getApplicationsAsync();
 
-      if (apps.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-muted">No applications received yet. When candidates apply on the career page, their resumes will appear here.</td></tr>`;
+      if (!apps || apps.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-white">No applications received yet. When candidates apply on the career page, their resumes will appear here.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = apps.map(a => {
-        const waMsg = `Hello ${a.fullName}, this is Techbizz HR regarding your application for the ${a.jobTitle} position.`;
-        const waLink = `https://wa.me/91${a.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(waMsg)}`;
-        const mailLink = `mailto:${a.email}?subject=${encodeURIComponent('Regarding your application at Techbizz Integrators')}`;
+        const cleanPhone = (a.phone || '').replace(/[^0-9]/g, '');
+        const waMsg = `Hello ${a.fullName}, this is Techbizz HR (+91 78386 66145) regarding your application for the ${a.jobTitle} role at Techbizz Integrators.`;
+        const waLink = `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(waMsg)}`;
+        const mailLink = `mailto:${a.email}?subject=${encodeURIComponent('Regarding your application at Techbizz Integrators')}&body=${encodeURIComponent('Dear ' + a.fullName + ',\n\nThank you for applying for the ' + a.jobTitle + ' role at Techbizz Integrators.')}`;
 
-        const resumeBtn = a.resumeDataUrl 
-          ? `<a href="${a.resumeDataUrl}" download="${a.resumeFileName || 'resume.pdf'}" class="btn btn-sm btn-outline-success rounded-pill px-2 py-1"><i class="bi bi-download me-1"></i> ${a.resumeFileName || 'Resume'}</a>`
-          : `<span class="text-muted small">No file</span>`;
+        const resumeUrl = a.resumeUrl || a.resumeDataUrl;
+        const resumeBtn = resumeUrl 
+          ? `<a href="${resumeUrl}" target="_blank" download="${a.resumeFileName || 'resume.pdf'}" class="btn btn-sm btn-outline-success rounded-pill px-3 py-1"><i class="bi bi-download me-1"></i> Download Resume</a>`
+          : `<span class="text-muted small">No file attached</span>`;
 
         return `
           <tr>
-            <td><small class="text-muted">${a.submittedAt || 'Recent'}</small></td>
-            <td><strong>${a.fullName}</strong><br><small class="text-muted">${a.city || ''}</small></td>
+            <td><span class="text-white small">${a.submittedAt || 'Recent'}</span></td>
+            <td><strong class="text-white">${a.fullName}</strong><br><span class="text-muted small">${a.city || ''}</span></td>
             <td><span class="badge bg-purple" style="background:#7347d8;">${a.jobTitle}</span></td>
-            <td><strong>${a.experience}</strong></td>
+            <td><strong class="text-white">${a.experience}</strong></td>
             <td>
-              <small class="d-block"><i class="bi bi-envelope me-1"></i>${a.email}</small>
-              <small class="d-block"><i class="bi bi-phone me-1"></i>${a.phone}</small>
+              <span class="d-block text-white small"><i class="bi bi-envelope me-1 text-primary"></i>${a.email}</span>
+              <span class="d-block text-white small"><i class="bi bi-phone me-1 text-success"></i>${a.phone}</span>
             </td>
             <td>${resumeBtn}</td>
             <td class="text-end">
-              <a href="${waLink}" target="_blank" class="btn btn-sm btn-success rounded-circle me-1" title="Chat on WhatsApp" style="background: #25D366; border: none;">
-                <i class="bi bi-whatsapp"></i>
+              <a href="${waLink}" target="_blank" class="btn btn-sm btn-success rounded-pill px-2 me-1" title="Chat on WhatsApp" style="background: #25D366; border: none;">
+                <i class="bi bi-whatsapp"></i> Chat
               </a>
-              <a href="${mailLink}" class="btn btn-sm btn-outline-light rounded-circle me-1" title="Email Candidate">
+              <a href="${mailLink}" class="btn btn-sm btn-outline-light rounded-pill px-2 me-1" title="Email Candidate">
                 <i class="bi bi-envelope"></i>
               </a>
               <button class="btn btn-sm btn-outline-danger rounded-circle" onclick="deleteApp('${a.id}')" title="Delete">
@@ -672,7 +852,48 @@ Willingness to travel for field installations" required></textarea>
       }
     };
 
-    // Backup & Restore
+    function loadSupabaseInputs() {
+      const creds = TechbizzCareerEngine.getSupabaseCredentials();
+      if (creds) {
+        document.getElementById('sbUrlInput').value = creds.url || '';
+        document.getElementById('sbKeyInput').value = creds.key || '';
+      }
+    }
+
+    document.getElementById('supabaseConfigForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const url = document.getElementById('sbUrlInput').value.trim();
+      const key = document.getElementById('sbKeyInput').value.trim();
+      const alertBox = document.getElementById('sbConfigAlert');
+
+      const ok = TechbizzCareerEngine.setSupabaseCredentials(url, key);
+      updateSyncBadge();
+
+      alertBox.className = 'alert alert-success';
+      alertBox.innerHTML = '<i class="bi bi-check-circle me-1"></i> Supabase credentials saved! All jobs and resume files are now cloud synchronized.';
+      alertBox.style.display = 'block';
+    });
+
+    function disconnectSupabase() {
+      if (confirm('Disconnect Supabase? Portal will revert to local mode.')) {
+        TechbizzCareerEngine.setSupabaseCredentials(null, null);
+        document.getElementById('sbUrlInput').value = '';
+        document.getElementById('sbKeyInput').value = '';
+        updateSyncBadge();
+        const alertBox = document.getElementById('sbConfigAlert');
+        alertBox.className = 'alert alert-warning';
+        alertBox.innerHTML = 'Supabase disconnected. Using local mode.';
+        alertBox.style.display = 'block';
+      }
+    }
+
+    function copySqlScript() {
+      const text = document.getElementById('sqlSetupScriptText').value;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Supabase SQL setup script copied to clipboard! Paste it into Supabase SQL Editor.');
+      });
+    }
+
     function exportDataFile() {
       const dataStr = TechbizzCareerEngine.exportDataJSON();
       const blob = new Blob([dataStr], { type: 'application/json' });
@@ -695,8 +916,7 @@ Willingness to travel for field installations" required></textarea>
         const ok = TechbizzCareerEngine.importDataJSON(e.target.result);
         if (ok) {
           alert('Data imported successfully!');
-          updateStats();
-          loadManageJobsTable();
+          initDashboard();
         } else {
           alert('Invalid backup file.');
         }
