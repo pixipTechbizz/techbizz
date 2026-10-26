@@ -1,4 +1,4 @@
-body {
+﻿body {
   background-color: #ebe3f0; /* Matches the background color */
   font-family: 'Poppins', sans-serif; /* Modern stylish font */
 }
@@ -571,42 +571,51 @@ left: 50%;
 transform: translateX(-50%);
 border-radius: 2px;
 }
-.card {
-border: none;
-border-radius: 15px;
-overflow: hidden;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-background: rgba(255, 255, 255, 0.8);
-backdrop-filter: blur(10px);
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.card:hover {
-transform: translateY(-10px);
-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-.card-img-top {
-height: 300px;
-object-fit: cover;
-filter: brightness(0.9);
-transition: filter 0.3s ease;
-}
-.card:hover .card-img-top {
-filter: brightness(1);
-}
-.card-body {
-padding: 1.5rem;
-}
-.card-title {
-font-size: 1.5rem;
-font-weight: bold;
-color: #262b31;
-margin-bottom: 1rem;
-}
-.card-text {
-color: #161414;
-margin-bottom: 1.5rem;
-}
-/* pixel based services css ends here */
+  .card {
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
+  background: #202035 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+  }
+  .card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55) !important;
+  border-color: rgba(143, 108, 246, 0.55) !important;
+  }
+  .card-img-top {
+  height: 250px !important;
+  object-fit: cover !important;
+  transition: transform 0.4s ease !important;
+  }
+  .card:hover .card-img-top {
+  transform: scale(1.04) !important;
+  }
+  .card-body {
+  background: #202035 !important;
+  padding: 22px 20px !important;
+  text-align: center;
+  }
+  .card-title {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin-bottom: 0.75rem !important;
+  }
+  .card-text {
+  padding: 0 !important;
+  height: auto !important;
+  min-height: 85px !important;
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  margin-bottom: 0 !important;
+  }
+  .card-text strong {
+  color: #ffb703 !important;
+  }
+  /* pixel based services css ends here */
 
 
 

@@ -1,4 +1,4 @@
-body {
+﻿body {
   background-color: #ebe3f0; /* Matches the background color */
   font-family: 'Poppins', sans-serif; /* Modern stylish font */
 }
@@ -731,8 +731,61 @@ width: 100%;
   transform: scale(1.1); 
 }
 
-.card-body{
-  background-color: #181824;
+.dark-section .card-body {
+  background-color: #202035;
+}
+
+/* Container01 Cards (Case Studies & LED Screens Sections) */
+.container01 .card {
+  background: #202035 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
+}
+
+.container01 .card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55) !important;
+  border-color: rgba(143, 108, 246, 0.55) !important;
+}
+
+.container01 .card-img-top {
+  height: 250px !important;
+  object-fit: cover !important;
+  transition: transform 0.4s ease !important;
+}
+
+.container01 .card:hover .card-img-top {
+  transform: scale(1.04) !important;
+}
+
+.container01 .card-body {
+  background: #202035 !important;
+  padding: 22px 20px !important;
+  text-align: center;
+}
+
+.container01 .card-title {
+  color: #ffffff !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 12px !important;
+}
+
+.container01 .card-text {
+  color: #ffffff !important; /* Pure crisp bright white text - 100% visible */
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  height: auto !important;
+  min-height: 85px !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+}
+
+.container01 .card-text strong {
+  color: #ffb703 !important;
 }
 
 @media (max-width: 768px) {
