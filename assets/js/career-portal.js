@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Techbizz Integrators - Careers & HR CMS Portal Engine
  * Version: 2.0 (2026)
  * Features:
@@ -75,7 +75,20 @@ const TechbizzCareerEngine = (function() {
     // Supabase client instance
     let supabaseClient = null;
 
+    const DEFAULT_SUPABASE_CONFIG = {
+        url: 'https://lazueosmqfpaflrbshte.supabase.co',
+        key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhenVlb3NtcWZwYWZscmJzaHRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwMTIyMzEsImV4cCI6MjEwODU4ODIzMX0.FZf6v-RAGWHs9Y7QuhkL_3yp8j4qMhdZjNcT37iGdQQ'
+    };
+
     function getSupabaseConfig() {
+        const stored = localStorage.getItem(STORAGE_KEY_SUPABASE);
+        if (stored) {
+            try { return JSON.parse(stored); } catch (e) { return DEFAULT_SUPABASE_CONFIG; }
+        }
+        return DEFAULT_SUPABASE_CONFIG;
+    }
+
+    function _oldGetSupabaseConfig() {
         const stored = localStorage.getItem(STORAGE_KEY_SUPABASE);
         if (stored) {
             try { return JSON.parse(stored); } catch (e) { return null; }
