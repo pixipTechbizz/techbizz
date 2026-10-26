@@ -1,29 +1,274 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Careers at Techbizz Integrators | Join Our Team of LED & Security Experts</title>
-  <meta name="description" content="Explore exciting career opportunities at TechBizz Integrators. Join our expert team in LED display, digital signage, and CCTV solutions. Apply today and grow with us!">
-
-
+  <title>Careers & Openings | Techbizz Integrators Private Limited</title>
+  <meta name="description" content="Explore career opportunities at Techbizz Integrators. Join our team of LED video wall engineers, AutoCAD designers, and security technology specialists.">
   <link rel="icon" type="image/png" href="../assets/img/fevicon.png">
 
-
+  <!-- CSS & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <!-- Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/carrier.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css?v=3.1">
+
+  <style>
+    body {
+      background-color: #0f0d1b;
+      color: #f1f5f9;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .career-hero {
+      background: linear-gradient(135deg, #18152e 0%, #291e4a 50%, #151129 100%);
+      padding: 75px 20px 65px;
+      text-align: center;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .career-hero h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+    
+    .career-hero p {
+      color: #c7c7dc;
+      font-size: 1.15rem;
+      max-width: 780px;
+      margin: 0 auto 25px;
+      line-height: 1.65;
+    }
+
+    .filter-pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: linear-gradient(135deg, #8f6cf6, #7347d8);
+      border-color: #8f6cf6;
+      box-shadow: 0 4px 15px rgba(143, 108, 246, 0.45);
+      color: #ffffff;
+    }
+
+    /* Job Card Styling */
+    .job-card {
+      background: #1b1930;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 26px 24px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .job-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+      border-color: rgba(143, 108, 246, 0.55);
+    }
+
+    .job-dept-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(143, 108, 246, 0.18);
+      color: #bfa6ff;
+      margin-bottom: 14px;
+    }
+
+    .job-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .job-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 15px 0;
+      padding: 12px 14px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .meta-item {
+      font-size: 0.82rem;
+      color: #a8a8c2;
+    }
+
+    .meta-item strong {
+      display: block;
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .job-desc {
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .req-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 22px;
+    }
+
+    .req-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+      font-size: 0.86rem;
+      color: #94a3b8;
+    }
+
+    .req-list li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #25D366;
+      font-size: 0.75rem;
+    }
+
+    .btn-apply-primary {
+      background: linear-gradient(135deg, #8f6cf6, #7347d8);
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 22px;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-apply-primary:hover {
+      background: linear-gradient(135deg, #a182fa, #8053e6);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(143, 108, 246, 0.5);
+      color: #ffffff;
+    }
+
+    .btn-apply-whatsapp {
+      background: #25D366;
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 18px;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .btn-apply-whatsapp:hover {
+      background: #20ba59;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Modal styling */
+    .modal-content {
+      background: #1b1930;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 24px;
+    }
+
+    .modal-header .btn-close {
+      filter: invert(1);
+    }
+
+    .form-control, .form-select {
+      background: #262442;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    .form-control:focus, .form-select:focus {
+      background: #2b284d;
+      border-color: #8f6cf6;
+      color: #ffffff;
+      box-shadow: 0 0 0 0.25rem rgba(143, 108, 246, 0.25);
+    }
+
+    .form-label {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+
+    .exp-eval-badge {
+      font-size: 0.82rem;
+      padding: 5px 10px;
+      border-radius: 6px;
+      margin-top: 6px;
+      display: inline-block;
+    }
+
+    .general-apply-box {
+      background: linear-gradient(135deg, #1b1736, #251e44);
+      border: 1px dashed rgba(143, 108, 246, 0.45);
+      border-radius: 18px;
+      padding: 40px 30px;
+      text-align: center;
+      margin: 60px 0;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Top Navbar Wrapper -->
   <div class="navbar-wrapper sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-light  custom-navbar ">
+    <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">
                 <img src="../assets/img/logo techbizz.png" alt="Techbizz Integrators" class="logo1">
@@ -34,54 +279,43 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../index.html">Home</a>
+                        <a class="nav-link" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Services
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                             <li><a class="dropdown-item" href="screen.html">LED Display</a></li>
                             <li><a class="dropdown-item" href="cctv.html">CCTV Camera</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="case.html">Case Study</a>
-
-
                     </li>
-                
-
-
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Gallery
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <li><a class="dropdown-item" href="led-displays-images.html">Images</a></li>
-                            <li><a class="dropdown-item" href="led-displays-videos.html">Videos</a></li>
-                        </ul>
+                      <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Gallery
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="galleryDropdown">
+                          <li><a class="dropdown-item" href="led-displays-images.html">Images</a></li>
+                          <li><a class="dropdown-item" href="led-displays-videos.html">Videos</a></li>
+                      </ul>
                     </li>
-
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="about.html" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             About Us
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
                             <li><a class="dropdown-item" href="about.html">About Us</a></li>
                             <li><a class="dropdown-item" href="certificate.html">Certifications</a></li>
-                            
+                            <li><a class="dropdown-item" href="career.html">Careers</a></li>
                         </ul>
                     </li>
-
-
-
-
-
-                                        <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link active" href="career.html">Careers</a>
                     </li>
-<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact Us</a>
                     </li>
                 </ul>
@@ -102,183 +336,192 @@
             </div>
         </div>
     </nav>
-</div>
+  </div>
 
-
-<!-- carrier Page start here -->
   <!-- Hero Section -->
-  <div class="hero">
-    <h1>Join Our Team at TechBizz</h1>
-    <p>Discover exciting opportunities to grow your career with us.</p>
-</div>
+  <section class="career-hero">
+    <div class="container">
+      <span class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(143, 108, 246, 0.2); color: #c4b5fd; font-size: 0.9rem; border: 1px solid rgba(143, 108, 246, 0.4);">
+        <i class="bi bi-stars me-1"></i> We Are Hiring
+      </span>
+      <h1>Build Your Future with Techbizz</h1>
+      <p>
+        Be part of India's fast-growing visual technology and smart surveillance company. Work with cutting-edge LED displays, video processors, and enterprise security systems.
+      </p>
 
-<!-- Job Listings -->
-<div class="container job-listing mt-5">
-    <h2 class="text-center mb-4">Current Openings</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="job-card">
-                <h4>Site Engineer</h4>
-                <p>Location: GHAZIABAD | Full-time</p>
-                <button class="btn btn-primary apply-btn" data-job="Frontend Developer">Apply Now</button>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="job-card">
-                <h4>AutoCad Designer</h4>
-                <p>Location: GHAZIABAD | Full-time</p>
-                <button class="btn btn-primary apply-btn" data-job="Backend Developer">Apply Now</button>
-            </div>
-        </div>
+      <!-- Department Filter Pills -->
+      <div class="filter-pills-container" id="filterPillsContainer">
+        <button class="filter-btn active" data-filter="all">All Openings</button>
+        <button class="filter-btn" data-filter="Site Operations & Engineering">Engineering & Site Operations</button>
+        <button class="filter-btn" data-filter="Design & Engineering">AutoCAD & Structural</button>
+        <button class="filter-btn" data-filter="Sales & Business Development">B2B Corporate Sales</button>
+      </div>
     </div>
-</div>
+  </section>
 
-
-
-<!-- Application Form (Modal) -->
-<!-- <div class="modal fade" id="applyModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Apply for <span id="jobTitle"></span></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="applicationForm">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="resume" class="form-label">Upload Resume</label>
-                        <input type="file" class="form-control" id="resume" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit Application</button>
-                </form>
-            </div>
-        </div>
+  <!-- Openings Section -->
+  <section class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h3 class="fw-bold mb-1" style="color: #ffffff;">Current Openings</h3>
+        <p class="text-muted mb-0" id="jobsCountText">Showing active opportunities</p>
+      </div>
+      <div>
+        <a href="hr-portal.html" class="btn btn-sm btn-outline-secondary rounded-pill px-3 text-muted" title="Authorized HR Portal" style="font-size: 0.8rem; border-color: rgba(255,255,255,0.2);">
+          <i class="bi bi-shield-lock me-1"></i> HR Portal
+        </a>
+      </div>
     </div>
-</div> -->
 
-
-<!-- Application Form (Modal) -->
-<div class="modal fade" id="applyModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Apply for <span id="jobTitle"></span></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="applicationForm">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="resume" class="form-label">Upload Resume</label>
-                        <input type="file" class="form-control" id="resume" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit Application</button>
-                </form>
-                <p id="formStatus" class="mt-3"></p>
-            </div>
-        </div>
+    <!-- Job Cards Grid -->
+    <div class="row g-4" id="jobsGridContainer">
+      <!-- Injected dynamically by career-portal.js -->
     </div>
-</div>
 
-<script>
-document.getElementById("applicationForm").addEventListener("submit", async function(event) {
-    event.preventDefault(); // Prevent form from submitting traditionally
+    <!-- General Application Box -->
+    <div class="general-apply-box">
+      <h3 class="fw-bold text-white mb-2">Don't See the Perfect Match?</h3>
+      <p class="text-muted mb-4" style="max-width: 650px; margin: 0 auto;">
+        We are always looking for driven site technicians, AV commissioning engineers, and project leads. Send your resume directly to our HR team!
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="mailto:careers@techbizzintegrators.com?subject=Spontaneous Application - Techbizz Integrators" 
+           class="btn btn-outline-light rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2">
+          <i class="bi bi-envelope"></i> Email Resume to HR
+        </a>
+        <a href="https://wa.me/919910895095?text=Hello%20Techbizz%20HR,%20I%20am%20interested%20in%20exploring%20career%20opportunities%20at%20Techbizz.%20Sharing%20my%20resume%20below." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn btn-success rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2" 
+           style="background: #25D366; border: none;">
+          <i class="bi bi-whatsapp"></i> WhatsApp HR Directly
+        </a>
+      </div>
+    </div>
+  </section>
 
-    const form = event.target;
-    const formData = new FormData(form);
-    
-    // Handling file upload manually
-    const resumeFile = document.getElementById("resume").files[0];
-    if (resumeFile) {
-        alert("File uploads are not supported directly. Please upload your resume to Google Drive and paste the link below.");
-        return;
-    }
+  <!-- Candidate Application Modal -->
+  <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold" id="applyModalLabel">Apply for Position</h5>
+            <span class="badge bg-purple mt-1" id="modalJobDept" style="background: #7347d8;">Role</span>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          
+          <!-- Requirement notice -->
+          <div class="p-3 mb-4 rounded-3" style="background: rgba(143, 108, 246, 0.12); border: 1px solid rgba(143, 108, 246, 0.3);">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-info-circle text-purple fs-5"></i>
+              <div>
+                <strong class="text-white d-block" id="modalReqHeading">Role Experience Requirement</strong>
+                <span class="text-muted" style="font-size: 0.85rem;" id="modalReqSubtext">HR has specified minimum required experience for this role.</span>
+              </div>
+            </div>
+          </div>
 
-    const formStatus = document.getElementById("formStatus");
-    
-    try {
-        const response = await fetch("https://formspree.io/f/xnnjodre", {
-            method: "POST",
-            body: formData,
-            headers: { "Accept": "application/json" }
-        });
+          <form id="candidateApplicationForm">
+            <input type="hidden" id="formJobId" name="jobId">
+            <input type="hidden" id="formJobTitle" name="jobTitle">
 
-        if (response.ok) {
-            formStatus.innerHTML = `<span class="text-success">Application submitted successfully!</span>`;
-            form.reset(); // Reset form after submission
-        } else {
-            formStatus.innerHTML = `<span class="text-danger">Failed to submit. Try again later.</span>`;
-        }
-    } catch (error) {
-        formStatus.innerHTML = `<span class="text-danger">Error submitting form.</span>`;
-    }
-});
-</script>
+            <div class="row g-3">
+              <!-- Full Name -->
+              <div class="col-md-6">
+                <label for="candidateName" class="form-label">Full Name *</label>
+                <input type="text" class="form-control" id="candidateName" name="fullName" placeholder="e.g. Rahul Sharma" required>
+              </div>
 
+              <!-- Email -->
+              <div class="col-md-6">
+                <label for="candidateEmail" class="form-label">Email Address *</label>
+                <input type="email" class="form-control" id="candidateEmail" name="email" placeholder="e.g. rahul@example.com" required>
+              </div>
 
+              <!-- Mobile Number -->
+              <div class="col-md-6">
+                <label for="candidatePhone" class="form-label">Mobile / WhatsApp Number *</label>
+                <input type="tel" class="form-control" id="candidatePhone" name="phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+              </div>
 
+              <!-- Current Location -->
+              <div class="col-md-6">
+                <label for="candidateCity" class="form-label">Current City / Location *</label>
+                <input type="text" class="form-control" id="candidateCity" name="city" placeholder="e.g. Ghaziabad, Delhi NCR" required>
+              </div>
 
+              <!-- Experience Selector (Scroll / Dropdown) -->
+              <div class="col-md-6">
+                <label for="candidateExpSelect" class="form-label">Your Total Experience *</label>
+                <select class="form-select" id="candidateExpSelect" name="experience" required>
+                  <option value="" disabled selected>-- Select your total experience --</option>
+                  <option value="Fresher (0 - 1 Year)" data-years="0">Fresher (0 - 1 Year)</option>
+                  <option value="1 - 2 Years" data-years="1.5">1 - 2 Years</option>
+                  <option value="2 - 3 Years" data-years="2.5">2 - 3 Years</option>
+                  <option value="3 - 5 Years" data-years="4">3 - 5 Years</option>
+                  <option value="5 - 8 Years" data-years="6">5 - 8 Years</option>
+                  <option value="8+ Years" data-years="8">8+ Years (Senior Lead)</option>
+                </select>
+                <div id="expMatchIndicator"></div>
+              </div>
 
+              <!-- Notice Period / Availability -->
+              <div class="col-md-6">
+                <label for="candidateNotice" class="form-label">Notice Period / Availability</label>
+                <select class="form-select" id="candidateNotice" name="noticePeriod">
+                  <option value="Immediate Joiner (0-7 days)">Immediate Joiner (0-7 days)</option>
+                  <option value="15 Days">15 Days</option>
+                  <option value="30 Days">30 Days</option>
+                  <option value="Currently Not Working">Currently Not Working / Available</option>
+                </select>
+              </div>
 
+              <!-- Resume Upload File -->
+              <div class="col-12">
+                <label for="candidateResume" class="form-label">Upload Resume (PDF / DOC / DOCX - Max 5MB) *</label>
+                <input type="file" class="form-control" id="candidateResume" accept=".pdf,.doc,.docx" required>
+                <div class="form-text text-muted" style="font-size: 0.8rem;">
+                  Your resume will be safely saved in the HR database for review.
+                </div>
+              </div>
 
+              <!-- Note / Cover Message -->
+              <div class="col-12">
+                <label for="candidateNote" class="form-label">Key Skills / Brief Note for HR (Optional)</label>
+                <textarea class="form-control" id="candidateNote" rows="2" placeholder="Tell us briefly about your past project experience or technical skills..."></textarea>
+              </div>
+            </div>
 
+            <!-- Submission Status Message -->
+            <div id="submissionAlert" class="mt-3" style="display: none;"></div>
 
+            <!-- Action Buttons -->
+            <div class="mt-4 pt-3 border-top border-secondary d-flex flex-wrap gap-2 justify-content-between align-items-center">
+              <div>
+                <button type="submit" class="btn btn-apply-primary" id="btnSubmitApp">
+                  <i class="bi bi-send-fill"></i> Submit Application
+                </button>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-apply-whatsapp" id="btnWhatsAppDirect">
+                  <i class="bi bi-whatsapp"></i> Send on WhatsApp
+                </button>
+                <button type="button" class="btn btn-outline-light rounded-pill px-3 py-1" id="btnEmailDirect" style="font-size: 0.88rem;">
+                  <i class="bi bi-envelope"></i> Email to HR
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.querySelectorAll('.apply-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            document.getElementById('jobTitle').textContent = this.getAttribute('data-job');
-            var modal = new bootstrap.Modal(document.getElementById('applyModal'));
-            modal.show();
-        });
-    });
-
-    document.getElementById('applicationForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert('Application Submitted Successfully!');
-        var modal = bootstrap.Modal.getInstance(document.getElementById('applyModal'));
-        modal.hide();
-        this.reset();
-    });
-</script>
-
-<!-- Carrier page end here -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-<!-- Footer Section -->
-<footer class="footer">
+  <!-- Standard Footer -->
+  <footer class="footer">
     <div class="container">
         <div class="row gy-4">
             <!-- Logo Section -->
@@ -345,42 +588,262 @@ document.getElementById("applicationForm").addEventListener("submit", async func
     <div class="footer-bottom">
         <p>&copy; Techbizz Integrators Private Limited 2026. All Rights Reserved.</p>
     </div>
-</footer>
+  </footer>
 
-<!-- Floating WhatsApp CTA Button (Bottom-Left) -->
-<div class="floating-whatsapp-container" style="position: fixed; bottom: 25px; left: 25px; z-index: 999999;">
-  <a href="https://wa.me/919910895095?text=Hello%20Techbizz%20Integrators,%20I%20am%20interested%20in%20an%20LED%20Display%20Solution." 
-     target="_blank" 
-     rel="noopener noreferrer" 
-     class="floating-whatsapp-btn"
-     style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #25D366, #128C7E); color: #ffffff !important; padding: 12px 20px; border-radius: 50px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45); text-decoration: none !important; font-weight: 600; font-size: 14px;"
-     title="Chat with Techbizz on WhatsApp">
-    <span class="whatsapp-pulse"></span>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block; flex-shrink: 0;"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.98-.15.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.15-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.3-.23.25-.88.86-.88 2.1 0 1.24.9 2.45 1.03 2.62.12.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
-    <span class="whatsapp-text">Chat on WhatsApp</span>
-  </a>
-</div>
+  <!-- Floating WhatsApp CTA Button (Bottom-Left) -->
+  <div class="floating-whatsapp-container" style="position: fixed; bottom: 25px; left: 25px; z-index: 999999;">
+    <a href="https://wa.me/919910895095?text=Hello%20Techbizz%20Integrators,%20I%20am%20interested%20in%20an%20LED%20Display%20Solution." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="floating-whatsapp-btn"
+       style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #25D366, #128C7E); color: #ffffff !important; padding: 12px 20px; border-radius: 50px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45); text-decoration: none !important; font-weight: 600; font-size: 14px;"
+       title="Chat with Techbizz on WhatsApp">
+      <span class="whatsapp-pulse"></span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block; flex-shrink: 0;"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.98-.15.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.15-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.3-.23.25-.88.86-.88 2.1 0 1.24.9 2.45 1.03 2.62.12.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
+      <span class="whatsapp-text">Chat on WhatsApp</span>
+    </a>
+  </div>
 
-<!-- JS Libraries -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JS Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/career-portal.js"></script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/67caee3b711e7e1910a3152f/1ilob57gs';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
-  })();
-</script>
-<!--End of Tawk.to Script-->
+  <script>
+    let activeFilter = 'all';
+    let currentSelectedJob = null;
+
+    // Render Jobs on Page
+    function renderJobs() {
+      const container = document.getElementById('jobsGridContainer');
+      const countText = document.getElementById('jobsCountText');
+      const allJobs = TechbizzCareerEngine.getJobs(true); // only active
+
+      const filtered = (activeFilter === 'all') 
+        ? allJobs 
+        : allJobs.filter(j => j.department.toLowerCase() === activeFilter.toLowerCase());
+
+      countText.textContent = `Showing ${filtered.length} active position${filtered.length === 1 ? '' : 's'}`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <i class="bi bi-briefcase text-muted" style="font-size: 3rem;"></i>
+            <h4 class="mt-3 text-white">No active openings in this department right now</h4>
+            <p class="text-muted">Feel free to submit a general application below or contact our HR directly.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(job => {
+        const reqsHtml = (job.requirements && Array.isArray(job.requirements)) 
+          ? job.requirements.slice(0, 3).map(r => `<li>${r}</li>`).join('') 
+          : '';
+
+        const waLink = TechbizzCareerEngine.getWhatsAppLink(job.title, '', '', `${job.minExperience}+ Yrs`);
+
+        return `
+          <div class="col-lg-4 col-md-6">
+            <div class="job-card">
+              <div>
+                <span class="job-dept-badge">${job.department}</span>
+                <h3 class="job-title">${job.title}</h3>
+                
+                <div class="job-meta-grid">
+                  <div class="meta-item">
+                    <i class="bi bi-geo-alt me-1 text-purple"></i>Location
+                    <strong>${job.location}</strong>
+                  </div>
+                  <div class="meta-item">
+                    <i class="bi bi-clock-history me-1 text-purple"></i>Experience
+                    <strong>Min ${job.minExperience} Year${job.minExperience > 1 ? 's' : ''}</strong>
+                  </div>
+                  <div class="meta-item">
+                    <i class="bi bi-cash-stack me-1 text-purple"></i>Salary
+                    <strong>${job.salary}</strong>
+                  </div>
+                </div>
+
+                <p class="job-desc">${job.description}</p>
+                <ul class="req-list">
+                  ${reqsHtml}
+                </ul>
+              </div>
+
+              <div class="pt-3 border-top border-secondary d-flex justify-content-between align-items-center">
+                <button class="btn btn-apply-primary" onclick="openApplicationModal('${job.id}')">
+                  Apply Now <i class="bi bi-arrow-right"></i>
+                </button>
+                <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn btn-apply-whatsapp" title="Send resume directly on WhatsApp">
+                  <i class="bi bi-whatsapp"></i> Quick Apply
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Filter Buttons Click
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        activeFilter = this.getAttribute('data-filter');
+        renderJobs();
+      });
+    });
+
+    // Open Application Modal
+    window.openApplicationModal = function(jobId) {
+      const job = TechbizzCareerEngine.getJobById(jobId);
+      if (!job) return;
+      currentSelectedJob = job;
+
+      document.getElementById('formJobId').value = job.id;
+      document.getElementById('formJobTitle').value = job.title;
+      document.getElementById('applyModalLabel').textContent = `Apply for: ${job.title}`;
+      document.getElementById('modalJobDept').textContent = `${job.department} • ${job.location}`;
+      document.getElementById('modalReqHeading').textContent = `Minimum Experience Required: ${job.minExperience} Year${job.minExperience > 1 ? 's' : ''}`;
+      document.getElementById('modalReqSubtext').textContent = `Role salary range: ${job.salary}`;
+      
+      // Reset form
+      document.getElementById('candidateApplicationForm').reset();
+      document.getElementById('expMatchIndicator').innerHTML = '';
+      document.getElementById('submissionAlert').style.display = 'none';
+
+      // Update WhatsApp and Email buttons dynamically
+      updateDirectActionLinks();
+
+      const modal = new bootstrap.Modal(document.getElementById('applyModal'));
+      modal.show();
+    };
+
+    // Live update of Direct WhatsApp & Email buttons as user types
+    function updateDirectActionLinks() {
+      if (!currentSelectedJob) return;
+      const name = document.getElementById('candidateName').value;
+      const phone = document.getElementById('candidatePhone').value;
+      const exp = document.getElementById('candidateExpSelect').value;
+
+      const waBtn = document.getElementById('btnWhatsAppDirect');
+      const emailBtn = document.getElementById('btnEmailDirect');
+
+      waBtn.onclick = function() {
+        window.open(TechbizzCareerEngine.getWhatsAppLink(currentSelectedJob.title, name, phone, exp), '_blank');
+      };
+
+      emailBtn.onclick = function() {
+        window.location.href = TechbizzCareerEngine.getMailtoLink(currentSelectedJob.title, name, phone, exp);
+      };
+    }
+
+    document.getElementById('candidateName').addEventListener('input', updateDirectActionLinks);
+    document.getElementById('candidatePhone').addEventListener('input', updateDirectActionLinks);
+
+    // Experience Evaluator on candidate selection
+    document.getElementById('candidateExpSelect').addEventListener('change', function() {
+      if (!currentSelectedJob) return;
+      const selectedOption = this.options[this.selectedIndex];
+      const years = parseFloat(selectedOption.getAttribute('data-years') || 0);
+      const minRequired = currentSelectedJob.minExperience || 0;
+      const indicator = document.getElementById('expMatchIndicator');
+
+      if (years >= minRequired) {
+        indicator.innerHTML = `<span class="exp-eval-badge" style="background: rgba(37, 211, 102, 0.2); color: #25D366; border: 1px solid #25D366;"><i class="bi bi-check-circle me-1"></i> Meets/Exceeds experience criteria (${minRequired} Yrs)</span>`;
+      } else {
+        indicator.innerHTML = `<span class="exp-eval-badge" style="background: rgba(255, 183, 3, 0.2); color: #ffb703; border: 1px solid #ffb703;"><i class="bi bi-info-circle me-1"></i> Note: Role specifies min ${minRequired} Yrs, but outstanding profiles are considered!</span>`;
+      }
+      updateDirectActionLinks();
+    });
+
+    // Handle Form Submission
+    document.getElementById('candidateApplicationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const alertBox = document.getElementById('submissionAlert');
+      const submitBtn = document.getElementById('btnSubmitApp');
+
+      const resumeInput = document.getElementById('candidateResume');
+      if (!resumeInput.files || resumeInput.files.length === 0) {
+        alertBox.className = 'alert alert-warning';
+        alertBox.innerHTML = '<i class="bi bi-exclamation-triangle me-1"></i> Please select your resume file.';
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      const file = resumeInput.files[0];
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Submitting...';
+
+      // Read resume file as base64 data for storage
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const appData = {
+          jobId: document.getElementById('formJobId').value,
+          jobTitle: document.getElementById('formJobTitle').value,
+          fullName: document.getElementById('candidateName').value,
+          email: document.getElementById('candidateEmail').value,
+          phone: document.getElementById('candidatePhone').value,
+          city: document.getElementById('candidateCity').value,
+          experience: document.getElementById('candidateExpSelect').value,
+          noticePeriod: document.getElementById('candidateNotice').value,
+          note: document.getElementById('candidateNote').value,
+          resumeFileName: file.name,
+          resumeFileSize: (file.size / 1024).toFixed(1) + ' KB',
+          resumeDataUrl: evt.target.result // Base64 storage
+        };
+
+        TechbizzCareerEngine.submitApplication(appData);
+
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Submitted!';
+
+        alertBox.className = 'alert alert-success mt-3';
+        alertBox.innerHTML = `
+          <strong><i class="bi bi-check-circle-fill me-1"></i> Application Received Successfully!</strong><br>
+          Our HR team at Techbizz has received your profile for <em>${appData.jobTitle}</em>.
+          <div class="mt-2">
+            <span class="small text-muted d-block mb-1">Want instant confirmation on WhatsApp?</span>
+            <button type="button" class="btn btn-sm btn-success rounded-pill" onclick="window.open('${TechbizzCareerEngine.getWhatsAppLink(appData.jobTitle, appData.fullName, appData.phone, appData.experience)}', '_blank')">
+              <i class="bi bi-whatsapp"></i> Notify HR on WhatsApp Now
+            </button>
+          </div>
+        `;
+        alertBox.style.display = 'block';
+
+        // Reset inputs
+        setTimeout(() => {
+          submitBtn.innerHTML = '<i class="bi bi-send-fill"></i> Submit Application';
+        }, 3000);
+      };
+
+      reader.onerror = function() {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="bi bi-send-fill"></i> Submit Application';
+        alertBox.className = 'alert alert-danger';
+        alertBox.textContent = 'Error reading resume file. Please try again.';
+        alertBox.style.display = 'block';
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', renderJobs);
+  </script>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/67caee3b711e7e1910a3152f/1ilob57gs';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
 </body>
 </html>
-
-
-
-
-<!-- Footer Section -->
