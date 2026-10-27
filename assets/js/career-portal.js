@@ -346,11 +346,19 @@ const TechbizzCareerEngine = (function() {
                     target_hr_inbox: 'hr@techbizzintegrators.com'
                 };
 
+                // 1. Dispatch directly to HR Email via FormSubmit
+                fetch('https://formsubmit.co/ajax/hr@techbizzintegrators.com', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(emailPayload)
+                }).catch(err => console.warn('FormSubmit HR notice:', err));
+
+                // 2. Dispatch to existing Techbizz Formspree endpoint as backup
                 fetch('https://formspree.io/f/xgvoyyel', {
                     method: 'POST',
                     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                     body: JSON.stringify(emailPayload)
-                }).catch(err => console.warn('Email delivery notice:', err));
+                }).catch(err => console.warn('Formspree delivery notice:', err));
             } catch (err) {
                 console.warn('Email dispatch error:', err);
             }
