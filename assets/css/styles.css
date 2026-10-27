@@ -1,4 +1,4 @@
-﻿body {
+body {
   background-color: #ebe3f0; /* Matches the background color */
   font-family: 'Poppins', sans-serif; /* Modern stylish font */
 }
@@ -1114,4 +1114,28 @@ width: 100%;
   .whatsapp-pulse {
     border-radius: 50%;
   }
+}
+
+/* Pixip-Style Subtle Admin / HR Icon in Navbar */
+.nav-admin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #64748b;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.nav-admin-icon:hover {
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.1);
+  border-color: rgba(2, 132, 199, 0.35);
+  transform: translateY(-1px);
 }

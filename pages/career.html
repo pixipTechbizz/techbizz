@@ -7,162 +7,102 @@
   <meta name="description" content="Explore exciting career opportunities at Techbizz Integrators. Join our team of LED video wall engineers, AutoCAD designers, and electronic security specialists.">
   <link rel="icon" type="image/png" href="../assets/img/fevicon.png">
 
-  <!-- CSS & Fonts -->
+  <!-- CSS & Fonts (Pixip-Inspired Clean Typography) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/styles.css?v=3.2">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=3.3">
 
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root {
-      --bg-midnight: #090d16;
-      --bg-card: rgba(17, 24, 39, 0.72);
-      --bg-card-hover: rgba(22, 32, 51, 0.85);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(99, 102, 241, 0.4);
-      --accent-indigo: #6366f1;
-      --accent-indigo-light: #818cf8;
+      --bg-page: #f8fafc;
+      --bg-surface: #ffffff;
+      --text-main: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --primary-gradient: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
       --accent-teal: #10b981;
-      --accent-sky: #38bdf8;
-      --accent-amber: #f59e0b;
-      --text-heading: #f8fafc;
-      --text-body: #cbd5e1;
-      --text-muted: #94a3b8;
+      --accent-amber: #d97706;
+      --accent-sky: #0284c7;
     }
 
     body {
-      background-color: var(--bg-midnight);
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 85% 25%, rgba(20, 184, 166, 0.06) 0%, transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(56, 189, 248, 0.05) 0%, transparent 50%);
-      background-attachment: fixed;
-      color: var(--text-body) !important;
-      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-secondary) !important;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* Calming, Soothing Hero Banner */
-    .career-hero-soothing {
-      position: relative;
-      padding: 70px 20px 55px;
+    /* Clean Bright Enterprise Hero Banner */
+    .career-hero-clean {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 60px 20px 48px;
       text-align: center;
-      border-bottom: 1px solid var(--border-subtle);
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(9, 13, 22, 0.95) 100%);
-      backdrop-filter: blur(12px);
+      position: relative;
     }
 
-    .hero-pill-badge {
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 18px;
+      padding: 6px 16px;
       border-radius: 9999px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      background: rgba(99, 102, 241, 0.12);
-      color: #a5b4fc;
-      border: 1px solid rgba(99, 102, 241, 0.28);
-      margin-bottom: 20px;
-      letter-spacing: 0.2px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: #e0f2fe;
+      color: var(--primary);
+      border: 1px solid #bae6fd;
+      margin-bottom: 18px;
     }
 
-    .hero-title-soothing {
-      font-size: clamp(2rem, 4vw, 3rem);
+    .hero-headline {
+      font-size: clamp(2rem, 3.8vw, 3rem);
       font-weight: 800;
-      color: var(--text-heading) !important;
-      letter-spacing: -0.02em;
+      color: var(--text-main) !important;
+      letter-spacing: -0.025em;
       margin-bottom: 16px;
       line-height: 1.25;
     }
 
-    .hero-title-soothing span {
-      background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 50%, #38bdf8 100%);
+    .hero-headline .text-gradient {
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-desc-soothing {
-      font-size: 1.08rem;
+    .hero-subtext {
+      font-size: 1.1rem;
       color: var(--text-muted) !important;
       max-width: 740px;
       margin: 0 auto 28px;
       line-height: 1.7;
     }
 
-    /* Hero Quick Buttons */
-    .hero-action-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-
-    .btn-hero-primary {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: #ffffff !important;
-      font-weight: 600;
-      font-size: 0.92rem;
-      padding: 11px 24px;
-      border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
-      transition: all 0.25s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-hero-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(99, 102, 241, 0.5);
-      color: #ffffff !important;
-    }
-
-    .btn-hero-hr {
-      background: rgba(255, 255, 255, 0.06);
-      color: #e2e8f0 !important;
-      font-weight: 600;
-      font-size: 0.92rem;
-      padding: 11px 22px;
-      border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(8px);
-      transition: all 0.25s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-hero-hr:hover {
-      background: rgba(99, 102, 241, 0.15);
-      color: #ffffff !important;
-      border-color: rgba(99, 102, 241, 0.4);
-      transform: translateY(-2px);
-    }
-
-    /* Filter Pills */
+    /* Filter Pills (Clean Light Slate) */
     .filter-pills-wrap {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 9px;
-      margin-top: 20px;
+      gap: 8px;
+      margin-top: 15px;
     }
 
     .filter-pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-muted) !important;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary) !important;
       padding: 8px 18px;
       border-radius: 9999px;
       font-size: 0.88rem;
@@ -170,137 +110,141 @@
       transition: all 0.2s ease;
       cursor: pointer;
       user-select: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
-    .filter-pill:hover, .filter-pill.active {
-      background: rgba(99, 102, 241, 0.2) !important;
-      border-color: var(--accent-indigo) !important;
+    .filter-pill:hover {
+      background: #f1f5f9;
+      color: var(--text-main) !important;
+      border-color: #cbd5e1;
+    }
+
+    .filter-pill.active {
+      background: var(--primary-gradient) !important;
+      border-color: var(--primary) !important;
       color: #ffffff !important;
-      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
     }
 
-    /* Soothing Job Cards */
-    .job-card-soothing {
-      background: var(--bg-card);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 18px;
+    /* Clean Bright Job Cards (Pixip-Style) */
+    .job-card-clean {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
       padding: 26px 24px;
-      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
     }
 
-    .job-card-soothing:hover {
-      background: var(--bg-card-hover);
+    .job-card-clean:hover {
       transform: translateY(-4px);
-      border-color: rgba(99, 102, 241, 0.38);
-      box-shadow: 0 16px 36px -8px rgba(10, 15, 30, 0.8), 0 0 0 1px rgba(99, 102, 241, 0.25);
+      border-color: #93c5fd;
+      box-shadow: 0 16px 32px -4px rgba(2, 132, 199, 0.12);
     }
 
-    .card-top-row {
+    .card-top-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
-    .dept-badge-soft {
+    .dept-badge-clean {
       display: inline-block;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      padding: 5px 12px;
-      border-radius: 8px;
-      background: rgba(99, 102, 241, 0.14);
-      color: #a5b4fc !important;
-      border: 1px solid rgba(99, 102, 241, 0.28);
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #e0f2fe;
+      color: #0369a1 !important;
+      border: 1px solid #bae6fd;
     }
 
-    .job-posted-time {
-      font-size: 0.76rem;
+    .job-date-text {
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
-    .job-title-soothing {
-      font-size: 1.3rem;
+    .job-title-clean {
+      font-size: 1.28rem;
       font-weight: 700;
-      color: var(--text-heading) !important;
+      color: var(--text-main) !important;
       margin-bottom: 12px;
       line-height: 1.35;
     }
 
-    /* Meta Badges Grid */
-    .job-badges-grid {
+    /* Clean Meta Badges */
+    .job-meta-chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin: 14px 0 16px;
+      gap: 6px;
+      margin: 12px 0 16px;
     }
 
-    .meta-chip {
+    .clean-chip {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px 11px;
+      gap: 5px;
+      padding: 5px 10px;
       border-radius: 8px;
       font-size: 0.82rem;
       font-weight: 500;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--text-body);
+      background: #f1f5f9;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
     }
 
-    .meta-chip.salary {
-      background: rgba(16, 185, 129, 0.1);
-      border-color: rgba(16, 185, 129, 0.25);
-      color: #6ee7b7;
+    .clean-chip.salary {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #065f46;
       font-weight: 600;
     }
 
-    .meta-chip.exp {
-      background: rgba(245, 158, 11, 0.1);
-      border-color: rgba(245, 158, 11, 0.25);
-      color: #fde68a;
+    .clean-chip.exp {
+      background: #fef3c7;
+      border-color: #fde68a;
+      color: #92400e;
       font-weight: 600;
     }
 
-    .meta-chip.loc {
-      background: rgba(56, 189, 248, 0.08);
-      border-color: rgba(56, 189, 248, 0.2);
-      color: #7dd3fc;
+    .clean-chip.loc {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+      color: #0369a1;
     }
 
-    .job-desc-soothing {
-      color: var(--text-muted) !important;
+    .job-desc-clean {
+      color: var(--text-secondary) !important;
       font-size: 0.92rem;
       line-height: 1.6;
       margin-bottom: 16px;
     }
 
-    .req-list-soothing {
+    .req-list-clean {
       list-style: none;
       padding-left: 0;
       margin-bottom: 22px;
     }
 
-    .req-list-soothing li {
+    .req-list-clean li {
       position: relative;
       padding-left: 22px;
       margin-bottom: 8px;
       font-size: 0.86rem;
-      color: var(--text-body) !important;
+      color: var(--text-secondary) !important;
       line-height: 1.5;
     }
 
-    .req-list-soothing li::before {
+    .req-list-clean li::before {
       content: "\F26E";
       font-family: "bootstrap-icons";
       position: absolute;
@@ -309,21 +253,21 @@
       font-size: 0.85rem;
     }
 
-    .card-footer-action {
+    .card-actions-row {
       display: flex;
       align-items: center;
       gap: 10px;
       padding-top: 16px;
-      border-top: 1px solid var(--border-subtle);
+      border-top: 1px solid var(--border-color);
     }
 
-    .btn-apply-soothing {
+    .btn-apply-primary {
       flex: 1;
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      background: var(--primary-gradient);
       color: #ffffff !important;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: none;
       padding: 10px 18px;
-      border-radius: 12px;
+      border-radius: 10px;
       font-weight: 600;
       font-size: 0.92rem;
       display: inline-flex;
@@ -331,23 +275,23 @@
       justify-content: center;
       gap: 8px;
       transition: all 0.2s ease;
-      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
     }
 
-    .btn-apply-soothing:hover {
-      background: linear-gradient(135deg, #4f46e5, #4338ca);
-      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.45);
+    .btn-apply-primary:hover {
+      background: linear-gradient(135deg, #0369a1, #1d4ed8);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
       transform: translateY(-1px);
       color: #ffffff !important;
     }
 
-    .btn-whatsapp-direct {
+    .btn-whatsapp-icon {
       width: 44px;
       height: 44px;
-      border-radius: 12px;
-      background: rgba(37, 211, 102, 0.15);
-      border: 1px solid rgba(37, 211, 102, 0.3);
-      color: #25d366 !important;
+      border-radius: 10px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #10b981 !important;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -356,127 +300,78 @@
       text-decoration: none;
     }
 
-    .btn-whatsapp-direct:hover {
+    .btn-whatsapp-icon:hover {
       background: #25d366;
       color: #ffffff !important;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.45);
+      border-color: #25d366;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
       transform: translateY(-1px);
     }
 
-    /* Modal Redesign - Calming & Clean */
-    .modal-content-soothing {
-      background: #0f1626 !important;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      color: var(--text-heading) !important;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+    /* Modal Styling (Clean Bright White) */
+    .modal-content-clean {
+      background: #ffffff !important;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      color: var(--text-main) !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
       overflow: hidden;
     }
 
-    .modal-header-soothing {
-      background: rgba(15, 23, 42, 0.8);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 20px 24px;
+    .modal-header-clean {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      padding: 18px 24px;
     }
 
-    .modal-header-soothing .btn-close {
-      filter: invert(1);
-      opacity: 0.7;
-    }
-
-    .modal-body-soothing {
+    .modal-body-clean {
       padding: 24px;
     }
 
-    /* Clean Input Styling with High Contrast Dropdowns */
-    .form-control-soothing, .form-select-soothing {
-      background-color: #172033 !important;
-      border: 1px solid rgba(255, 255, 255, 0.14) !important;
-      color: #ffffff !important;
-      border-radius: 12px;
-      padding: 12px 14px;
+    /* Clean Bright Form Controls */
+    .form-control-clean, .form-select-clean {
+      background-color: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      color: var(--text-main) !important;
+      border-radius: 10px;
+      padding: 11px 14px;
       font-size: 0.95rem;
       transition: all 0.2s ease;
     }
 
-    .form-control-soothing:focus, .form-select-soothing:focus {
-      background-color: #1c273e !important;
-      border-color: #6366f1 !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+    .form-control-clean:focus, .form-select-clean:focus {
+      background-color: #ffffff !important;
+      border-color: var(--primary) !important;
+      color: var(--text-main) !important;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2) !important;
     }
 
-    .form-control-soothing::placeholder {
+    .form-control-clean::placeholder {
       color: #94a3b8 !important;
     }
 
-    select.form-select-soothing option, select option {
-      background-color: #172033 !important;
-      color: #ffffff !important;
-      padding: 12px !important;
+    select.form-select-clean option, select option {
+      background-color: #ffffff !important;
+      color: var(--text-main) !important;
+      padding: 10px !important;
     }
 
-    .form-label-soothing {
+    .form-label-clean {
       font-size: 0.88rem;
       font-weight: 600;
-      color: #e2e8f0;
+      color: var(--text-main) !important;
       margin-bottom: 6px;
     }
 
-    /* Floating HR Portal Button */
-    .floating-hr-portal-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 99999;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #c4b5fd !important;
-      padding: 10px 18px;
-      border-radius: 9999px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(99, 102, 241, 0.25);
-      transition: all 0.25s ease;
-      text-decoration: none;
-      backdrop-filter: blur(8px);
-    }
-
-    .floating-hr-portal-btn:hover {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: #ffffff !important;
-      border-color: #818cf8;
-      box-shadow: 0 10px 28px rgba(99, 102, 241, 0.5);
-      transform: translateY(-2px);
-    }
-
-    /* Mobile Responsive Polish */
     @media (max-width: 768px) {
-      .career-hero-soothing {
-        padding: 50px 16px 40px;
+      .career-hero-clean {
+        padding: 45px 16px 36px;
       }
-      .hero-title-soothing {
+      .hero-headline {
         font-size: 1.85rem;
       }
-      .job-card-soothing {
+      .job-card-clean {
         padding: 20px 18px;
-      }
-      .floating-hr-portal-btn span {
-        display: none;
-      }
-      .floating-hr-portal-btn {
-        width: 48px;
-        height: 48px;
-        padding: 0;
-        justify-content: center;
-        border-radius: 50%;
-      }
-      .floating-hr-portal-btn i {
-        margin: 0 !important;
-        font-size: 1.2rem;
       }
     }
   </style>
@@ -537,10 +432,6 @@
                     </li>
                 </ul>
                 <div class="d-flex align-items-center gap-2">
-                    <!-- Direct HR Portal Quick Access in Navbar -->
-                    <a href="hr-portal.html" class="btn btn-sm btn-outline-light rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1 shadow-sm" style="border-color: rgba(255,255,255,0.25); font-size: 13px; font-weight: 600;">
-                      <i class="bi bi-shield-lock-fill text-warning"></i> HR Portal
-                    </a>
                     <a href="https://wa.me/919910895095?text=Hello%20Techbizz%20Integrators,%20I%20am%20interested%20in%20an%20LED%20Display%20Solution." 
                        target="_blank" 
                        rel="noopener noreferrer" 
@@ -548,37 +439,28 @@
                        style="background: #25D366; font-size: 13px; font-weight: 600;">
                         <i class="bi bi-whatsapp"></i> Chat Now
                     </a>
+                    <!-- Pixip-Style Discrete Admin / HR Icon -->
+                    <a href="hr-portal.html" class="nav-admin-icon" title="HR Admin CMS">
+                        <i class="bi bi-shield-lock"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
   </div>
 
-  <!-- Soothing Hero Section -->
-  <header class="career-hero-soothing">
+  <!-- Clean Bright Hero Section -->
+  <header class="career-hero-clean">
     <div class="container">
-      <div class="hero-pill-badge">
-        <i class="bi bi-stars"></i> We Are Hiring &bull; Join Techbizz Integrators
+      <div class="hero-eyebrow">
+        <i class="bi bi-stars"></i> We Are Hiring &bull; Build with Techbizz
       </div>
-      <h1 class="hero-title-soothing">
-        Shape the Future of <span>Visual Display & Security</span>
+      <h1 class="hero-headline">
+        Join our Team in <span class="text-gradient">LED & Security Tech</span>
       </h1>
-      <p class="hero-desc-soothing">
+      <p class="hero-subtext">
         Build high-impact commercial LED video walls, smart control rooms, and enterprise security systems. Join a fast-growing, engineering-driven team in Delhi-NCR.
       </p>
-
-      <!-- Action & HR Buttons in Hero -->
-      <div class="hero-action-buttons">
-        <a href="#openingsSection" class="btn-hero-primary">
-          <i class="bi bi-arrow-down-circle"></i> View Open Roles
-        </a>
-        <a href="hr-portal.html" class="btn-hero-hr" title="Authorized HR CMS Login">
-          <i class="bi bi-shield-lock text-info"></i> HR Portal Login
-        </a>
-        <a href="https://wa.me/917838666145?text=Hello%20Techbizz%20HR,%20I%20want%20to%20inquire%20about%20job%20opportunities." target="_blank" class="btn-hero-hr" style="color: #25d366 !important; border-color: rgba(37, 211, 102, 0.3);">
-          <i class="bi bi-whatsapp"></i> WhatsApp HR Team
-        </a>
-      </div>
 
       <!-- Department Filter Pills -->
       <div class="filter-pills-wrap" id="deptFilterButtons">
@@ -595,24 +477,21 @@
     <div class="container">
       
       <!-- Live Status & Stats Bar -->
-      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary border-opacity-25 gap-3">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-2 border-bottom border-light-subtle gap-3">
         <div>
-          <h4 class="fw-bold text-white mb-1">Current Open Positions</h4>
-          <p class="text-muted small mb-0">Direct company payroll &bull; Real site experience &bull; Performance incentives</p>
+          <h4 class="fw-bold text-dark mb-1">Current Open Positions</h4>
+          <p class="text-muted small mb-0">Direct company payroll &bull; Real field site experience &bull; Performance incentives</p>
         </div>
-        <div class="d-flex align-items-center gap-2">
-          <span class="badge px-3 py-2 rounded-pill" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">
-            <i class="bi bi-lightning-charge-fill me-1"></i> Direct HR Route
+        <div>
+          <span class="badge px-3 py-2 rounded-pill" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0;">
+            <i class="bi bi-lightning-charge-fill me-1 text-success"></i> Direct HR Route Active
           </span>
-          <a href="hr-portal.html" class="btn btn-sm btn-outline-light rounded-pill px-3 py-1 small" style="border-color: rgba(255,255,255,0.2);">
-            <i class="bi bi-plus-lg me-1"></i> Post Opening (HR)
-          </a>
         </div>
       </div>
 
       <!-- Job Cards Grid -->
       <div class="row g-4" id="jobCardsContainer">
-        <!-- Injected via JavaScript from Supabase / Engine -->
+        <!-- Injected via JavaScript -->
         <div class="col-12 text-center py-5">
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading openings...</span>
@@ -624,7 +503,7 @@
       <!-- No Openings Empty State -->
       <div id="noOpeningsNotice" class="text-center py-5" style="display: none;">
         <i class="bi bi-briefcase text-muted" style="font-size: 3rem;"></i>
-        <h4 class="text-white mt-3 fw-bold">No Openings Found in this Category</h4>
+        <h4 class="text-dark mt-3 fw-bold">No Openings Found in this Category</h4>
         <p class="text-muted">Feel free to send your general resume directly to our HR team.</p>
         <a href="https://wa.me/917838666145?text=Hello%20Techbizz%20HR,%20sharing%20my%20resume%20for%20future%20opportunities." target="_blank" class="btn btn-success rounded-pill px-4">
           <i class="bi bi-whatsapp me-1"></i> Send General Resume on WhatsApp
@@ -634,35 +513,35 @@
     </div>
   </main>
 
-  <!-- Application Modal (Soothing Modern Glassmorphic) -->
+  <!-- Application Modal (Clean Bright White) -->
   <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content modal-content-soothing">
-        <div class="modal-header modal-header-soothing">
+      <div class="modal-content modal-content-clean">
+        <div class="modal-header modal-header-clean">
           <div>
-            <h5 class="modal-title fw-bold text-white mb-1" id="applyModalLabel">Apply for Position</h5>
-            <span class="dept-badge-soft" id="modalJobDept">Role</span>
+            <h5 class="modal-title fw-bold text-dark mb-1" id="applyModalLabel">Apply for Position</h5>
+            <span class="dept-badge-clean" id="modalJobDept">Role</span>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
         <form id="candidateApplicationForm">
-          <div class="modal-body modal-body-soothing">
+          <div class="modal-body modal-body-clean">
             <input type="hidden" id="formJobId">
             <input type="hidden" id="formJobTitle">
 
             <!-- Selected Role Summary Card -->
-            <div class="p-3 rounded-3 mb-4" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2);">
+            <div class="p-3 rounded-3 mb-4" style="background: #f0f9ff; border: 1px solid #bae6fd;">
               <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
                   <span class="text-muted small d-block">Applying for:</span>
-                  <strong class="text-white fs-5" id="modalJobTitleDisplay">Job Title</strong>
+                  <strong class="text-dark fs-5" id="modalJobTitleDisplay">Job Title</strong>
                 </div>
                 <div class="text-md-end">
-                  <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35);" id="modalJobMinExpBadge">
+                  <span class="badge" style="background: #fef3c7; color: #92400e; border: 1px solid #fde68a;" id="modalJobMinExpBadge">
                     Min Exp: 2 Yrs
                   </span>
-                  <span class="badge ms-1" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.35);" id="modalJobSalaryBadge">
+                  <span class="badge ms-1" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0;" id="modalJobSalaryBadge">
                     Salary: ?
                   </span>
                 </div>
@@ -672,35 +551,34 @@
             <div class="row g-3">
               <!-- Full Name -->
               <div class="col-md-6">
-                <label for="candidateName" class="form-label-soothing">Full Name *</label>
-                <input type="text" class="form-control form-control-soothing" id="candidateName" placeholder="Enter your full name" required>
+                <label for="candidateName" class="form-label-clean">Full Name *</label>
+                <input type="text" class="form-control form-control-clean" id="candidateName" placeholder="Enter your full name" required>
               </div>
 
               <!-- Phone -->
               <div class="col-md-6">
-                <label for="candidatePhone" class="form-label-soothing">Mobile / WhatsApp Number *</label>
-                <input type="tel" class="form-control form-control-soothing" id="candidatePhone" placeholder="10-digit mobile number" required>
+                <label for="candidatePhone" class="form-label-clean">Mobile / WhatsApp Number *</label>
+                <input type="tel" class="form-control form-control-clean" id="candidatePhone" placeholder="10-digit mobile number" required>
               </div>
 
               <!-- Email -->
               <div class="col-md-6">
-                <label for="candidateEmail" class="form-label-soothing">Email Address *</label>
-                <input type="email" class="form-control form-control-soothing" id="candidateEmail" placeholder="your.name@example.com" required>
+                <label for="candidateEmail" class="form-label-clean">Email Address *</label>
+                <input type="email" class="form-control form-control-clean" id="candidateEmail" placeholder="your.name@example.com" required>
               </div>
 
               <!-- City / Current Location -->
               <div class="col-md-6">
-                <label for="candidateCity" class="form-label-soothing">Current City / Location *</label>
-                <input type="text" class="form-control form-control-soothing" id="candidateCity" placeholder="e.g. Ghaziabad, Noida, Delhi" required>
+                <label for="candidateCity" class="form-label-clean">Current City / Location *</label>
+                <input type="text" class="form-control form-control-clean" id="candidateCity" placeholder="e.g. Ghaziabad, Noida, Delhi" required>
               </div>
 
-              <!-- Total Relevant Experience (Scroll Selector with Match Indication) -->
+              <!-- Total Relevant Experience -->
               <div class="col-md-6">
-                <label for="candidateExpSelect" class="form-label-soothing">
+                <label for="candidateExpSelect" class="form-label-clean">
                   Total Relevant Experience *
-                  <span class="text-muted fw-normal small">(Select to compare)</span>
                 </label>
-                <select class="form-select form-select-soothing" id="candidateExpSelect" required>
+                <select class="form-select form-select-clean" id="candidateExpSelect" required>
                   <option value="" disabled selected>-- Select Your Experience --</option>
                   <option value="Fresher (0 - 1 Year)" data-years="0.5">Fresher (0 - 1 Year)</option>
                   <option value="1 - 2 Years" data-years="1.5">1 - 2 Years</option>
@@ -715,8 +593,8 @@
 
               <!-- Notice Period -->
               <div class="col-md-6">
-                <label for="candidateNotice" class="form-label-soothing">Notice Period / Availability *</label>
-                <select class="form-select form-select-soothing" id="candidateNotice" required>
+                <label for="candidateNotice" class="form-label-clean">Notice Period / Availability *</label>
+                <select class="form-select form-select-clean" id="candidateNotice" required>
                   <option value="Immediate" selected>Immediate Joiner (0 - 7 Days)</option>
                   <option value="15 Days">15 Days</option>
                   <option value="1 Month">1 Month</option>
@@ -724,19 +602,19 @@
                 </select>
               </div>
 
-              <!-- Resume Upload Button & Preview -->
+              <!-- Resume Upload Button -->
               <div class="col-12">
-                <label for="candidateResume" class="form-label-soothing">Upload Resume / CV (PDF, DOCX, Max 10MB) *</label>
-                <input type="file" class="form-control form-control-soothing" id="candidateResume" accept=".pdf,.doc,.docx" required>
+                <label for="candidateResume" class="form-label-clean">Upload Resume / CV (PDF, DOCX, Max 10MB) *</label>
+                <input type="file" class="form-control form-control-clean" id="candidateResume" accept=".pdf,.doc,.docx" required>
                 <div class="form-text text-muted small mt-1">
-                  <i class="bi bi-shield-check text-success me-1"></i> Your resume is securely encrypted and uploaded directly to Techbizz Cloud.
+                  <i class="bi bi-shield-check text-success me-1"></i> Your resume is securely uploaded directly to Techbizz Cloud Storage.
                 </div>
               </div>
 
-              <!-- Brief Note / Key Projects -->
+              <!-- Brief Note -->
               <div class="col-12">
-                <label for="candidateNote" class="form-label-soothing">Key Skills or Recent Projects (Optional)</label>
-                <textarea class="form-control form-control-soothing" id="candidateNote" rows="2" placeholder="Mention tools, LED processors (NovaStar), AutoCAD experience, or past projects..."></textarea>
+                <label for="candidateNote" class="form-label-clean">Key Skills or Past Projects (Optional)</label>
+                <textarea class="form-control form-control-clean" id="candidateNote" rows="2" placeholder="Mention tools, NovaStar controllers, AutoCAD experience, or past projects..."></textarea>
               </div>
             </div>
 
@@ -744,13 +622,13 @@
             <div id="submissionAlert" class="mt-3" style="display: none;"></div>
 
             <!-- Direct 1-Click Alternate Routing Strip -->
-            <div class="p-3 rounded-3 mt-4" style="background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255, 255, 255, 0.15);">
+            <div class="p-3 rounded-3 mt-4" style="background: #f8fafc; border: 1px dashed #cbd5e1;">
               <span class="text-muted small d-block mb-2">Want to contact HR directly right now?</span>
               <div class="d-flex flex-wrap gap-2">
                 <a id="btnDirectWhatsApp" href="#" target="_blank" class="btn btn-sm btn-success rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1">
                   <i class="bi bi-whatsapp"></i> Send on HR WhatsApp
                 </a>
-                <a id="btnDirectEmail" href="#" class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1">
+                <a id="btnDirectEmail" href="#" class="btn btn-sm btn-outline-primary rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1">
                   <i class="bi bi-envelope"></i> Email to HR Team
                 </a>
               </div>
@@ -758,9 +636,9 @@
 
           </div>
 
-          <div class="modal-footer" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 16px 24px;">
+          <div class="modal-footer" style="border-top: 1px solid var(--border-color); padding: 16px 24px;">
             <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-hero-primary px-4" id="btnSubmitApp">
+            <button type="submit" class="btn btn-apply-primary px-4" id="btnSubmitApp">
               <i class="bi bi-send-fill me-1"></i> Submit Application
             </button>
           </div>
@@ -791,7 +669,7 @@
                     <li><a href="cctv.html">CCTV & Security</a></li>
                     <li><a href="case.html">Case Studies</a></li>
                     <li><a href="career.html">Careers</a></li>
-                    <li><a href="hr-portal.html"><i class="bi bi-shield-lock me-1 text-warning"></i> HR Portal Login</a></li>
+                    <li><a href="hr-portal.html"><i class="bi bi-shield-lock me-1 text-warning"></i> HR Portal</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
@@ -818,15 +696,9 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; Techbizz Integrators Private Limited 2026. All Rights Reserved. &bull; <a href="hr-portal.html" class="text-white-50 text-decoration-none"><i class="bi bi-lock-fill"></i> HR Admin Portal</a></p>
+        <p>&copy; Techbizz Integrators Private Limited 2026. All Rights Reserved.</p>
     </div>
   </footer>
-
-  <!-- Floating HR Portal Shortcut Button (Bottom-Right) -->
-  <a href="hr-portal.html" class="floating-hr-portal-btn" title="HR Admin CMS Portal">
-    <i class="bi bi-person-badge-fill"></i>
-    <span>HR Portal</span>
-  </a>
 
   <!-- Floating WhatsApp CTA Button (Bottom-Left) -->
   <div class="floating-whatsapp-container" style="position: fixed; bottom: 25px; left: 25px; z-index: 999999;">
@@ -842,7 +714,7 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/career-portal.js?v=3.2"></script>
+  <script src="../assets/js/career-portal.js?v=3.3"></script>
 
   <script>
     let allJobs = [];
@@ -887,32 +759,32 @@
 
         return `
           <div class="col-lg-4 col-md-6 job-item-col" data-dept="${job.department}">
-            <div class="job-card-soothing">
+            <div class="job-card-clean">
               <div>
-                <div class="card-top-row">
-                  <span class="dept-badge-soft">${job.department}</span>
-                  <span class="job-posted-time"><i class="bi bi-clock me-1"></i>${job.date || 'Recent'}</span>
+                <div class="card-top-header">
+                  <span class="dept-badge-clean">${job.department}</span>
+                  <span class="job-date-text"><i class="bi bi-clock me-1"></i>${job.date || 'Recent'}</span>
                 </div>
-                <h3 class="job-title-soothing">${job.title}</h3>
+                <h3 class="job-title-clean">${job.title}</h3>
                 
-                <div class="job-badges-grid">
-                  <span class="meta-chip loc"><i class="bi bi-geo-alt-fill"></i> ${job.location || 'Ghaziabad, UP'}</span>
-                  <span class="meta-chip exp"><i class="bi bi-briefcase-fill"></i> Min ${job.minExperience || 0} Yr${(job.minExperience > 1 ? 's' : '')}</span>
-                  <span class="meta-chip salary"><i class="bi bi-cash-stack"></i> ${job.salary || 'Competitive'}</span>
+                <div class="job-meta-chips">
+                  <span class="clean-chip loc"><i class="bi bi-geo-alt-fill"></i> ${job.location || 'Ghaziabad, UP'}</span>
+                  <span class="clean-chip exp"><i class="bi bi-briefcase-fill"></i> Min ${job.minExperience || 0} Yr${(job.minExperience > 1 ? 's' : '')}</span>
+                  <span class="clean-chip salary"><i class="bi bi-cash-stack"></i> ${job.salary || 'Competitive'}</span>
                 </div>
 
-                <p class="job-desc-soothing">${job.description || ''}</p>
+                <p class="job-desc-clean">${job.description || ''}</p>
 
-                <ul class="req-list-soothing">
+                <ul class="req-list-clean">
                   ${reqItems}
                 </ul>
               </div>
 
-              <div class="card-footer-action">
-                <button type="button" class="btn-apply-soothing" onclick="openApplicationModal('${job.id}')">
+              <div class="card-actions-row">
+                <button type="button" class="btn-apply-primary" onclick="openApplicationModal('${job.id}')">
                   <i class="bi bi-send-fill"></i> Apply Now
                 </button>
-                <a href="${whatsAppLink}" target="_blank" class="btn-whatsapp-direct" title="Instant Chat with HR on WhatsApp">
+                <a href="${whatsAppLink}" target="_blank" class="btn-whatsapp-icon" title="Instant Chat with HR on WhatsApp">
                   <i class="bi bi-whatsapp"></i>
                 </a>
               </div>
@@ -955,7 +827,7 @@
       document.getElementById('formJobTitle').value = currentSelectedJob.title;
       document.getElementById('modalJobDept').textContent = currentSelectedJob.department;
       document.getElementById('modalJobTitleDisplay').textContent = currentSelectedJob.title;
-      document.getElementById('modalJobMinExpBadge').textContent = `Min Exp: ${currentSelectedJob.minExperience || 0} Yrs Required`;
+      document.getElementById('modalJobMinExpBadge').textContent = `Min Exp: ${currentSelectedJob.minExperience || 0} Yrs`;
       document.getElementById('modalJobSalaryBadge').textContent = `${currentSelectedJob.salary || 'Competitive'}`;
 
       // Reset dynamic fields
@@ -983,7 +855,6 @@
       mailBtn.href = TechbizzCareerEngine.getMailtoLink(currentSelectedJob.title, name, phone, exp);
     }
 
-    // Input change listeners to keep direct links fresh
     ['candidateName', 'candidatePhone'].forEach(id => {
       document.getElementById(id).addEventListener('input', updateDirectActionLinks);
     });
@@ -997,9 +868,9 @@
       const indicator = document.getElementById('expMatchIndicator');
 
       if (years >= minRequired) {
-        indicator.innerHTML = `<span class="badge px-3 py-2 rounded-pill" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="bi bi-check-circle-fill me-1"></i> Meets/Exceeds experience criteria (${minRequired} Yrs required)</span>`;
+        indicator.innerHTML = `<span class="badge px-3 py-2 rounded-pill" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0;"><i class="bi bi-check-circle-fill me-1 text-success"></i> Meets experience criteria (${minRequired} Yrs required)</span>`;
       } else {
-        indicator.innerHTML = `<span class="badge px-3 py-2 rounded-pill" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);"><i class="bi bi-info-circle-fill me-1"></i> Note: Role specifies min ${minRequired} Yrs, but enthusiastic candidates are encouraged to apply!</span>`;
+        indicator.innerHTML = `<span class="badge px-3 py-2 rounded-pill" style="background: #fef3c7; color: #92400e; border: 1px solid #fde68a;"><i class="bi bi-info-circle-fill me-1 text-warning"></i> Role specifies min ${minRequired} Yrs, but candidates are welcome to apply!</span>`;
       }
       updateDirectActionLinks();
     });
@@ -1022,7 +893,6 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Submitting Profile...';
 
-      // Read resume file as base64 data for storage & upload
       const reader = new FileReader();
       reader.onload = async function(evt) {
         const appData = {
@@ -1050,7 +920,7 @@
           <strong><i class="bi bi-check-circle-fill me-1"></i> Application Received Successfully!</strong><br>
           Our HR team (+91 78386 66145 / hr@techbizzintegrators.com) has received your profile for <em>${appData.jobTitle}</em>.
           <div class="mt-3">
-            <span class="small text-white d-block mb-2">Want instant confirmation on WhatsApp?</span>
+            <span class="small text-muted d-block mb-2">Want instant confirmation on WhatsApp?</span>
             <button type="button" class="btn btn-sm btn-success rounded-pill fw-semibold" onclick="window.open('${TechbizzCareerEngine.getWhatsAppLink(appData.jobTitle, appData.fullName, appData.phone, appData.experience)}', '_blank')">
               <i class="bi bi-whatsapp"></i> Notify HR on WhatsApp Now
             </button>
