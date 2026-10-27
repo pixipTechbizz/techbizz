@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>HR Careers CMS & Job Manager | Techbizz Integrators</title>
   <link rel="icon" type="image/png" href="../assets/img/fevicon.png">
+  <link rel="apple-touch-icon" href="../assets/img/fevicon.png">
+  <link rel="manifest" href="manifest-hr.json">
 
   <!-- Mobile App / PWA Meta Tags (Enables 1-Tap Home Screen App Experience) -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -479,7 +481,7 @@
         </div>
       </div>
       <div>
-        <button type="button" class="btn btn-sm btn-success rounded-pill px-3 fw-semibold" onclick="showAddToHomeScreenGuide()">
+        <button type="button" class="btn btn-sm btn-success rounded-pill px-3 fw-semibold" id="btnAddToPhone" onclick="showAddToHomeScreenGuide()">
           <i class="bi bi-phone me-1"></i> Add to Phone Screen
         </button>
       </div>
@@ -897,6 +899,111 @@ Willingness to travel for field installations" required></textarea>
     </div>
   </main>
 
+  <!-- Modal: Add to Phone Screen / PWA Install Guide -->
+  <div class="modal fade" id="addToHomeScreenModal" tabindex="-1" aria-labelledby="addToHomeScreenModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+        <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 22px 24px;">
+          <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center justify-content-center bg-white shadow-sm rounded-4" style="width: 54px; height: 54px; padding: 7px; border: 1px solid #bae6fd;">
+              <img src="../assets/img/fevicon.png" alt="Techbizz HR" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold text-dark mb-0" id="addToHomeScreenModalLabel">Techbizz HR Mobile App</h5>
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 mt-1 small">
+                <i class="bi bi-phone-fill me-1"></i> 1-Tap Home Screen App
+              </span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <!-- Live Preview Box: Exact screen appearance -->
+          <div class="p-3 rounded-3 mb-4" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="text-uppercase fw-bold text-muted" style="font-size: 0.72rem; letter-spacing: 0.5px;">
+                <i class="bi bi-phone me-1"></i> What will appear on your phone screen
+              </span>
+              <span class="badge bg-primary text-white" style="font-size: 0.68rem;">Standalone App</span>
+            </div>
+            <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 border shadow-xs">
+              <div class="d-flex align-items-center justify-content-center rounded-3 shadow-sm" style="width: 50px; height: 50px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); padding: 8px;">
+                <img src="../assets/img/fevicon.png" alt="Techbizz Logo" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(0) invert(1);">
+              </div>
+              <div class="flex-grow-1">
+                <strong class="text-dark d-block fw-bold" style="font-size: 0.96rem;">Techbizz HR</strong>
+                <span class="text-muted small" style="font-size: 0.8rem; line-height: 1.35; display: block;">Opens full-screen directly without browser URL bars, tabs, or bookmarks</span>
+              </div>
+              <i class="bi bi-check-circle-fill text-success fs-5"></i>
+            </div>
+          </div>
+
+          <!-- Dynamic Native Install Button (Chrome / Android / Edge) -->
+          <div id="nativeInstallPromptBox" style="display: none;" class="mb-4">
+            <button type="button" class="btn btn-success w-100 py-2 fw-semibold rounded-pill shadow-sm" onclick="triggerNativeInstall()">
+              <i class="bi bi-download me-1"></i> Tap to Install App on Phone Now
+            </button>
+            <div class="text-center text-muted small mt-1">Direct 1-tap native installation is ready</div>
+            <hr class="my-3">
+          </div>
+
+          <!-- Step-by-Step Instructions -->
+          <h6 class="fw-bold text-dark mb-2" style="font-size: 0.88rem;">
+            <i class="bi bi-gear-fill text-secondary me-1"></i> Easy 2-Step Setup Instructions:
+          </h6>
+
+          <ul class="nav nav-pills nav-fill mb-3" id="pwaDeviceTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active py-2 fw-semibold small" id="android-pwa-tab" data-bs-toggle="pill" data-bs-target="#android-pwa" type="button" role="tab">
+                <i class="bi bi-android2 me-1 text-success"></i> Android (Chrome)
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link py-2 fw-semibold small" id="ios-pwa-tab" data-bs-toggle="pill" data-bs-target="#ios-pwa" type="button" role="tab">
+                <i class="bi bi-apple me-1 text-dark"></i> iPhone (Safari)
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="pwaDeviceTabContent">
+            <!-- Android Steps -->
+            <div class="tab-pane fade show active" id="android-pwa" role="tabpanel">
+              <div class="p-3 rounded-3" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+                <ol class="text-secondary small ps-3 mb-0" style="line-height: 1.9;">
+                  <li>In Google Chrome, tap the <strong>3 dots (⋮)</strong> at top right.</li>
+                  <li>Tap <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
+                  <li>Tap <strong>"Install"</strong>. Done! The <strong>Techbizz HR</strong> app icon is on your home screen.</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- iOS Steps -->
+            <div class="tab-pane fade" id="ios-pwa" role="tabpanel">
+              <div class="p-3 rounded-3" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+                <ol class="text-secondary small ps-3 mb-0" style="line-height: 1.9;">
+                  <li>In Safari browser, tap the <strong>Share</strong> button <i class="bi bi-box-arrow-up text-primary"></i> at bottom center.</li>
+                  <li>Scroll down and tap <strong>"Add to Home Screen" <i class="bi bi-plus-square text-dark"></i></strong>.</li>
+                  <li>Tap <strong>"Add"</strong> at top right. The <strong>Techbizz HR</strong> app icon is on your home screen.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="mt-4 pt-3 border-top d-flex gap-2">
+            <button type="button" class="btn btn-outline-secondary btn-sm flex-grow-1 rounded-pill fw-semibold" onclick="copyPortalLinkToClipboard()">
+              <i class="bi bi-link-45deg me-1"></i> Copy HR Portal Link
+            </button>
+            <button type="button" class="btn btn-portal-primary btn-sm px-4 rounded-pill fw-semibold" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/career-portal.js?v=3.6"></script>
@@ -1024,9 +1131,106 @@ Willingness to travel for field installations" required></textarea>
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    window.showAddToHomeScreenGuide = function() {
-      openPasswordChangeTab();
+    // PWA & Home Screen Installation Engine
+    let deferredInstallPrompt = null;
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('../sw.js').catch(err => {
+          console.log('SW registration note:', err);
+        });
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent browser default mini-infobar
+      e.preventDefault();
+      deferredInstallPrompt = e;
+
+      const btn = document.getElementById('btnAddToPhone');
+      if (btn) {
+        btn.innerHTML = '<i class="bi bi-download me-1"></i> Install App Now';
+        btn.classList.remove('btn-success');
+        btn.classList.add('btn-primary');
+      }
+
+      const nativeBox = document.getElementById('nativeInstallPromptBox');
+      if (nativeBox) {
+        nativeBox.style.display = 'block';
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      deferredInstallPrompt = null;
+      const btn = document.getElementById('btnAddToPhone');
+      if (btn) {
+        btn.innerHTML = '<i class="bi bi-check-circle me-1"></i> Installed on Phone';
+        btn.disabled = true;
+      }
+      showToast('🎉 Techbizz HR App installed on your phone successfully!');
+    });
+
+    window.triggerNativeInstall = async function() {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      const choiceResult = await deferredInstallPrompt.userChoice;
+      if (choiceResult && choiceResult.outcome === 'accepted') {
+        showToast('Installing Techbizz HR App to home screen...');
+      }
+      deferredInstallPrompt = null;
+      const modalEl = document.getElementById('addToHomeScreenModal');
+      if (modalEl) {
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+      }
     };
+
+    window.showAddToHomeScreenGuide = async function() {
+      if (deferredInstallPrompt) {
+        // Native install prompt ready (Chrome / Android / Edge)
+        await triggerNativeInstall();
+        return;
+      }
+
+      // Detect iOS and auto-switch to iOS tab
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      if (isIOS) {
+        const iosTab = document.getElementById('ios-pwa-tab');
+        if (iosTab) {
+          const tabTrigger = new bootstrap.Tab(iosTab);
+          tabTrigger.show();
+        }
+      }
+
+      const modalEl = document.getElementById('addToHomeScreenModal');
+      if (modalEl) {
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
+      }
+    };
+
+    window.copyPortalLinkToClipboard = function() {
+      const url = window.location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('📋 HR Portal link copied to clipboard!');
+        }).catch(() => {
+          fallbackCopyText(url);
+        });
+      } else {
+        fallbackCopyText(url);
+      }
+    };
+
+    function fallbackCopyText(text) {
+      const temp = document.createElement('input');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      showToast('📋 HR Portal link copied to clipboard!');
+    }
 
     async function initDashboard() {
       loadManageJobsTable();

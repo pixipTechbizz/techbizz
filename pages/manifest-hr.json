@@ -1,0 +1,19 @@
+{
+  "name": "Techbizz HR Portal",
+  "short_name": "Techbizz HR",
+  "description": "Techbizz Integrators HR Recruitment & Job Portal",
+  "start_url": "hr-portal.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0284c7",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "../assets/img/fevicon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
