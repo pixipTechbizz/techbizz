@@ -165,8 +165,10 @@ const TechbizzCareerEngine = (function() {
                     }
                     const { data, error } = await query;
                     if (!error && data && data.length > 0) {
+                        // Filter out internal system config rows
+                        const filtered = data.filter(d => d.id !== 'system-hr-config');
                         // Map database column names if needed
-                        const mapped = data.map(d => ({
+                        const mapped = filtered.map(d => ({
                             id: d.id,
                             title: d.title,
                             department: d.department,
@@ -190,7 +192,7 @@ const TechbizzCareerEngine = (function() {
         },
 
         getJobs: function(activeOnly = false) {
-            const jobs = initJobs();
+            let jobs = initJobs().filter(j => j.id !== 'system-hr-config');
             if (activeOnly) {
                 return jobs.filter(j => j.status === 'active');
             }
@@ -412,22 +414,23 @@ const TechbizzCareerEngine = (function() {
         getHREmail: function() { return HR_EMAIL; },
         getHRPhone: function() { return '+91 78386 66145'; },
 
-        // HR Passcode Management (Cloud-first from Supabase storage resumes bucket, cached locally)
+        // HR Passcode Management (Cloud Database sync via jobs system config row, cached locally)
         getHRPasscodeAsync: async function() {
-            // 1. Try fetching from public cloud config in Supabase
-            try {
-                const config = getSupabaseConfig();
-                const url = `${config.url}/storage/v1/object/public/resumes/system_hr_config.json?t=${Date.now()}`;
-                const res = await fetch(url);
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && data.passcode) {
-                        localStorage.setItem(STORAGE_KEY_PASSCODE, data.passcode);
-                        return data.passcode;
+            // 1. Try fetching from Supabase Database
+            if (this.isSupabaseConnected()) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('jobs')
+                        .select('salary')
+                        .eq('id', 'system-hr-config')
+                        .maybeSingle();
+                    if (!error && data && data.salary) {
+                        localStorage.setItem(STORAGE_KEY_PASSCODE, data.salary);
+                        return data.salary;
                     }
+                } catch (e) {
+                    console.warn('Could not fetch cloud passcode from DB:', e);
                 }
-            } catch (e) {
-                console.warn('Could not fetch cloud passcode:', e);
             }
             // 2. LocalStorage fallback
             const local = localStorage.getItem(STORAGE_KEY_PASSCODE);
@@ -441,23 +444,26 @@ const TechbizzCareerEngine = (function() {
             const cleanPasscode = newPasscode.trim();
             localStorage.setItem(STORAGE_KEY_PASSCODE, cleanPasscode);
 
-            // Sync to Supabase Storage if client is connected
+            // Sync to Supabase Database
             if (this.isSupabaseConnected()) {
                 try {
-                    const payload = JSON.stringify({
-                        passcode: cleanPasscode,
-                        updated_at: new Date().toISOString()
-                    });
-                    const blob = new Blob([payload], { type: 'application/json' });
-                    const { error } = await supabaseClient.storage.from('resumes').upload('system_hr_config.json', blob, {
-                        upsert: true,
-                        contentType: 'application/json'
-                    });
+                    const { error } = await supabaseClient.from('jobs').upsert({
+                        id: 'system-hr-config',
+                        title: '__SYSTEM_CONFIG__',
+                        department: 'SYSTEM',
+                        location: 'SYSTEM',
+                        type: 'SYSTEM',
+                        min_experience: 0,
+                        salary: cleanPasscode,
+                        status: 'closed',
+                        description: 'System Config Row for HR Credentials',
+                        requirements: []
+                    }, { onConflict: 'id' });
                     if (error) {
-                        console.warn('Cloud passcode sync notice:', error.message);
+                        console.warn('DB passcode sync notice:', error.message);
                     }
                 } catch (e) {
-                    console.warn('Cloud passcode sync error:', e);
+                    console.warn('DB passcode sync error:', e);
                 }
             }
             return { success: true };
@@ -467,7 +473,8 @@ const TechbizzCareerEngine = (function() {
             if (!enteredPasscode) return false;
             const current = await this.getHRPasscodeAsync();
             const clean = enteredPasscode.trim();
-            return clean === current || clean === DEFAULT_PASSCODE || clean === 'techbizz' || clean === 'admin123';
+            // Strictly match the current active passcode (or default if no custom passcode was ever configured)
+            return clean === current;
         },
 
         // Fast Access & Sharing Helpers
