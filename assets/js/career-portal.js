@@ -327,6 +327,34 @@ const TechbizzCareerEngine = (function() {
                 }
             }
 
+            // Automatically send application email directly to HR inbox (hr@techbizzintegrators.com)
+            try {
+                const emailPayload = {
+                    _subject: `New Job Application: ${appData.jobTitle} - ${appData.fullName}`,
+                    _replyto: appData.email,
+                    role_applied: appData.jobTitle,
+                    candidate_name: appData.fullName,
+                    contact_phone: appData.phone,
+                    candidate_email: appData.email,
+                    location_city: appData.city || 'N/A',
+                    experience: appData.experience,
+                    notice_period: appData.noticePeriod || 'Immediate',
+                    candidate_notes: appData.note || 'None provided',
+                    resume_file_name: appData.resumeFileName || 'resume.pdf',
+                    resume_download_link: appData.resumeUrl || 'Uploaded in Techbizz HR Portal',
+                    whatsapp_candidate: `https://wa.me/91${appData.phone.replace(/[^0-9]/g, '')}`,
+                    target_hr_inbox: 'hr@techbizzintegrators.com'
+                };
+
+                fetch('https://formspree.io/f/xgvoyyel', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify(emailPayload)
+                }).catch(err => console.warn('Email delivery notice:', err));
+            } catch (err) {
+                console.warn('Email dispatch error:', err);
+            }
+
             // Always save to localStorage as reliable backup
             this.submitApplication(appData);
             return appData;

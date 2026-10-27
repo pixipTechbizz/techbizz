@@ -427,6 +427,11 @@
       </div>
 
       <div class="d-flex align-items-center gap-2">
+        <!-- New Applications Notification Button -->
+        <button class="btn btn-sm btn-light border position-relative rounded-pill px-3" onclick="viewNewApplications()" title="Candidate Notifications">
+          <i class="bi bi-bell-fill text-warning me-1"></i> <span class="d-none d-sm-inline">Alerts</span>
+          <span id="notificationBadgeCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none; font-size: 0.72rem;">0</span>
+        </button>
         <a href="career.html" target="_blank" class="btn btn-sm btn-portal-outline" title="View Live Public Career Page">
           <i class="bi bi-box-arrow-up-right me-1"></i> <span class="d-none d-md-inline">Live Website</span>
         </a>
@@ -443,6 +448,27 @@
   <!-- Main Dashboard Container -->
   <main class="container-fluid py-4 px-3 px-lg-5">
     
+    <!-- Real-Time New Applications Notification Banner -->
+    <div id="newAppsAlertBanner" class="alert alert-primary d-flex flex-wrap justify-content-between align-items-center p-3 mb-4 rounded-3 shadow-sm" style="background: #e0f2fe; border: 1px solid #bae6fd; color: #0369a1; display: none;">
+      <div class="d-flex align-items-center gap-3">
+        <span class="p-2 rounded-circle bg-white text-primary shadow-sm d-inline-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+          <i class="bi bi-bell-fill fs-5 text-warning"></i>
+        </span>
+        <div>
+          <strong class="d-block text-dark fs-6" id="newAppsBannerHeading">New Application(s) Received!</strong>
+          <span class="small text-secondary" id="newAppsBannerDetail">New candidate resumes arrived in the cloud for HR review.</span>
+        </div>
+      </div>
+      <div class="d-flex gap-2 mt-2 mt-sm-0">
+        <button class="btn btn-sm btn-primary rounded-pill px-3 fw-semibold" onclick="viewNewApplications()">
+          <i class="bi bi-eye-fill me-1"></i> Review Applications
+        </button>
+        <button class="btn btn-sm btn-outline-secondary rounded-pill px-2" onclick="dismissNewAppsBanner()" title="Mark all as read">
+          <i class="bi bi-check2"></i> Mark Read
+        </button>
+      </div>
+    </div>
+
     <!-- Single Add to Phone Screen Banner (As Requested) -->
     <div class="phone-shortcut-banner">
       <div class="d-flex align-items-center gap-2">
@@ -472,8 +498,9 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="pills-apps-tab" data-bs-toggle="pill" data-bs-target="#pills-apps" type="button" role="tab" onclick="loadApplicationsTable()">
+        <button class="nav-link" id="pills-apps-tab" data-bs-toggle="pill" data-bs-target="#pills-apps" type="button" role="tab" onclick="loadApplicationsTable(true)">
           <i class="bi bi-file-earmark-person-fill text-success"></i> Candidate Resumes (<span id="tabAppsCount">0</span>)
+          <span id="tabNewBadge" class="badge rounded-pill bg-danger ms-1" style="display: none; font-size: 0.72rem;">NEW</span>
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -872,7 +899,7 @@ Willingness to travel for field installations" required></textarea>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/career-portal.js?v=3.4"></script>
+  <script src="../assets/js/career-portal.js?v=3.5"></script>
 
   <script>
     // Authentication Check
@@ -1004,6 +1031,26 @@ Willingness to travel for field installations" required></textarea>
     async function initDashboard() {
       loadManageJobsTable();
       loadApplicationsTable();
+
+      // Listen for incoming applications in real-time
+      if (window.supabase) {
+        try {
+          const creds = TechbizzCareerEngine.getSupabaseCredentials();
+          if (creds && creds.url && creds.key) {
+            const rtClient = window.supabase.createClient(creds.url, creds.key);
+            rtClient
+              .channel('realtime_applications_stream')
+              .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'applications' }, payload => {
+                playNotificationChime();
+                showToast(`🔔 New Application Received: ${payload.new.full_name} for ${payload.new.job_title}!`);
+                loadApplicationsTable(false);
+              })
+              .subscribe();
+          }
+        } catch (e) {
+          console.warn('Realtime subscription notice:', e);
+        }
+      }
     }
 
     // Load & Render Jobs (Desktop Table + Mobile Cards)
@@ -1096,11 +1143,51 @@ Willingness to travel for field installations" required></textarea>
       }).join('');
     }
 
-    // Load & Render Applications (Desktop Table + Mobile Cards)
-    async function loadApplicationsTable() {
+    const STORAGE_KEY_LAST_READ = 'techbizz_hr_last_read_app_time';
+
+    function playNotificationChime() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } catch (e) {}
+    }
+
+    window.viewNewApplications = function() {
+      const tab = new bootstrap.Tab(document.getElementById('pills-apps-tab'));
+      tab.show();
+      dismissNewAppsBanner();
+      const el = document.getElementById('pills-apps');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.dismissNewAppsBanner = function() {
+      localStorage.setItem(STORAGE_KEY_LAST_READ, Date.now().toString());
+      document.getElementById('newAppsAlertBanner').style.display = 'none';
+      document.getElementById('notificationBadgeCount').style.display = 'none';
+      document.getElementById('tabNewBadge').style.display = 'none';
+      loadApplicationsTable(false);
+    };
+
+    // Load & Render Applications (Desktop Table + Mobile Cards + New Alerts)
+    async function loadApplicationsTable(markRead = false) {
       const tbody = document.getElementById('appsTableBody');
       const mobileContainer = document.getElementById('appsMobileContainer');
       const countLabel = document.getElementById('tabAppsCount');
+      const notifBadge = document.getElementById('notificationBadgeCount');
+      const tabNewBadge = document.getElementById('tabNewBadge');
+      const banner = document.getElementById('newAppsAlertBanner');
 
       let apps = [];
       try {
@@ -1114,7 +1201,47 @@ Willingness to travel for field installations" required></textarea>
       if (!apps || apps.length === 0) {
         tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-muted">No candidate applications received yet.</td></tr>';
         mobileContainer.innerHTML = '<div class="text-center py-4 text-muted">No candidate applications received yet.</div>';
+        notifBadge.style.display = 'none';
+        tabNewBadge.style.display = 'none';
+        banner.style.display = 'none';
         return;
+      }
+
+      // Check for unread applications
+      const lastReadTime = parseInt(localStorage.getItem(STORAGE_KEY_LAST_READ) || '0', 10);
+      let newCount = 0;
+
+      apps.forEach(app => {
+        let appTime = 0;
+        if (app.submittedAt) {
+          appTime = new Date(app.submittedAt).getTime() || 0;
+        }
+        if (!appTime && app.id && app.id.startsWith('app-')) {
+          appTime = parseInt(app.id.replace('app-', ''), 10) || 0;
+        }
+        if (appTime > lastReadTime) {
+          app.isNew = true;
+          newCount++;
+        }
+      });
+
+      // Update Notification Banners & Badges
+      if (newCount > 0 && !markRead) {
+        notifBadge.textContent = newCount;
+        notifBadge.style.display = 'inline-block';
+        tabNewBadge.textContent = `${newCount} NEW`;
+        tabNewBadge.style.display = 'inline-block';
+        document.getElementById('newAppsBannerHeading').textContent = `${newCount} New Job Application(s) Received!`;
+        document.getElementById('newAppsBannerDetail').textContent = `New resumes arrived in Supabase and were dispatched to HR Email (hr@techbizzintegrators.com).`;
+        banner.style.display = 'flex';
+      } else {
+        notifBadge.style.display = 'none';
+        tabNewBadge.style.display = 'none';
+        banner.style.display = 'none';
+        if (markRead) {
+          localStorage.setItem(STORAGE_KEY_LAST_READ, Date.now().toString());
+          apps.forEach(a => a.isNew = false);
+        }
       }
 
       // 1. Desktop Table View
@@ -1129,7 +1256,10 @@ Willingness to travel for field installations" required></textarea>
 
         return `
           <tr>
-            <td><span class="text-muted small">${app.submittedAt || 'Recent'}</span></td>
+            <td>
+              <span class="text-muted small">${app.submittedAt || 'Recent'}</span>
+              ${app.isNew ? '<span class="badge bg-danger rounded-pill px-2 py-0 ms-1 small" style="font-size: 0.65rem;">NEW</span>' : ''}
+            </td>
             <td>
               <strong class="text-dark">${app.fullName}</strong>
               <div class="text-muted small">${app.city || 'Delhi NCR'} &bull; Notice: ${app.noticePeriod || 'Immediate'}</div>
@@ -1167,10 +1297,13 @@ Willingness to travel for field installations" required></textarea>
         const waLink = `https://wa.me/91${app.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(app.fullName)},%20Techbizz%20HR%20received%20your%20application%20for%20${encodeURIComponent(app.jobTitle)}.`;
 
         return `
-          <div class="candidate-card-mobile">
+          <div class="candidate-card-mobile ${app.isNew ? 'border-primary' : ''}">
             <div class="d-flex justify-content-between align-items-start mb-2">
               <div>
-                <strong class="text-dark fs-6">${app.fullName}</strong>
+                <div class="d-flex align-items-center gap-2">
+                  <strong class="text-dark fs-6">${app.fullName}</strong>
+                  ${app.isNew ? '<span class="badge bg-danger rounded-pill px-2 py-0 small" style="font-size: 0.65rem;">NEW</span>' : ''}
+                </div>
                 <span class="badge d-block mt-1 text-start" style="background: #e0f2fe; color: #0369a1; max-width: fit-content;">${app.jobTitle}</span>
               </div>
               <span class="badge rounded-pill px-2 py-1 small" style="background: #fef3c7; color: #92400e;">
