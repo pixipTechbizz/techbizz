@@ -2,109 +2,204 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>HR Careers CMS & Job Manager | Techbizz Integrators</title>
   <link rel="icon" type="image/png" href="../assets/img/fevicon.png">
+
+  <!-- Mobile App / PWA Meta Tags (Enables 1-Tap Home Screen App Experience) -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Techbizz HR">
+  <meta name="theme-color" content="#090d16">
 
   <!-- CSS & Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/styles.css?v=3.1">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+    :root {
+      --bg-midnight: #080c15;
+      --bg-card: rgba(15, 23, 42, 0.78);
+      --bg-card-elevated: #131b2e;
+      --border-subtle: rgba(255, 255, 255, 0.09);
+      --border-focus: rgba(99, 102, 241, 0.45);
+      --accent-indigo: #6366f1;
+      --accent-indigo-light: #818cf8;
+      --accent-teal: #10b981;
+      --accent-sky: #38bdf8;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-heading: #f8fafc;
+      --text-body: #cbd5e1;
+      --text-muted: #94a3b8;
+    }
+
     body {
-      background-color: #0c0a17;
-      color: #ffffff !important;
-      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-midnight);
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(56, 189, 248, 0.05) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-body) !important;
+      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
       min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .hr-header {
-      background: #151326;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 16px 24px;
+    /* Executive Glass Header */
+    .hr-header-soothing {
+      background: rgba(11, 16, 29, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 20px;
     }
 
-    .portal-card {
-      background: #18162b;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 16px;
+    .portal-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.12);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.28);
+    }
+
+    .portal-card-soothing {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
       padding: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      margin-bottom: 24px;
     }
 
+    /* Mobile Quick Access Bar for HR */
+    .hr-quick-access-strip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.22);
+      border-radius: 14px;
+      padding: 12px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Nav Pills - Modern & Touch Friendly */
     .nav-pills .nav-link {
-      color: #e2e8f0 !important;
-      background: #23203c;
+      color: var(--text-muted) !important;
+      background: rgba(255, 255, 255, 0.04);
       font-weight: 600;
-      border-radius: 10px;
-      padding: 11px 22px;
-      margin-right: 10px;
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-right: 8px;
       margin-bottom: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.92rem;
     }
 
     .nav-pills .nav-link:hover {
-      background: #2f2a50;
+      background: rgba(255, 255, 255, 0.08);
       color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.15);
     }
 
     .nav-pills .nav-link.active {
-      background: linear-gradient(135deg, #8f6cf6, #7347d8) !important;
+      background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
       color: #ffffff !important;
-      border-color: #8f6cf6;
-      box-shadow: 0 4px 15px rgba(143, 108, 246, 0.5);
+      border-color: #818cf8;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
     }
 
-    /* Form Controls & Dropdown Contrast Fixes */
-    .form-control, .form-select {
-      background-color: #23203c !important;
-      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    /* Form Controls & Dropdowns (High Contrast & Touch Friendly) */
+    .form-control-soothing, .form-select-soothing {
+      background-color: #131b2e !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
       color: #ffffff !important;
-      border-radius: 10px;
-      padding: 11px 14px;
+      border-radius: 12px;
+      padding: 13px 16px;
       font-size: 0.95rem;
+      transition: all 0.2s ease;
+      min-height: 48px;
     }
 
-    .form-control:focus, .form-select:focus {
-      background-color: #2b274c !important;
-      border-color: #8f6cf6 !important;
+    .form-control-soothing:focus, .form-select-soothing:focus {
+      background-color: #17223b !important;
+      border-color: var(--accent-indigo) !important;
       color: #ffffff !important;
-      box-shadow: 0 0 0 0.25rem rgba(143, 108, 246, 0.3) !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.28) !important;
     }
 
-    .form-control::placeholder {
-      color: #94a3b8 !important;
+    .form-control-soothing::placeholder {
+      color: #64748b !important;
     }
 
-    /* Fixed: Select dropdown options white-on-white bug */
-    select.form-select option, select option {
-      background-color: #23203c !important;
+    select.form-select-soothing option, select option {
+      background-color: #131b2e !important;
       color: #ffffff !important;
       padding: 12px !important;
     }
 
-    .form-label {
-      font-size: 0.92rem;
+    .form-label-soothing {
+      font-size: 0.88rem;
       font-weight: 600 !important;
-      color: #ffffff !important;
+      color: #e2e8f0 !important;
       margin-bottom: 7px;
     }
 
-    .text-muted {
-      color: #cbd5e1 !important; /* Crisp high-contrast silver instead of dark grey */
+    /* Quick Preset Chips for Rapid Mobile Entry */
+    .preset-chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
     }
 
-    /* High Contrast Table Styling */
-    .table-responsive {
-      border-radius: 12px;
+    .preset-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      padding: 4px 11px;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .preset-chip:hover, .preset-chip:active {
+      background: rgba(99, 102, 241, 0.25);
+      color: #ffffff;
+      border-color: var(--accent-indigo);
+    }
+
+    /* High Contrast Modern Table */
+    .table-container-soothing {
+      border-radius: 14px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--border-subtle);
+      background: rgba(11, 16, 29, 0.5);
     }
 
     .table {
@@ -112,177 +207,296 @@
       color: #ffffff !important;
       --bs-table-bg: transparent;
       --bs-table-color: #ffffff;
-      --bs-table-hover-bg: #262145;
+      --bs-table-hover-bg: rgba(99, 102, 241, 0.08);
       --bs-table-hover-color: #ffffff;
     }
 
     .table th {
-      background: #29244d !important;
-      color: #ffffff !important;
-      font-weight: 700 !important;
-      font-size: 0.92rem !important;
+      background: #131b2e !important;
+      color: #94a3b8 !important;
+      font-weight: 600;
+      font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 16px 18px;
-      border-bottom: 2px solid rgba(143, 108, 246, 0.4) !important;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .table td {
-      background: #18162b !important;
-      color: #ffffff !important;
-      padding: 16px 18px;
-      vertical-align: middle;
-      font-size: 0.95rem;
-      border-color: rgba(255, 255, 255, 0.1) !important;
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.92rem;
+      color: #e2e8f0 !important;
     }
 
-    .table tr:hover td {
-      background: #252047 !important;
-      color: #ffffff !important;
+    /* Mobile Candidate Cards View (Shown on screens < 992px) */
+    .candidate-card-mobile {
+      background: #111827;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .table td strong {
-      color: #ffffff !important;
-      font-size: 1rem;
+    .candidate-action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
     }
 
-    .table td small {
-      color: #d1d5db !important;
-    }
-
-    .badge-active {
-      background: rgba(37, 211, 102, 0.22);
-      color: #25D366;
-      border: 1px solid #25D366;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.82rem;
-    }
-
-    .badge-closed {
-      background: rgba(239, 68, 68, 0.22);
-      color: #ef4444;
-      border: 1px solid #ef4444;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.82rem;
-    }
-
-    /* Lock Screen Overlay */
+    /* Fullscreen Passcode Lock Modal */
     #lockScreenOverlay {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: #0c0a17;
-      z-index: 99999;
+      width: 100vw;
+      height: 100vh;
+      background: #080c15;
+      background-image: radial-gradient(circle at 50% 30%, rgba(99, 102, 241, 0.12) 0%, transparent 60%);
+      z-index: 9999999;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
 
-    .login-box {
-      background: #18162b;
-      border: 1px solid rgba(143, 108, 246, 0.35);
-      border-radius: 20px;
-      padding: 40px;
-      max-width: 440px;
+    .login-box-soothing {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 40px 32px;
+      max-width: 420px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Buttons */
+    .btn-portal-primary {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 12px 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      min-height: 48px;
+    }
+
+    .btn-portal-primary:hover {
+      background: linear-gradient(135deg, #4f46e5, #4338ca);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-portal-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0 !important;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 12px 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      min-height: 48px;
+    }
+
+    .btn-portal-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Toast Alert Notification */
+    #toastNotification {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999999;
+      display: none;
+      min-width: 280px;
+      border-radius: 12px;
+      padding: 14px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 991px) {
+      .table-desktop-view {
+        display: none !important;
+      }
+      .cards-mobile-view {
+        display: block !important;
+      }
+      .hr-header-soothing {
+        padding: 12px 16px;
+      }
+      .portal-card-soothing {
+        padding: 18px 16px;
+        border-radius: 16px;
+      }
+      .nav-pills {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .nav-pills .nav-link {
+        white-space: nowrap;
+        padding: 10px 16px;
+        font-size: 0.86rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .table-desktop-view {
+        display: block !important;
+      }
+      .cards-mobile-view {
+        display: none !important;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Toast Notification Pill -->
+  <div id="toastNotification" class="alert alert-success text-white">
+    <i class="bi bi-check-circle-fill me-2"></i> <span id="toastMessage">Success</span>
+  </div>
+
   <!-- Password Lock Screen Modal -->
   <div id="lockScreenOverlay">
-    <div class="login-box">
-      <img src="../assets/img/logo techbizz.png" alt="Techbizz Integrators" style="max-height: 60px;" class="mb-4">
-      <h4 class="fw-bold text-white mb-2">HR Careers CMS</h4>
-      <p class="text-muted small mb-4">Enter authorized HR passcode to manage openings and review applications.</p>
+    <div class="login-box-soothing">
+      <img src="../assets/img/logo techbizz.png" alt="Techbizz Integrators" style="max-height: 55px;" class="mb-4">
+      <h4 class="fw-bold text-white mb-2">Techbizz HR Portal</h4>
+      <p class="text-muted small mb-4">Enter authorized HR Passcode to manage jobs and review candidate resumes.</p>
       
       <form id="hrLoginForm">
         <div class="mb-3 text-start">
-          <label for="hrPasscodeInput" class="form-label">HR Passcode</label>
+          <label for="hrPasscodeInput" class="form-label-soothing">HR Passcode</label>
           <div class="input-group">
-            <span class="input-group-text" style="background: #23203c; border-color: rgba(255,255,255,0.25); color: #8f6cf6;">
-              <i class="bi bi-shield-lock"></i>
+            <span class="input-group-text" style="background: #131b2e; border-color: rgba(255,255,255,0.15); color: #818cf8;">
+              <i class="bi bi-shield-lock-fill"></i>
             </span>
-            <input type="password" class="form-control" id="hrPasscodeInput" placeholder="Enter HR PIN (e.g. Techbizz@2026)" required>
+            <input type="password" class="form-control form-control-soothing" id="hrPasscodeInput" placeholder="Enter PIN (e.g. Techbizz@2026)" required autofocus>
+            <button class="btn btn-outline-secondary" type="button" id="btnToggleLoginPass" style="border-color: rgba(255,255,255,0.15); background: #131b2e; color: #94a3b8;">
+              <i class="bi bi-eye"></i>
+            </button>
           </div>
           <div id="loginError" class="text-danger small mt-2" style="display: none;">
-            <i class="bi bi-exclamation-circle me-1"></i> Incorrect passcode. Try again.
+            <i class="bi bi-exclamation-circle me-1"></i> Incorrect passcode. Try again or check with Admin.
           </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100 py-2 rounded-pill fw-semibold" style="background: linear-gradient(135deg, #8f6cf6, #7347d8); border: none;">
-          Unlock HR Portal <i class="bi bi-unlock-fill ms-1"></i>
+
+        <button type="submit" class="btn btn-portal-primary w-100 py-3" id="btnLoginSubmit">
+          Unlock HR Workspace <i class="bi bi-unlock-fill ms-1"></i>
         </button>
       </form>
-      <div class="mt-4 pt-3 border-top border-secondary">
+
+      <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
         <a href="career.html" class="text-muted small text-decoration-none">
-          <i class="bi bi-arrow-left me-1"></i> Back to Public Career Page
+          <i class="bi bi-arrow-left me-1"></i> Public Careers
         </a>
+        <span class="text-muted small"><i class="bi bi-shield-check text-success me-1"></i> Cloud Secured</span>
       </div>
     </div>
   </div>
 
   <!-- Main HR Dashboard Header -->
-  <header class="hr-header sticky-top">
-    <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center gap-3">
+  <header class="hr-header-soothing sticky-top">
+    <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center gap-2">
       <div class="d-flex align-items-center gap-3">
-        <img src="../assets/img/logo techbizz.png" alt="Techbizz Integrators" style="max-height: 48px;">
-        <span class="badge px-3 py-2 rounded-pill" style="background: rgba(143, 108, 246, 0.25); color: #c4b5fd; border: 1px solid rgba(143, 108, 246, 0.45); font-size: 0.9rem;">
-          <i class="bi bi-person-badge me-1"></i> HR Job CMS Portal
+        <a href="../index.html">
+          <img src="../assets/img/logo techbizz.png" alt="Techbizz Integrators" style="max-height: 44px;">
+        </a>
+        <span class="portal-brand-badge d-none d-sm-inline-flex">
+          <i class="bi bi-briefcase-fill text-primary"></i> HR Workspace
         </span>
-        <span id="cloudStatusBadge" class="badge bg-secondary px-3 py-2 rounded-pill" style="font-size: 0.8rem;">
-          <i class="bi bi-hdd me-1"></i> Checking Sync...
+        <span id="cloudStatusBadge" class="badge rounded-pill px-3 py-2" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.78rem;">
+          <i class="bi bi-cloud-check-fill me-1"></i> Cloud Synced
         </span>
       </div>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-white small d-none d-md-inline" id="portalStatsLabel">Loading stats...</span>
-        <a href="career.html" target="_blank" class="btn btn-sm btn-outline-light rounded-pill px-3">
-          <i class="bi bi-box-arrow-up-right me-1"></i> View Live Site
+
+      <div class="d-flex align-items-center gap-2">
+        <a href="career.html" target="_blank" class="btn btn-sm btn-portal-outline px-3" style="min-height: 38px; font-size: 0.85rem;" title="View Live Public Career Page">
+          <i class="bi bi-box-arrow-up-right me-1"></i> <span class="d-none d-md-inline">Live Website</span>
         </a>
-        <button class="btn btn-sm btn-outline-danger rounded-pill px-3" onclick="logoutHR()">
-          <i class="bi bi-box-arrow-right me-1"></i> Lock
+        <button class="btn btn-sm btn-portal-outline px-3" style="min-height: 38px; font-size: 0.85rem;" onclick="openPasswordChangeTab()" title="Change Your Passcode">
+          <i class="bi bi-key-fill text-warning me-1"></i> <span class="d-none d-sm-inline">Change PIN</span>
+        </button>
+        <button class="btn btn-sm btn-outline-danger rounded-pill px-3" style="min-height: 38px; font-size: 0.85rem;" onclick="logoutHR()" title="Lock / Logout">
+          <i class="bi bi-lock-fill"></i>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Dashboard Container -->
-  <main class="container-fluid py-4 px-lg-5">
+  <!-- Main Dashboard Container -->
+  <main class="container-fluid py-4 px-3 px-lg-5">
     
-    <!-- Navigation Tabs -->
+    <!-- Quick Access & Mobile Shortcut Banner -->
+    <div class="hr-quick-access-strip">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-phone-fill text-success fs-5"></i>
+        <div>
+          <strong class="text-white small d-block">Quick Access & Mobile Shortcut:</strong>
+          <span class="text-muted small">Open this portal with 1 tap from anywhere without typing the URL.</span>
+        </div>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <button type="button" class="btn btn-sm btn-success rounded-pill px-3 fw-semibold" onclick="sendPortalToWhatsApp()" title="Send direct portal link to HR WhatsApp (+91 78386 66145)">
+          <i class="bi bi-whatsapp me-1"></i> Send Link to WhatsApp
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3 fw-semibold" onclick="copyPortalLink()" title="Copy direct portal link to clipboard">
+          <i class="bi bi-clipboard-check me-1"></i> Copy Link
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3 fw-semibold" onclick="showAddToHomeScreenGuide()">
+          <i class="bi bi-phone me-1"></i> Add to Phone Screen
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs (Touch Friendly & Responsive) -->
     <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="pills-post-tab" data-bs-toggle="pill" data-bs-target="#pills-post" type="button" role="tab">
-          <i class="bi bi-plus-circle me-1"></i> Post New Opening
+          <i class="bi bi-plus-circle-fill text-primary"></i> Post New Opening
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-manage-tab" data-bs-toggle="pill" data-bs-target="#pills-manage" type="button" role="tab" onclick="loadManageJobsTable()">
-          <i class="bi bi-briefcase me-1"></i> Manage Openings (<span id="tabJobsCount">0</span>)
+          <i class="bi bi-briefcase-fill text-info"></i> Manage Openings (<span id="tabJobsCount">0</span>)
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-apps-tab" data-bs-toggle="pill" data-bs-target="#pills-apps" type="button" role="tab" onclick="loadApplicationsTable()">
-          <i class="bi bi-file-earmark-person me-1"></i> Candidate Applications (<span id="tabAppsCount">0</span>)
+          <i class="bi bi-file-earmark-person-fill text-success"></i> Candidate Resumes (<span id="tabAppsCount">0</span>)
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-security-tab" data-bs-toggle="pill" data-bs-target="#pills-security" type="button" role="tab">
+          <i class="bi bi-key-fill text-warning"></i> Security & PIN
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-supabase-tab" data-bs-toggle="pill" data-bs-target="#pills-supabase" type="button" role="tab">
-          <i class="bi bi-cloud-arrow-up me-1"></i> Cloud Database (Supabase)
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="pills-backup-tab" data-bs-toggle="pill" data-bs-target="#pills-backup" type="button" role="tab">
-          <i class="bi bi-gear me-1"></i> Backup & Export
+          <i class="bi bi-cloud-arrow-up-fill text-secondary"></i> Cloud Sync
         </button>
       </li>
     </ul>
@@ -290,28 +504,43 @@
     <!-- Tab Content Panels -->
     <div class="tab-content" id="pills-tabContent">
 
-      <!-- TAB 1: Post / Edit Job Opening -->
+      <!-- ========================================== -->
+      <!-- TAB 1: Post / Edit Job Opening (Mobile First) -->
+      <!-- ========================================== -->
       <div class="tab-pane fade show active" id="pills-post" role="tabpanel">
         <div class="row">
           <div class="col-lg-8">
-            <div class="portal-card">
-              <h4 class="fw-bold text-white mb-1" id="formHeaderTitle">Create New Job Opening</h4>
-              <p class="text-muted small mb-4">Fill in the role details. Once published, it will appear on techbizzintegrators.in/pages/career.html immediately.</p>
+            <div class="portal-card-soothing">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                  <h4 class="fw-bold text-white mb-1" id="formHeaderTitle">Create New Job Opening</h4>
+                  <p class="text-muted small mb-0">Fill in the details. Once published, it goes live on the website instantly.</p>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill" onclick="resetJobForm()">
+                  <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+                </button>
+              </div>
 
               <form id="jobPostingForm">
                 <input type="hidden" id="editJobId" name="id">
 
                 <div class="row g-3">
                   <!-- Job Title -->
-                  <div class="col-md-7">
-                    <label for="postJobTitle" class="form-label">Job Title *</label>
-                    <input type="text" class="form-control" id="postJobTitle" placeholder="e.g. Site Engineer - LED Video Walls" required>
+                  <div class="col-12 col-md-7">
+                    <label for="postJobTitle" class="form-label-soothing">Job Title *</label>
+                    <input type="text" class="form-control form-control-soothing" id="postJobTitle" placeholder="e.g. Site Engineer - LED Video Walls" required>
+                    <div class="preset-chips-wrap">
+                      <span class="preset-chip" onclick="setJobTitlePreset('Site Engineer - LED Video Walls')">Site Engineer</span>
+                      <span class="preset-chip" onclick="setJobTitlePreset('AutoCAD & Structural Designer')">AutoCAD Designer</span>
+                      <span class="preset-chip" onclick="setJobTitlePreset('B2B Corporate Sales Executive')">Sales Exec</span>
+                      <span class="preset-chip" onclick="setJobTitlePreset('CCTV & Security Technician')">CCTV Tech</span>
+                    </div>
                   </div>
 
-                  <!-- Department -->
-                  <div class="col-md-5">
-                    <label for="postJobDept" class="form-label">Department / Category *</label>
-                    <select class="form-select" id="postJobDept" required>
+                  <!-- Department / Role Category -->
+                  <div class="col-12 col-md-5">
+                    <label for="postJobDept" class="form-label-soothing">Department / Category *</label>
+                    <select class="form-select form-select-soothing" id="postJobDept" required>
                       <option value="Site Operations & Engineering">Site Operations & Engineering</option>
                       <option value="Design & Engineering">Design & Engineering (AutoCAD)</option>
                       <option value="Sales & Business Development">Sales & Business Development</option>
@@ -320,60 +549,75 @@
                     </select>
                   </div>
 
-                  <!-- Work Location -->
-                  <div class="col-md-4">
-                    <label for="postJobLocation" class="form-label">Location *</label>
-                    <input type="text" class="form-control" id="postJobLocation" placeholder="e.g. Ghaziabad / Delhi NCR" required>
+                  <!-- Location -->
+                  <div class="col-12 col-md-4">
+                    <label for="postJobLocation" class="form-label-soothing">Location *</label>
+                    <input type="text" class="form-control form-control-soothing" id="postJobLocation" value="Ghaziabad, UP / Delhi NCR" required>
                   </div>
 
-                  <!-- Job Type -->
-                  <div class="col-md-4">
-                    <label for="postJobType" class="form-label">Work Type *</label>
-                    <select class="form-select" id="postJobType" required>
-                      <option value="Full-Time">Full-Time</option>
+                  <!-- Work Type -->
+                  <div class="col-12 col-md-4">
+                    <label for="postJobType" class="form-label-soothing">Work Type *</label>
+                    <select class="form-select form-select-soothing" id="postJobType" required>
+                      <option value="Full-Time" selected>Full-Time</option>
                       <option value="Part-Time">Part-Time</option>
                       <option value="Contract / Project-based">Contract / Project-based</option>
                     </select>
                   </div>
 
-                  <!-- Minimum Experience -->
-                  <div class="col-md-4">
-                    <label for="postJobMinExp" class="form-label">Min Experience Required *</label>
-                    <select class="form-select" id="postJobMinExp" required>
+                  <!-- Min Experience Required -->
+                  <div class="col-12 col-md-4">
+                    <label for="postJobMinExp" class="form-label-soothing">Min Experience (Yrs) *</label>
+                    <select class="form-select form-select-soothing" id="postJobMinExp" required>
                       <option value="0">Fresher (0 - 1 Year)</option>
                       <option value="1">1 Year</option>
                       <option value="2" selected>2 Years</option>
                       <option value="3">3 Years</option>
                       <option value="4">4 Years</option>
-                      <option value="5">5+ Years (Lead / Specialist)</option>
+                      <option value="5">5+ Years (Senior / Lead)</option>
+                    </select>
+                    <!-- Quick Tap Chips for Mobile -->
+                    <div class="preset-chips-wrap">
+                      <span class="preset-chip" onclick="setMinExpPreset(0)">Fresher</span>
+                      <span class="preset-chip" onclick="setMinExpPreset(1)">1 Yr</span>
+                      <span class="preset-chip" onclick="setMinExpPreset(2)">2 Yrs</span>
+                      <span class="preset-chip" onclick="setMinExpPreset(3)">3 Yrs</span>
+                      <span class="preset-chip" onclick="setMinExpPreset(5)">5+ Yrs</span>
+                    </div>
+                  </div>
+
+                  <!-- Salary / Compensation -->
+                  <div class="col-12 col-md-6">
+                    <label for="postJobSalary" class="form-label-soothing">Salary / Compensation *</label>
+                    <input type="text" class="form-control form-control-soothing" id="postJobSalary" placeholder="e.g. ?25,000 - ?45,000 / month" required>
+                    <!-- Quick Salary Chips for Mobile -->
+                    <div class="preset-chips-wrap">
+                      <span class="preset-chip" onclick="setSalaryPreset('?20,000 - ?35,000 / month')">?20k-35k/mo</span>
+                      <span class="preset-chip" onclick="setSalaryPreset('?25,000 - ?45,000 / month')">?25k-45k/mo</span>
+                      <span class="preset-chip" onclick="setSalaryPreset('?3.5 - 6.0 LPA + Commission')">?3.5-6 LPA</span>
+                      <span class="preset-chip" onclick="setSalaryPreset('Competitive / As per industry standards')">Negotiable</span>
+                    </div>
+                  </div>
+
+                  <!-- Initial Status -->
+                  <div class="col-12 col-md-6">
+                    <label for="postJobStatus" class="form-label-soothing">Publishing Status *</label>
+                    <select class="form-select form-select-soothing" id="postJobStatus">
+                      <option value="active" selected>Active (Live on Website immediately)</option>
+                      <option value="closed">Draft / Closed (Hidden from Public)</option>
                     </select>
                   </div>
 
-                  <!-- Salary Range -->
-                  <div class="col-md-6">
-                    <label for="postJobSalary" class="form-label">Salary / Compensation *</label>
-                    <input type="text" class="form-control" id="postJobSalary" placeholder="e.g. ₹25,000 - ₹45,000 / month or ₹4 - 6 LPA" required>
-                  </div>
-
-                  <!-- Status -->
-                  <div class="col-md-6">
-                    <label for="postJobStatus" class="form-label">Initial Status *</label>
-                    <select class="form-select" id="postJobStatus">
-                      <option value="active">Active (Visible on Website)</option>
-                      <option value="closed">Draft / Closed (Hidden)</option>
-                    </select>
-                  </div>
-
-                  <!-- Job Description -->
+                  <!-- Description -->
                   <div class="col-12">
-                    <label for="postJobDesc" class="form-label">Role Overview / Summary *</label>
-                    <textarea class="form-control" id="postJobDesc" rows="3" placeholder="Briefly describe what this person will do at Techbizz..." required></textarea>
+                    <label for="postJobDesc" class="form-label-soothing">Role Overview / Summary *</label>
+                    <textarea class="form-control form-control-soothing" id="postJobDesc" rows="3" placeholder="Briefly describe responsibilities and day-to-day duties..." required></textarea>
                   </div>
 
-                  <!-- Key Requirements -->
+                  <!-- Requirements (One per line) -->
                   <div class="col-12">
-                    <label for="postJobReqs" class="form-label">Key Requirements / Skills (One per line) *</label>
-                    <textarea class="form-control" id="postJobReqs" rows="4" placeholder="Hands-on experience in LED video wall cabinet assembly
+                    <label for="postJobReqs" class="form-label-soothing">Key Requirements / Skills (One per line) *</label>
+                    <textarea class="form-control form-control-soothing" id="postJobReqs" rows="4" placeholder="Hands-on experience in LED video wall cabinet assembly
 Proficiency with NovaStar / Colorlight video processors
 Willingness to travel for field installations" required></textarea>
                   </div>
@@ -381,58 +625,73 @@ Willingness to travel for field installations" required></textarea>
 
                 <div id="postAlert" class="mt-3" style="display: none;"></div>
 
-                <div class="mt-4 pt-3 border-top border-secondary d-flex gap-2">
-                  <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold" id="btnPublishJob" style="background: linear-gradient(135deg, #8f6cf6, #7347d8); border: none;">
-                    <i class="bi bi-cloud-arrow-up-fill me-1"></i> Publish Opening
+                <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-flex flex-wrap gap-2">
+                  <button type="submit" class="btn btn-portal-primary px-4 fw-semibold" id="btnPublishJob">
+                    <i class="bi bi-cloud-arrow-up-fill me-1"></i> <span id="publishBtnLabel">Publish Opening to Website</span>
                   </button>
-                  <button type="button" class="btn btn-outline-secondary rounded-pill px-3" onclick="resetJobForm()">
-                    Reset Form
+                  <button type="button" class="btn btn-portal-outline px-3" onclick="resetJobForm()">
+                    Clear Form
                   </button>
                 </div>
               </form>
             </div>
           </div>
 
-          <!-- Quick Contacts Sidebar -->
+          <!-- Quick Info & HR Contacts Sidebar -->
           <div class="col-lg-4">
-            <div class="portal-card mb-4">
-              <h5 class="fw-bold text-white mb-3"><i class="bi bi-whatsapp text-success me-2"></i> HR Direct Routing</h5>
-              <p class="text-muted small mb-3">All candidate submissions and WhatsApp inquiries route directly to:</p>
-              <div class="p-3 rounded mb-2 text-white" style="background: #23203c; border: 1px solid rgba(255,255,255,0.1);">
-                <span class="text-muted small d-block">HR WhatsApp Number:</span>
-                <strong class="text-white fs-6"><i class="bi bi-telephone text-success me-1"></i> +91 78386 66145</strong>
+            <div class="portal-card-soothing">
+              <h5 class="fw-bold text-white mb-3">
+                <i class="bi bi-whatsapp text-success me-2"></i> HR Direct Routing
+              </h5>
+              <p class="text-muted small mb-3">Candidates submitting applications receive direct buttons to contact your official HR credentials:</p>
+              
+              <div class="p-3 rounded-3 mb-3" style="background: rgba(37, 211, 102, 0.08); border: 1px solid rgba(37, 211, 102, 0.25);">
+                <span class="text-muted small d-block">HR Official WhatsApp:</span>
+                <strong class="text-white fs-6"><i class="bi bi-whatsapp text-success me-1"></i> +91 78386 66145</strong>
               </div>
-              <div class="p-3 rounded text-white" style="background: #23203c; border: 1px solid rgba(255,255,255,0.1);">
+
+              <div class="p-3 rounded-3 mb-3" style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);">
                 <span class="text-muted small d-block">HR Official Email:</span>
-                <strong class="text-white fs-6"><i class="bi bi-envelope text-primary me-1"></i> hr@techbizzintegrators.com</strong>
+                <strong class="text-white fs-6"><i class="bi bi-envelope text-info me-1"></i> hr@techbizzintegrators.com</strong>
+              </div>
+
+              <div class="p-3 rounded-3" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25);">
+                <span class="text-muted small d-block">Resume Cloud Storage:</span>
+                <strong class="text-white fs-6"><i class="bi bi-shield-check text-success me-1"></i> Supabase Bucket (resumes)</strong>
               </div>
             </div>
 
-            <div class="portal-card">
-              <h5 class="fw-bold text-white mb-2"><i class="bi bi-lightbulb text-warning me-2"></i> HR Tips</h5>
-              <ul class="text-muted small ps-3 mb-0" style="line-height: 1.9;">
-                <li><strong>Dynamic Updates:</strong> Any job you add or edit is immediately updated for website visitors.</li>
-                <li><strong>One-Click Candidate Chat:</strong> In the Applications tab, click the green WhatsApp icon to directly chat with any applicant.</li>
+            <div class="portal-card-soothing">
+              <h5 class="fw-bold text-white mb-2">
+                <i class="bi bi-lightbulb-fill text-warning me-2"></i> Mobile Tips for HR
+              </h5>
+              <ul class="text-muted small ps-3 mb-0" style="line-height: 1.8;">
+                <li><strong>Mobile Easy Entry:</strong> Tap on the preset chips above (e.g. <em>2 Yrs</em> or <em>?25k-45k</em>) to fill fields instantly without typing on phone keyboards.</li>
+                <li><strong>1-Tap Chat:</strong> Under <em>Candidate Resumes</em>, tap the green WhatsApp icon to directly chat with the applicant.</li>
+                <li><strong>Instant Toggling:</strong> You can pause or reopen any job anytime under <em>Manage Openings</em>.</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB 2: Manage Openings -->
+      <!-- ========================================== -->
+      <!-- TAB 2: Manage Openings (Dual View Desktop/Mobile) -->
+      <!-- ========================================== -->
       <div class="tab-pane fade" id="pills-manage" role="tabpanel">
-        <div class="portal-card">
-          <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="portal-card-soothing">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
             <div>
               <h4 class="fw-bold text-white mb-1">Active & Closed Openings</h4>
-              <p class="text-muted small mb-0">Toggle status anytime to instantly show or hide openings from the live website.</p>
+              <p class="text-muted small mb-0">Toggle active status anytime to show or hide roles on the live website.</p>
             </div>
-            <button class="btn btn-sm btn-primary rounded-pill px-3" onclick="document.getElementById('pills-post-tab').click(); resetJobForm();">
-              <i class="bi bi-plus-lg me-1"></i> New Opening
+            <button class="btn btn-sm btn-portal-primary px-3" onclick="document.getElementById('pills-post-tab').click(); resetJobForm();">
+              <i class="bi bi-plus-lg me-1"></i> Post New Opening
             </button>
           </div>
 
-          <div class="table-responsive">
+          <!-- Desktop Table View -->
+          <div class="table-container-soothing table-desktop-view">
             <table class="table align-middle">
               <thead>
                 <tr>
@@ -446,27 +705,36 @@ Willingness to travel for field installations" required></textarea>
                 </tr>
               </thead>
               <tbody id="manageJobsTableBody">
-                <!-- Injected dynamically -->
+                <!-- Injected via JavaScript -->
               </tbody>
             </table>
           </div>
+
+          <!-- Mobile Cards View -->
+          <div class="cards-mobile-view" id="manageJobsMobileContainer">
+            <!-- Injected via JavaScript -->
+          </div>
+
         </div>
       </div>
 
+      <!-- ========================================== -->
       <!-- TAB 3: Candidate Applications & Resumes -->
+      <!-- ========================================== -->
       <div class="tab-pane fade" id="pills-apps" role="tabpanel">
-        <div class="portal-card">
-          <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="portal-card-soothing">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
             <div>
               <h4 class="fw-bold text-white mb-1">Received Applications & Resumes</h4>
-              <p class="text-muted small mb-0">Review applicants, download submitted resumes, or contact them directly via WhatsApp or Email.</p>
+              <p class="text-muted small mb-0">Review profiles, download resumes, or contact applicants directly via WhatsApp, Call, or Email.</p>
             </div>
-            <button class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="loadApplicationsTable()">
-              <i class="bi bi-arrow-clockwise me-1"></i> Refresh List
+            <button class="btn btn-sm btn-portal-outline px-3" onclick="loadApplicationsTable()">
+              <i class="bi bi-arrow-clockwise me-1"></i> Refresh Applications
             </button>
           </div>
 
-          <div class="table-responsive">
+          <!-- Desktop Table View -->
+          <div class="table-container-soothing table-desktop-view">
             <table class="table align-middle">
               <thead>
                 <tr>
@@ -476,45 +744,63 @@ Willingness to travel for field installations" required></textarea>
                   <th>Experience</th>
                   <th>Contact Details</th>
                   <th>Resume</th>
-                  <th class="text-end">Quick Contact</th>
+                  <th class="text-end">Direct Contact</th>
                 </tr>
               </thead>
               <tbody id="appsTableBody">
-                <!-- Injected dynamically -->
+                <!-- Injected via JavaScript -->
               </tbody>
             </table>
           </div>
+
+          <!-- Mobile Cards View -->
+          <div class="cards-mobile-view" id="appsMobileContainer">
+            <!-- Injected via JavaScript -->
+          </div>
+
         </div>
       </div>
 
-      <!-- TAB 4: Cloud Database Setup (Supabase) -->
-      <div class="tab-pane fade" id="pills-supabase" role="tabpanel">
+      <!-- ========================================== -->
+      <!-- TAB 4: Security & Passcode Change -->
+      <!-- ========================================== -->
+      <div class="tab-pane fade" id="pills-security" role="tabpanel">
         <div class="row">
           <div class="col-lg-6">
-            <div class="portal-card mb-4">
-              <h4 class="fw-bold text-white mb-2"><i class="bi bi-cloud-check text-primary me-2"></i> Connect Supabase Cloud DB</h4>
+            <div class="portal-card-soothing">
+              <h4 class="fw-bold text-white mb-2">
+                <i class="bi bi-key-fill text-warning me-2"></i> Change HR Passcode
+              </h4>
               <p class="text-muted small mb-4">
-                Enter your Supabase Project URL and Public Anon Key below. This enables permanent global database sync and resumes cloud bucket storage!
+                Update the passcode used to unlock this HR CMS. Once changed, the new passcode syncs immediately across your phone and desktop.
               </p>
 
-              <form id="supabaseConfigForm">
+              <form id="changePasscodeForm">
                 <div class="mb-3">
-                  <label for="sbUrlInput" class="form-label">Supabase Project URL *</label>
-                  <input type="url" class="form-control" id="sbUrlInput" placeholder="https://xyzcompany.supabase.co" required>
-                </div>
-                <div class="mb-3">
-                  <label for="sbKeyInput" class="form-label">Supabase Anon Public Key *</label>
-                  <textarea class="form-control" id="sbKeyInput" rows="3" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." required></textarea>
+                  <label for="currentPasscodeInput" class="form-label-soothing">Current Passcode *</label>
+                  <input type="password" class="form-control form-control-soothing" id="currentPasscodeInput" placeholder="Enter your existing PIN" required>
                 </div>
 
-                <div id="sbConfigAlert" class="mt-2" style="display: none;"></div>
+                <div class="mb-3">
+                  <label for="newPasscodeInput" class="form-label-soothing">New Passcode (min 4 characters) *</label>
+                  <div class="input-group">
+                    <input type="password" class="form-control form-control-soothing" id="newPasscodeInput" placeholder="Enter your new secure PIN" required>
+                    <button class="btn btn-outline-secondary" type="button" id="btnToggleNewPass" style="border-color: rgba(255,255,255,0.15); background: #131b2e; color: #94a3b8;">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                </div>
 
-                <div class="mt-4 d-flex gap-2">
-                  <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold" style="background: linear-gradient(135deg, #8f6cf6, #7347d8); border: none;">
-                    <i class="bi bi-save me-1"></i> Save & Connect Supabase
-                  </button>
-                  <button type="button" class="btn btn-outline-danger rounded-pill px-3" onclick="disconnectSupabase()">
-                    Disconnect
+                <div class="mb-3">
+                  <label for="confirmPasscodeInput" class="form-label-soothing">Confirm New Passcode *</label>
+                  <input type="password" class="form-control form-control-soothing" id="confirmPasscodeInput" placeholder="Re-enter your new PIN" required>
+                </div>
+
+                <div id="passwordAlert" class="mt-3" style="display: none;"></div>
+
+                <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+                  <button type="submit" class="btn btn-portal-primary px-4 fw-semibold" id="btnSavePasscode">
+                    <i class="bi bi-check-circle-fill me-1"></i> Save New Passcode
                   </button>
                 </div>
               </form>
@@ -522,86 +808,87 @@ Willingness to travel for field installations" required></textarea>
           </div>
 
           <div class="col-lg-6">
-            <div class="portal-card mb-4">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h5 class="fw-bold text-white mb-0"><i class="bi bi-code-slash text-warning me-2"></i> Supabase SQL Setup Script</h5>
-                <button class="btn btn-sm btn-outline-warning rounded-pill px-3" onclick="copySqlScript()">
-                  <i class="bi bi-clipboard me-1"></i> Copy SQL
-                </button>
+            <div class="portal-card-soothing">
+              <h5 class="fw-bold text-white mb-3">
+                <i class="bi bi-phone-vibrate text-info me-2"></i> How to Add HR Portal to Your Phone
+              </h5>
+              <p class="text-muted small mb-3">You don't need to type the URL every time! Save it as a phone app in 2 steps:</p>
+
+              <div class="p-3 rounded-3 mb-3" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);">
+                <strong class="text-white d-block mb-1"><i class="bi bi-apple text-white me-1"></i> On iPhone (Safari):</strong>
+                <ol class="text-muted small ps-3 mb-0" style="line-height: 1.8;">
+                  <li>Open this link in Safari browser.</li>
+                  <li>Tap the <strong>Share</strong> button (box with upward arrow at bottom).</li>
+                  <li>Scroll down and tap <strong>"Add to Home Screen"</strong>.</li>
+                  <li>Tap <strong>Add</strong>. A Techbizz HR app icon appears on your home screen!</li>
+                </ol>
               </div>
-              <p class="text-muted small mb-3">Paste this exact SQL script into your Supabase Dashboard -> <strong>SQL Editor</strong> to create the tables and resume bucket in 10 seconds:</p>
 
-              <textarea class="form-control text-white" id="sqlSetupScriptText" rows="12" readonly style="font-family: monospace; font-size: 0.8rem; background: #121021 !important; color: #a5b4fc !important;">
--- 1. Create Jobs Table
-create table if not exists public.jobs (
-  id text primary key,
-  title text not null,
-  department text not null,
-  location text not null,
-  type text not null,
-  min_experience int not null default 0,
-  salary text not null,
-  description text not null,
-  requirements jsonb not null default '[]'::jsonb,
-  status text not null default 'active',
-  created_at timestamp with time zone default now()
-);
+              <div class="p-3 rounded-3 mb-3" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);">
+                <strong class="text-white d-block mb-1"><i class="bi bi-android2 text-success me-1"></i> On Android (Chrome):</strong>
+                <ol class="text-muted small ps-3 mb-0" style="line-height: 1.8;">
+                  <li>Open this link in Google Chrome.</li>
+                  <li>Tap the <strong>3 vertical dots</strong> (top right corner).</li>
+                  <li>Select <strong>"Add to Home screen"</strong> (or <strong>"Install app"</strong>).</li>
+                  <li>Tap <strong>Install</strong>. Done!</li>
+                </ol>
+              </div>
 
--- 2. Create Applications Table
-create table if not exists public.applications (
-  id text primary key,
-  job_id text,
-  job_title text not null,
-  full_name text not null,
-  email text not null,
-  phone text not null,
-  city text,
-  experience text not null,
-  notice_period text,
-  note text,
-  resume_url text,
-  resume_file_name text,
-  submitted_at timestamp with time zone default now()
-);
-
--- 3. Enable Public Access for Reading & Writing
-alter table public.jobs enable row level security;
-create policy "Allow all on jobs" on public.jobs for all using (true) with check (true);
-
-alter table public.applications enable row level security;
-create policy "Allow all on applications" on public.applications for all using (true) with check (true);
-
--- 4. Create Storage Bucket for Resumes
-insert into storage.buckets (id, name, public) values ('resumes', 'resumes', true)
-on conflict (id) do nothing;
-create policy "Allow public upload to resumes" on storage.objects for insert with check (bucket_id = 'resumes');
-create policy "Allow public read from resumes" on storage.objects for select using (bucket_id = 'resumes');
-              </textarea>
+              <button type="button" class="btn btn-success w-100 rounded-pill py-2 fw-semibold" onclick="sendPortalToWhatsApp()">
+                <i class="bi bi-whatsapp me-1"></i> Send Direct Portal Link to WhatsApp (+91 78386 66145)
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB 5: Backup & Export -->
-      <div class="tab-pane fade" id="pills-backup" role="tabpanel">
+      <!-- ========================================== -->
+      <!-- TAB 5: Cloud Database (Supabase Status) -->
+      <!-- ========================================== -->
+      <div class="tab-pane fade" id="pills-supabase" role="tabpanel">
         <div class="row">
           <div class="col-lg-6">
-            <div class="portal-card mb-4">
-              <h5 class="fw-bold text-white mb-2"><i class="bi bi-download text-primary me-2"></i> Export & Backup Data</h5>
-              <p class="text-muted small mb-3">Download a full JSON backup of all job openings and candidate applications.</p>
-              <button class="btn btn-outline-light rounded-pill px-4" onclick="exportDataFile()">
-                <i class="bi bi-file-earmark-arrow-down me-1"></i> Download Backup File (.json)
-              </button>
+            <div class="portal-card-soothing mb-4">
+              <h4 class="fw-bold text-white mb-2">
+                <i class="bi bi-cloud-check-fill text-success me-2"></i> Supabase Cloud Status
+              </h4>
+              <p class="text-muted small mb-4">
+                Your portal is connected to the official Techbizz production database and resume storage bucket.
+              </p>
+
+              <div class="p-3 rounded-3 mb-3" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25);">
+                <span class="text-muted small d-block">Project URL:</span>
+                <strong class="text-white small text-break">https://lazueosmqfpaflrbshte.supabase.co</strong>
+              </div>
+
+              <div class="p-3 rounded-3 mb-3" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25);">
+                <span class="text-muted small d-block">Database Status:</span>
+                <strong class="text-white small"><i class="bi bi-check-circle-fill text-success me-1"></i> Active & Live (Tables: jobs, applications)</strong>
+              </div>
+
+              <div class="p-3 rounded-3" style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);">
+                <span class="text-muted small d-block">Resume Storage Bucket:</span>
+                <strong class="text-white small"><i class="bi bi-check-circle-fill text-success me-1"></i> resumes (Public cloud bucket active)</strong>
+              </div>
             </div>
           </div>
+
           <div class="col-lg-6">
-            <div class="portal-card mb-4">
-              <h5 class="fw-bold text-white mb-2"><i class="bi bi-upload text-info me-2"></i> Restore Data</h5>
-              <p class="text-muted small mb-3">Restore jobs and applications from a previously saved JSON backup.</p>
-              <input type="file" id="importFileInput" accept=".json" class="form-control mb-3">
-              <button class="btn btn-outline-warning rounded-pill px-4" onclick="importDataFile()">
-                <i class="bi bi-arrow-counterclockwise me-1"></i> Import Backup
-              </button>
+            <div class="portal-card-soothing">
+              <h5 class="fw-bold text-white mb-3">
+                <i class="bi bi-shield-lock-fill text-warning me-2"></i> Data Safety & Backup
+              </h5>
+              <p class="text-muted small mb-3">Download a local JSON backup of all jobs and applications anytime:</p>
+              
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-portal-primary px-3" onclick="exportDataToFile()">
+                  <i class="bi bi-download me-1"></i> Download JSON Backup
+                </button>
+                <button type="button" class="btn btn-portal-outline px-3" onclick="document.getElementById('importFileInput').click()">
+                  <i class="bi bi-upload me-1"></i> Import Backup
+                </button>
+                <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importDataFromFile(event)">
+              </div>
             </div>
           </div>
         </div>
@@ -610,14 +897,13 @@ create policy "Allow public read from resumes" on storage.objects for select usi
     </div>
   </main>
 
-  <!-- JS Libraries -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/career-portal.js"></script>
+  <script src="../assets/js/career-portal.js?v=3.2"></script>
 
   <script>
-    const HR_PASSCODE = 'Techbizz@2026';
-
-    function checkAuth() {
+    // Authentication Check
+    async function checkAuth() {
       if (sessionStorage.getItem('techbizz_hr_authenticated') === 'true') {
         document.getElementById('lockScreenOverlay').style.display = 'none';
         initDashboard();
@@ -626,107 +912,357 @@ create policy "Allow public read from resumes" on storage.objects for select usi
       }
     }
 
-    document.getElementById('hrLoginForm').addEventListener('submit', function(e) {
+    // Toggle password eye in login form
+    document.getElementById('btnToggleLoginPass').addEventListener('click', function() {
+      const input = document.getElementById('hrPasscodeInput');
+      const icon = this.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'bi bi-eye';
+      }
+    });
+
+    // Toggle password eye in new passcode form
+    document.getElementById('btnToggleNewPass').addEventListener('click', function() {
+      const input = document.getElementById('newPasscodeInput');
+      const icon = this.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'bi bi-eye';
+      }
+    });
+
+    // Handle Login Submit with Dynamic Passcode Verification
+    document.getElementById('hrLoginForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const entered = document.getElementById('hrPasscodeInput').value.trim();
       const err = document.getElementById('loginError');
+      const submitBtn = document.getElementById('btnLoginSubmit');
 
-      if (entered === HR_PASSCODE || entered === 'techbizz' || entered === 'admin123') {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Verifying...';
+
+      const isValid = await TechbizzCareerEngine.verifyPasscodeAsync(entered);
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Unlock HR Workspace <i class="bi bi-unlock-fill ms-1"></i>';
+
+      if (isValid) {
         sessionStorage.setItem('techbizz_hr_authenticated', 'true');
         document.getElementById('lockScreenOverlay').style.display = 'none';
         initDashboard();
+        showToast('Welcome to Techbizz HR Workspace!');
       } else {
         err.style.display = 'block';
+        document.getElementById('hrPasscodeInput').classList.add('is-invalid');
       }
     });
 
     function logoutHR() {
       sessionStorage.removeItem('techbizz_hr_authenticated');
-      window.location.reload();
+      document.getElementById('lockScreenOverlay').style.display = 'flex';
+      document.getElementById('hrPasscodeInput').value = '';
     }
 
-    function initDashboard() {
-      updateSyncBadge();
-      updateStats();
-      loadManageJobsTable();
-      loadSupabaseInputs();
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const msg = document.getElementById('toastMessage');
+      msg.textContent = message;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3500);
     }
 
-    function updateSyncBadge() {
-      const badge = document.getElementById('cloudStatusBadge');
-      if (TechbizzCareerEngine.isSupabaseConnected()) {
-        badge.className = 'badge bg-success px-3 py-2 rounded-pill';
-        badge.innerHTML = '<i class="bi bi-cloud-check-fill me-1"></i> Cloud Synced (Supabase)';
-      } else {
-        badge.className = 'badge bg-warning text-dark px-3 py-2 rounded-pill';
-        badge.innerHTML = '<i class="bi bi-hdd-fill me-1"></i> Local Mode (Ready for Cloud)';
+    // Preset Chip Click Handlers (For effortless mobile form filling)
+    window.setJobTitlePreset = function(title) {
+      document.getElementById('postJobTitle').value = title;
+      if (title.includes('Site Engineer')) {
+        document.getElementById('postJobDept').value = 'Site Operations & Engineering';
+        document.getElementById('postJobDesc').value = 'Lead on-site installation, structural alignment, power distribution, and video processing setup for commercial LED video walls.';
+        document.getElementById('postJobReqs').value = 'Hands-on experience in LED video wall cabinet assembly and power distribution\nProficiency with video processors (NovaStar, Colorlight)\nWillingness to travel for field installations';
+        setMinExpPreset(2);
+        setSalaryPreset('?25,000 - ?45,000 / month');
+      } else if (title.includes('AutoCAD')) {
+        document.getElementById('postJobDept').value = 'Design & Engineering';
+        document.getElementById('postJobDesc').value = 'Create detailed 2D/3D fabrication drawings, structural steel load calculations, and mounting layouts for architectural LED screens and billboards.';
+        document.getElementById('postJobReqs').value = 'Proficiency in AutoCAD 2D/3D and structural layout design\nUnderstanding of steel truss fabrication and mounting brackets\nDiploma/Degree in Mechanical / Civil Drafting';
+        setMinExpPreset(1);
+        setSalaryPreset('?25,000 - ?40,000 / month');
+      } else if (title.includes('Sales')) {
+        document.getElementById('postJobDept').value = 'Sales & Business Development';
+        document.getElementById('postJobDesc').value = 'Drive institutional and B2B project sales of large-format LED screens, control rooms, and enterprise CCTV solutions.';
+        document.getElementById('postJobReqs').value = 'Proven track record in B2B corporate sales, AV or electronic security\nStrong network with interior designers, architects, and procurement heads\nStrong proposal presentation and negotiation skills';
+        setMinExpPreset(2);
+        setSalaryPreset('?3.5 - 6.0 LPA + Commission');
+      } else if (title.includes('CCTV')) {
+        document.getElementById('postJobDept').value = 'CCTV & Security Systems';
+        document.getElementById('postJobDesc').value = 'Installation, IP configuration, NVR setup, and structured cabling for enterprise CCTV surveillance networks.';
+        document.getElementById('postJobReqs').value = 'Hands-on experience with IP cameras, PTZ cameras, NVRs, and PoE switches\nBasic network configuration (IP addressing, port forwarding)\nWillingness to handle field maintenance';
+        setMinExpPreset(1);
+        setSalaryPreset('?20,000 - ?35,000 / month');
       }
+    };
+
+    window.setMinExpPreset = function(years) {
+      document.getElementById('postJobMinExp').value = years.toString();
+    };
+
+    window.setSalaryPreset = function(salary) {
+      document.getElementById('postJobSalary').value = salary;
+    };
+
+    // Open Password Change Tab directly
+    window.openPasswordChangeTab = function() {
+      const tab = new bootstrap.Tab(document.getElementById('pills-security-tab'));
+      tab.show();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Fast Access Sharing Handlers
+    window.copyPortalLink = function() {
+      const url = TechbizzCareerEngine.getHRPortalUrl();
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('HR Portal Link copied to clipboard!');
+      }).catch(() => {
+        prompt('Copy this HR Portal Link:', url);
+      });
+    };
+
+    window.sendPortalToWhatsApp = function() {
+      const link = TechbizzCareerEngine.getWhatsAppPortalShareLink();
+      window.open(link, '_blank');
+    };
+
+    window.showAddToHomeScreenGuide = function() {
+      openPasswordChangeTab();
+    };
+
+    // Initialize Dashboard Data
+    async function initDashboard() {
+      loadManageJobsTable();
+      loadApplicationsTable();
     }
 
-    function updateStats() {
-      const jobs = TechbizzCareerEngine.getJobs();
-      const apps = TechbizzCareerEngine.getApplications();
-      const activeJobs = jobs.filter(j => j.status === 'active');
-
-      document.getElementById('tabJobsCount').textContent = jobs.length;
-      document.getElementById('tabAppsCount').textContent = apps.length;
-      document.getElementById('portalStatsLabel').textContent = `${activeJobs.length} Active Openings • ${apps.length} Total Applicants`;
-    }
-
+    // Load & Render Jobs (Desktop Table + Mobile Cards)
     async function loadManageJobsTable() {
       const tbody = document.getElementById('manageJobsTableBody');
-      const jobs = await TechbizzCareerEngine.getJobsAsync();
+      const mobileContainer = document.getElementById('manageJobsMobileContainer');
+      const countLabel = document.getElementById('tabJobsCount');
+
+      let jobs = [];
+      try {
+        jobs = await TechbizzCareerEngine.getJobsAsync();
+      } catch (e) {
+        jobs = TechbizzCareerEngine.getJobs();
+      }
+
+      countLabel.textContent = jobs.length;
 
       if (!jobs || jobs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-white">No openings created yet. Click "Post New Opening" above!</td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-muted">No openings found. Post one using the form above!</td></tr>';
+        mobileContainer.innerHTML = '<div class="text-center py-4 text-muted">No openings found.</div>';
         return;
       }
 
-      tbody.innerHTML = jobs.map(j => {
-        const isActive = (j.status === 'active');
-        const badge = isActive ? '<span class="badge-active">Active</span>' : '<span class="badge-closed">Closed</span>';
-        const toggleBtnText = isActive ? 'Deactivate' : 'Activate';
-        const toggleBtnClass = isActive ? 'btn-outline-warning' : 'btn-outline-success';
-
+      // 1. Desktop Table View
+      tbody.innerHTML = jobs.map(job => {
+        const isActive = job.status === 'active';
         return `
           <tr>
-            <td><strong class="text-white">${j.title}</strong></td>
-            <td><span class="text-white small">${j.department}</span></td>
-            <td><span class="text-white small">${j.location}</span></td>
-            <td><span class="badge bg-purple" style="background:#7347d8;">${j.minExperience}+ Yrs</span></td>
-            <td><span class="text-white small">${j.salary}</span></td>
-            <td>${badge}</td>
+            <td>
+              <strong class="text-white">${job.title}</strong>
+              <div class="text-muted small">ID: ${job.id} &bull; ${job.date || 'Recent'}</div>
+            </td>
+            <td><span class="badge" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc;">${job.department}</span></td>
+            <td><span class="text-muted">${job.location}</span></td>
+            <td><span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #fde68a;">${job.minExperience || 0} Yrs</span></td>
+            <td><span class="text-white">${job.salary}</span></td>
+            <td>
+              <span class="badge ${isActive ? 'bg-success' : 'bg-secondary'} rounded-pill px-3 py-1">
+                ${isActive ? 'Active (Live)' : 'Closed'}
+              </span>
+            </td>
             <td class="text-end">
-              <button class="btn btn-sm ${toggleBtnClass} rounded-pill me-1" onclick="toggleJob('${j.id}')">
-                ${toggleBtnText}
+              <button class="btn btn-sm ${isActive ? 'btn-outline-warning' : 'btn-outline-success'} rounded-pill me-1" onclick="toggleJobStatus('${job.id}')" title="Toggle Active / Closed">
+                <i class="bi ${isActive ? 'bi-pause-circle' : 'bi-play-circle'}"></i> ${isActive ? 'Close' : 'Open'}
               </button>
-              <button class="btn btn-sm btn-outline-info rounded-pill me-1" onclick="editJob('${j.id}')">
-                Edit
+              <button class="btn btn-sm btn-outline-info rounded-pill me-1" onclick="editJob('${job.id}')" title="Edit Opening">
+                <i class="bi bi-pencil"></i> Edit
               </button>
-              <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="deleteJob('${j.id}')">
+              <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="deleteJob('${job.id}')" title="Delete Opening">
                 <i class="bi bi-trash"></i>
               </button>
             </td>
           </tr>
         `;
       }).join('');
-      updateStats();
+
+      // 2. Mobile Cards View
+      mobileContainer.innerHTML = jobs.map(job => {
+        const isActive = job.status === 'active';
+        return `
+          <div class="candidate-card-mobile">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <strong class="text-white fs-6">${job.title}</strong>
+                <span class="badge d-block mt-1 text-start" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc; max-width: fit-content;">${job.department}</span>
+              </div>
+              <span class="badge ${isActive ? 'bg-success' : 'bg-secondary'} rounded-pill px-2 py-1 small">
+                ${isActive ? 'Live' : 'Closed'}
+              </span>
+            </div>
+
+            <div class="text-muted small my-2">
+              <div><i class="bi bi-geo-alt text-info me-1"></i> ${job.location}</div>
+              <div><i class="bi bi-briefcase text-warning me-1"></i> Min Exp: ${job.minExperience || 0} Yrs &bull; Salary: ${job.salary}</div>
+            </div>
+
+            <div class="candidate-action-buttons">
+              <button class="btn btn-sm ${isActive ? 'btn-outline-warning' : 'btn-outline-success'} rounded-pill flex-grow-1" onclick="toggleJobStatus('${job.id}')">
+                <i class="bi ${isActive ? 'bi-pause-circle' : 'bi-play-circle'} me-1"></i> ${isActive ? 'Close' : 'Activate'}
+              </button>
+              <button class="btn btn-sm btn-outline-info rounded-pill flex-grow-1" onclick="editJob('${job.id}')">
+                <i class="bi bi-pencil me-1"></i> Edit
+              </button>
+              <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="deleteJob('${job.id}')">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
-    window.toggleJob = function(id) {
-      TechbizzCareerEngine.toggleJobStatus(id);
-      loadManageJobsTable();
-    };
+    // Load & Render Applications (Desktop Table + Mobile Cards)
+    async function loadApplicationsTable() {
+      const tbody = document.getElementById('appsTableBody');
+      const mobileContainer = document.getElementById('appsMobileContainer');
+      const countLabel = document.getElementById('tabAppsCount');
 
-    window.deleteJob = async function(id) {
-      if (confirm('Are you sure you want to delete this job opening?')) {
-        await TechbizzCareerEngine.deleteJobAsync(id);
-        loadManageJobsTable();
+      let apps = [];
+      try {
+        apps = await TechbizzCareerEngine.getApplicationsAsync();
+      } catch (e) {
+        apps = TechbizzCareerEngine.getApplications();
       }
+
+      countLabel.textContent = apps.length;
+
+      if (!apps || apps.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-muted">No candidate applications received yet.</td></tr>';
+        mobileContainer.innerHTML = '<div class="text-center py-4 text-muted">No candidate applications received yet.</div>';
+        return;
+      }
+
+      // 1. Desktop Table View
+      tbody.innerHTML = apps.map(app => {
+        const resumeBtn = app.resumeUrl 
+          ? `<a href="${app.resumeUrl}" target="_blank" class="btn btn-sm btn-outline-info rounded-pill px-3"><i class="bi bi-download me-1"></i> Resume</a>`
+          : (app.resumeDataUrl 
+              ? `<a href="${app.resumeDataUrl}" download="${app.resumeFileName || 'resume.pdf'}" class="btn btn-sm btn-outline-info rounded-pill px-3"><i class="bi bi-download me-1"></i> Resume</a>`
+              : `<span class="badge bg-secondary">No File</span>`);
+
+        const waLink = `https://wa.me/91${app.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(app.fullName)},%20Techbizz%20HR%20received%20your%20application%20for%20${encodeURIComponent(app.jobTitle)}.`;
+
+        return `
+          <tr>
+            <td><span class="text-muted small">${app.submittedAt || 'Recent'}</span></td>
+            <td>
+              <strong class="text-white">${app.fullName}</strong>
+              <div class="text-muted small">${app.city || 'Delhi NCR'} &bull; Notice: ${app.noticePeriod || 'Immediate'}</div>
+            </td>
+            <td><span class="badge" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc;">${app.jobTitle}</span></td>
+            <td><span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #fde68a;">${app.experience}</span></td>
+            <td>
+              <div class="text-white"><i class="bi bi-telephone text-success me-1"></i> ${app.phone}</div>
+              <div class="text-muted small"><i class="bi bi-envelope text-info me-1"></i> ${app.email}</div>
+            </td>
+            <td>${resumeBtn}</td>
+            <td class="text-end">
+              <a href="${waLink}" target="_blank" class="btn btn-sm btn-success rounded-circle me-1" title="Chat with Candidate on WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+              </a>
+              <a href="tel:${app.phone}" class="btn btn-sm btn-outline-light rounded-circle me-1" title="Call Candidate">
+                <i class="bi bi-telephone"></i>
+              </a>
+              <button class="btn btn-sm btn-outline-danger rounded-circle" onclick="deleteApplication('${app.id}')" title="Delete Application">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // 2. Mobile Cards View
+      mobileContainer.innerHTML = apps.map(app => {
+        const resumeBtn = app.resumeUrl 
+          ? `<a href="${app.resumeUrl}" target="_blank" class="btn btn-sm btn-outline-info rounded-pill flex-grow-1"><i class="bi bi-download me-1"></i> Resume</a>`
+          : (app.resumeDataUrl 
+              ? `<a href="${app.resumeDataUrl}" download="${app.resumeFileName || 'resume.pdf'}" class="btn btn-sm btn-outline-info rounded-pill flex-grow-1"><i class="bi bi-download me-1"></i> Resume</a>`
+              : `<span class="badge bg-secondary flex-grow-1 py-2">No File</span>`);
+
+        const waLink = `https://wa.me/91${app.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(app.fullName)},%20Techbizz%20HR%20received%20your%20application%20for%20${encodeURIComponent(app.jobTitle)}.`;
+
+        return `
+          <div class="candidate-card-mobile">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <strong class="text-white fs-6">${app.fullName}</strong>
+                <span class="badge d-block mt-1 text-start" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc; max-width: fit-content;">${app.jobTitle}</span>
+              </div>
+              <span class="badge rounded-pill px-2 py-1 small" style="background: rgba(245, 158, 11, 0.15); color: #fde68a;">
+                ${app.experience}
+              </span>
+            </div>
+
+            <div class="text-muted small my-2">
+              <div><i class="bi bi-telephone text-success me-1"></i> ${app.phone} &bull; <i class="bi bi-geo-alt text-info me-1"></i> ${app.city || 'N/A'}</div>
+              <div><i class="bi bi-envelope text-primary me-1"></i> ${app.email}</div>
+              <div><i class="bi bi-clock text-muted me-1"></i> Notice: ${app.noticePeriod || 'Immediate'} &bull; ${app.submittedAt || 'Recent'}</div>
+              ${app.note ? `<div class="mt-1 text-white-50 fst-italic">"${app.note}"</div>` : ''}
+            </div>
+
+            <div class="candidate-action-buttons">
+              <a href="${waLink}" target="_blank" class="btn btn-sm btn-success rounded-pill flex-grow-1">
+                <i class="bi bi-whatsapp me-1"></i> WhatsApp
+              </a>
+              <a href="tel:${app.phone}" class="btn btn-sm btn-outline-light rounded-pill flex-grow-1">
+                <i class="bi bi-telephone me-1"></i> Call
+              </a>
+              ${resumeBtn}
+              <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="deleteApplication('${app.id}')">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Toggle Status (Active / Closed)
+    window.toggleJobStatus = async function(id) {
+      await TechbizzCareerEngine.toggleJobStatus(id);
+      loadManageJobsTable();
+      showToast('Opening status updated successfully!');
     };
 
-    window.editJob = function(id) {
-      const job = TechbizzCareerEngine.getJobById(id);
+    // Edit Job
+    window.editJob = async function(id) {
+      let jobs = [];
+      try {
+        jobs = await TechbizzCareerEngine.getJobsAsync();
+      } catch (e) {
+        jobs = TechbizzCareerEngine.getJobs();
+      }
+
+      const job = jobs.find(j => j.id === id);
       if (!job) return;
 
       document.getElementById('editJobId').value = job.id;
@@ -734,35 +1270,61 @@ create policy "Allow public read from resumes" on storage.objects for select usi
       document.getElementById('postJobDept').value = job.department;
       document.getElementById('postJobLocation').value = job.location;
       document.getElementById('postJobType').value = job.type;
-      document.getElementById('postJobMinExp').value = job.minExperience;
+      document.getElementById('postJobMinExp').value = job.minExperience || 0;
       document.getElementById('postJobSalary').value = job.salary;
       document.getElementById('postJobStatus').value = job.status;
       document.getElementById('postJobDesc').value = job.description;
-      document.getElementById('postJobReqs').value = (job.requirements && Array.isArray(job.requirements)) ? job.requirements.join('\n') : '';
+      document.getElementById('postJobReqs').value = Array.isArray(job.requirements) ? job.requirements.join('\n') : (job.requirements || '');
 
-      document.getElementById('formHeaderTitle').textContent = `Edit Opening: ${job.title}`;
-      document.getElementById('btnPublishJob').innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Update Opening';
+      document.getElementById('formHeaderTitle').textContent = `Editing: ${job.title}`;
+      document.getElementById('publishBtnLabel').textContent = 'Update Opening';
 
-      document.getElementById('pills-post-tab').click();
+      // Switch to Post tab & scroll to top
+      const tab = new bootstrap.Tab(document.getElementById('pills-post-tab'));
+      tab.show();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    function resetJobForm() {
+    // Delete Job
+    window.deleteJob = async function(id) {
+      if (!confirm('Are you sure you want to permanently delete this opening?')) return;
+      await TechbizzCareerEngine.deleteJobAsync(id);
+      loadManageJobsTable();
+      showToast('Opening deleted successfully.');
+    };
+
+    // Delete Application
+    window.deleteApplication = function(id) {
+      if (!confirm('Are you sure you want to delete this candidate application?')) return;
+      TechbizzCareerEngine.deleteApplication(id);
+      loadApplicationsTable();
+      showToast('Candidate application removed.');
+    };
+
+    // Reset Job Form
+    window.resetJobForm = function() {
       document.getElementById('jobPostingForm').reset();
       document.getElementById('editJobId').value = '';
       document.getElementById('formHeaderTitle').textContent = 'Create New Job Opening';
-      document.getElementById('btnPublishJob').innerHTML = '<i class="bi bi-cloud-arrow-up-fill me-1"></i> Publish Opening';
+      document.getElementById('publishBtnLabel').textContent = 'Publish Opening to Website';
       document.getElementById('postAlert').style.display = 'none';
-    }
+      document.getElementById('postJobLocation').value = 'Ghaziabad, UP / Delhi NCR';
+    };
 
+    // Handle Job Posting Form Submission
     document.getElementById('jobPostingForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const alertBox = document.getElementById('postAlert');
       const submitBtn = document.getElementById('btnPublishJob');
+      const alertBox = document.getElementById('postAlert');
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Publishing...';
 
       const reqsText = document.getElementById('postJobReqs').value;
-      const reqsArray = reqsText.split('\n').map(r => r.trim()).filter(r => r.length > 0);
+      const requirements = reqsText.split('\n').map(r => r.trim()).filter(r => r.length > 0);
 
       const jobData = {
+        id: document.getElementById('editJobId').value || undefined,
         title: document.getElementById('postJobTitle').value.trim(),
         department: document.getElementById('postJobDept').value,
         location: document.getElementById('postJobLocation').value.trim(),
@@ -771,159 +1333,112 @@ create policy "Allow public read from resumes" on storage.objects for select usi
         salary: document.getElementById('postJobSalary').value.trim(),
         status: document.getElementById('postJobStatus').value,
         description: document.getElementById('postJobDesc').value.trim(),
-        requirements: reqsArray
+        requirements: requirements
       };
-
-      const existingId = document.getElementById('editJobId').value;
-      if (existingId) {
-        jobData.id = existingId;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Saving...';
 
       await TechbizzCareerEngine.saveJobAsync(jobData);
 
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Saved!';
+      submitBtn.innerHTML = '<i class="bi bi-cloud-arrow-up-fill me-1"></i> Publish Opening to Website';
 
       alertBox.className = 'alert alert-success';
-      alertBox.innerHTML = `<strong><i class="bi bi-check-circle me-1"></i> Opening Saved Successfully!</strong> It is now live on the career page.`;
+      alertBox.innerHTML = `<strong><i class="bi bi-check-circle-fill me-1"></i> Success!</strong> Opening <em>${jobData.title}</em> is now live on techbizzintegrators.in/pages/career.html`;
       alertBox.style.display = 'block';
 
+      showToast(`Opening "${jobData.title}" saved successfully!`);
+      resetJobForm();
+      loadManageJobsTable();
+
       setTimeout(() => {
-        resetJobForm();
-        document.getElementById('pills-manage-tab').click();
-      }, 1000);
+        alertBox.style.display = 'none';
+      }, 4000);
     });
 
-    async function loadApplicationsTable() {
-      const tbody = document.getElementById('appsTableBody');
-      const apps = await TechbizzCareerEngine.getApplicationsAsync();
+    // Handle Passcode Change Form Submission
+    document.getElementById('changePasscodeForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const current = document.getElementById('currentPasscodeInput').value.trim();
+      const newPass = document.getElementById('newPasscodeInput').value.trim();
+      const confirmPass = document.getElementById('confirmPasscodeInput').value.trim();
+      const alertBox = document.getElementById('passwordAlert');
+      const submitBtn = document.getElementById('btnSavePasscode');
 
-      if (!apps || apps.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-white">No applications received yet. When candidates apply on the career page, their resumes will appear here.</td></tr>`;
+      // Verify current passcode
+      const isCurrentValid = await TechbizzCareerEngine.verifyPasscodeAsync(current);
+      if (!isCurrentValid) {
+        alertBox.className = 'alert alert-danger';
+        alertBox.innerHTML = '<i class="bi bi-exclamation-triangle me-1"></i> Current passcode is incorrect.';
+        alertBox.style.display = 'block';
         return;
       }
 
-      tbody.innerHTML = apps.map(a => {
-        const cleanPhone = (a.phone || '').replace(/[^0-9]/g, '');
-        const waMsg = `Hello ${a.fullName}, this is Techbizz HR (+91 78386 66145) regarding your application for the ${a.jobTitle} role at Techbizz Integrators.`;
-        const waLink = `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(waMsg)}`;
-        const mailLink = `mailto:${a.email}?subject=${encodeURIComponent('Regarding your application at Techbizz Integrators')}&body=${encodeURIComponent('Dear ' + a.fullName + ',\n\nThank you for applying for the ' + a.jobTitle + ' role at Techbizz Integrators.')}`;
-
-        const resumeUrl = a.resumeUrl || a.resumeDataUrl;
-        const resumeBtn = resumeUrl 
-          ? `<a href="${resumeUrl}" target="_blank" download="${a.resumeFileName || 'resume.pdf'}" class="btn btn-sm btn-outline-success rounded-pill px-3 py-1"><i class="bi bi-download me-1"></i> Download Resume</a>`
-          : `<span class="text-muted small">No file attached</span>`;
-
-        return `
-          <tr>
-            <td><span class="text-white small">${a.submittedAt || 'Recent'}</span></td>
-            <td><strong class="text-white">${a.fullName}</strong><br><span class="text-muted small">${a.city || ''}</span></td>
-            <td><span class="badge bg-purple" style="background:#7347d8;">${a.jobTitle}</span></td>
-            <td><strong class="text-white">${a.experience}</strong></td>
-            <td>
-              <span class="d-block text-white small"><i class="bi bi-envelope me-1 text-primary"></i>${a.email}</span>
-              <span class="d-block text-white small"><i class="bi bi-phone me-1 text-success"></i>${a.phone}</span>
-            </td>
-            <td>${resumeBtn}</td>
-            <td class="text-end">
-              <a href="${waLink}" target="_blank" class="btn btn-sm btn-success rounded-pill px-2 me-1" title="Chat on WhatsApp" style="background: #25D366; border: none;">
-                <i class="bi bi-whatsapp"></i> Chat
-              </a>
-              <a href="${mailLink}" class="btn btn-sm btn-outline-light rounded-pill px-2 me-1" title="Email Candidate">
-                <i class="bi bi-envelope"></i>
-              </a>
-              <button class="btn btn-sm btn-outline-danger rounded-circle" onclick="deleteApp('${a.id}')" title="Delete">
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-      updateStats();
-    }
-
-    window.deleteApp = function(id) {
-      if (confirm('Delete this applicant record?')) {
-        TechbizzCareerEngine.deleteApplication(id);
-        loadApplicationsTable();
-      }
-    };
-
-    function loadSupabaseInputs() {
-      const creds = TechbizzCareerEngine.getSupabaseCredentials();
-      if (creds) {
-        document.getElementById('sbUrlInput').value = creds.url || '';
-        document.getElementById('sbKeyInput').value = creds.key || '';
-      }
-    }
-
-    document.getElementById('supabaseConfigForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const url = document.getElementById('sbUrlInput').value.trim();
-      const key = document.getElementById('sbKeyInput').value.trim();
-      const alertBox = document.getElementById('sbConfigAlert');
-
-      const ok = TechbizzCareerEngine.setSupabaseCredentials(url, key);
-      updateSyncBadge();
-
-      alertBox.className = 'alert alert-success';
-      alertBox.innerHTML = '<i class="bi bi-check-circle me-1"></i> Supabase credentials saved! All jobs and resume files are now cloud synchronized.';
-      alertBox.style.display = 'block';
-    });
-
-    function disconnectSupabase() {
-      if (confirm('Disconnect Supabase? Portal will revert to local mode.')) {
-        TechbizzCareerEngine.setSupabaseCredentials(null, null);
-        document.getElementById('sbUrlInput').value = '';
-        document.getElementById('sbKeyInput').value = '';
-        updateSyncBadge();
-        const alertBox = document.getElementById('sbConfigAlert');
+      if (newPass.length < 4) {
         alertBox.className = 'alert alert-warning';
-        alertBox.innerHTML = 'Supabase disconnected. Using local mode.';
+        alertBox.innerHTML = '<i class="bi bi-exclamation-triangle me-1"></i> New passcode must be at least 4 characters long.';
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      if (newPass !== confirmPass) {
+        alertBox.className = 'alert alert-warning';
+        alertBox.innerHTML = '<i class="bi bi-exclamation-triangle me-1"></i> New passcodes do not match.';
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Updating Passcode...';
+
+      const res = await TechbizzCareerEngine.updateHRPasscodeAsync(newPass);
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Save New Passcode';
+
+      if (res && res.success) {
+        alertBox.className = 'alert alert-success';
+        alertBox.innerHTML = '<strong><i class="bi bi-check-circle-fill me-1"></i> Passcode Updated Successfully!</strong> You can now use your new passcode on all devices.';
+        alertBox.style.display = 'block';
+        document.getElementById('changePasscodeForm').reset();
+        showToast('HR Passcode updated and synced to cloud!');
+      } else {
+        alertBox.className = 'alert alert-danger';
+        alertBox.innerHTML = `<i class="bi bi-exclamation-triangle me-1"></i> Error: ${res ? res.error : 'Failed to update passcode'}`;
         alertBox.style.display = 'block';
       }
-    }
+    });
 
-    function copySqlScript() {
-      const text = document.getElementById('sqlSetupScriptText').value;
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Supabase SQL setup script copied to clipboard! Paste it into Supabase SQL Editor.');
-      });
-    }
-
-    function exportDataFile() {
-      const dataStr = TechbizzCareerEngine.exportDataJSON();
-      const blob = new Blob([dataStr], { type: 'application/json' });
+    // Backup Export
+    window.exportDataToFile = function() {
+      const json = TechbizzCareerEngine.exportDataJSON();
+      const blob = new Blob([json], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `techbizz-careers-backup-${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `techbizz_hr_backup_${new Date().toISOString().slice(0, 10)}.json`;
       a.click();
       URL.revokeObjectURL(url);
-    }
+      showToast('Backup downloaded successfully!');
+    };
 
-    function importDataFile() {
-      const input = document.getElementById('importFileInput');
-      if (!input.files || input.files.length === 0) {
-        alert('Please select a JSON backup file first.');
-        return;
-      }
+    // Backup Import
+    window.importDataFromFile = function(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
       const reader = new FileReader();
       reader.onload = function(e) {
-        const ok = TechbizzCareerEngine.importDataJSON(e.target.result);
-        if (ok) {
-          alert('Data imported successfully!');
+        const success = TechbizzCareerEngine.importDataJSON(e.target.result);
+        if (success) {
+          showToast('Data imported successfully!');
           initDashboard();
         } else {
-          alert('Invalid backup file.');
+          alert('Failed to import backup file. Invalid format.');
         }
       };
-      reader.readAsText(input.files[0]);
-    }
+      reader.readAsText(file);
+    };
 
+    // Run auth check on load
     document.addEventListener('DOMContentLoaded', checkAuth);
   </script>
 </body>

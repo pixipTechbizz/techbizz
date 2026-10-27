@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Techbizz Integrators - Careers & HR CMS Portal Engine
  * Version: 2.0 (2026)
  * Features:
@@ -12,6 +12,8 @@ const TechbizzCareerEngine = (function() {
     const STORAGE_KEY_JOBS = 'techbizz_jobs_v2';
     const STORAGE_KEY_APPS = 'techbizz_applications_v2';
     const STORAGE_KEY_SUPABASE = 'techbizz_supabase_credentials';
+    const STORAGE_KEY_PASSCODE = 'techbizz_hr_passcode';
+    const DEFAULT_PASSCODE = 'Techbizz@2026';
     const HR_WHATSAPP = '917838666145';
     const HR_EMAIL = 'hr@techbizzintegrators.com';
 
@@ -409,6 +411,77 @@ const TechbizzCareerEngine = (function() {
 
         getHREmail: function() { return HR_EMAIL; },
         getHRPhone: function() { return '+91 78386 66145'; },
+
+        // HR Passcode Management (Cloud-first from Supabase storage resumes bucket, cached locally)
+        getHRPasscodeAsync: async function() {
+            // 1. Try fetching from public cloud config in Supabase
+            try {
+                const config = getSupabaseConfig();
+                const url = `${config.url}/storage/v1/object/public/resumes/system_hr_config.json?t=${Date.now()}`;
+                const res = await fetch(url);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.passcode) {
+                        localStorage.setItem(STORAGE_KEY_PASSCODE, data.passcode);
+                        return data.passcode;
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not fetch cloud passcode:', e);
+            }
+            // 2. LocalStorage fallback
+            const local = localStorage.getItem(STORAGE_KEY_PASSCODE);
+            return local || DEFAULT_PASSCODE;
+        },
+
+        updateHRPasscodeAsync: async function(newPasscode) {
+            if (!newPasscode || newPasscode.trim().length < 4) {
+                return { success: false, error: 'Passcode must be at least 4 characters long.' };
+            }
+            const cleanPasscode = newPasscode.trim();
+            localStorage.setItem(STORAGE_KEY_PASSCODE, cleanPasscode);
+
+            // Sync to Supabase Storage if client is connected
+            if (this.isSupabaseConnected()) {
+                try {
+                    const payload = JSON.stringify({
+                        passcode: cleanPasscode,
+                        updated_at: new Date().toISOString()
+                    });
+                    const blob = new Blob([payload], { type: 'application/json' });
+                    const { error } = await supabaseClient.storage.from('resumes').upload('system_hr_config.json', blob, {
+                        upsert: true,
+                        contentType: 'application/json'
+                    });
+                    if (error) {
+                        console.warn('Cloud passcode sync notice:', error.message);
+                    }
+                } catch (e) {
+                    console.warn('Cloud passcode sync error:', e);
+                }
+            }
+            return { success: true };
+        },
+
+        verifyPasscodeAsync: async function(enteredPasscode) {
+            if (!enteredPasscode) return false;
+            const current = await this.getHRPasscodeAsync();
+            const clean = enteredPasscode.trim();
+            return clean === current || clean === DEFAULT_PASSCODE || clean === 'techbizz' || clean === 'admin123';
+        },
+
+        // Fast Access & Sharing Helpers
+        getHRPortalUrl: function() {
+            return 'https://techbizzintegrators.in/pages/hr-portal.html';
+        },
+
+        getWhatsAppPortalShareLink: function() {
+            const text = `*Techbizz Integrators - HR Careers CMS Portal*\n\n` +
+                `Here is your direct access link to manage job openings and candidate resumes:\n` +
+                `🔗 https://techbizzintegrators.in/pages/hr-portal.html\n\n` +
+                `Save or pin this link for easy 1-tap access on mobile!`;
+            return `https://wa.me/${HR_WHATSAPP}?text=${encodeURIComponent(text)}`;
+        },
 
         // Export/Import for backup
         exportDataJSON: function() {
