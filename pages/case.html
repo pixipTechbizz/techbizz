@@ -9,7 +9,8 @@
 
   <link rel="icon" type="image/png" href="../assets/img/fevicon.png">
 
-
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -113,6 +114,7 @@
       <div class="row justify-content-center">
           <div class="col-12 text-center">
               <div class="d-flex flex-wrap justify-content-center gap-3">
+                  <button class="custom-btn01 scroll-btn active-glimpse" data-target="glimpse" style="background: linear-gradient(135deg, #00d2ff, #8f6cf6); color: #fff; font-weight: 700; border: none; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);"><i class="ri-sparkling-fill me-1"></i> Glimpse of TechBizz</button>
                   <button class="custom-btn01 scroll-btn" data-target="dooh">DOOH</button>
                   <button class="custom-btn01 scroll-btn" data-target="corporate">Corporate</button>
                  
@@ -123,6 +125,248 @@
           </div>
       </div>
   </section>
+
+<!-- =========================================================
+     GLIMPSE OF TECHBIZZ SECTION (Trusted by Leading Brands)
+     ========================================================= -->
+<section class="glimpse-section animated-section mb-5" id="glimpse">
+  <div class="container">
+    <!-- Top Pill & Header -->
+    <div class="text-center mb-5">
+      <span class="glimpse-badge">
+        <i class="ri-sparkling-fill"></i> A Glimpse of TechBizz
+      </span>
+      <h2 class="glimpse-title">Trusted by India's Leading Brands</h2>
+      <p class="glimpse-subtitle">
+        From national broadcast studios and Fortune 500 boardrooms to premier transit networks and high-street luxury retail &mdash; a glimpse into the diverse organizations that trust TechBizz turnkey integration and display solutions.
+      </p>
+    </div>
+
+    <!-- Impact Numbers Strip -->
+    <div class="row g-3 mb-5 justify-content-center">
+      <div class="col-6 col-md-3">
+        <div class="glimpse-stat-card">
+          <div class="stat-number">150+</div>
+          <div class="stat-label">Trusted Enterprises</div>
+          <div class="stat-desc">Leading National &amp; Global Brands</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="glimpse-stat-card">
+          <div class="stat-number">10+ Yrs</div>
+          <div class="stat-label">Industry Leadership</div>
+          <div class="stat-desc">Delivering Excellence Since 2013</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="glimpse-stat-card">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Screens Deployed</div>
+          <div class="stat-desc">MicroLED, 4K Video Walls &amp; DOOH</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="glimpse-stat-card">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">Mission Uptime</div>
+          <div class="stat-desc">24/7 Enterprise-Grade Reliability</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Centerpiece: Brand Wall Showcase Frame -->
+    <div class="glimpse-showcase-wrapper">
+      <!-- Frame Top Bar -->
+      <div class="glimpse-frame-header">
+        <div class="frame-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="frame-label d-none d-sm-inline">TechBizz Hall of Trust &bull; 150+ Enterprise Partners</span>
+        </div>
+        <div class="frame-actions">
+          <span class="badge-inhouse d-none d-md-inline-flex">
+            <i class="ri-checkbox-circle-fill"></i> 100% Commissioned In-House
+          </span>
+          <button type="button" class="btn-enlarge" data-bs-toggle="modal" data-bs-target="#glimpseModalCase">
+            <i class="ri-fullscreen-line"></i> <span>Enlarge Wall</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Image with Zoom on Click -->
+      <div class="glimpse-img-box" data-bs-toggle="modal" data-bs-target="#glimpseModalCase" title="Click to view full-resolution brand collage">
+        <div class="img-overlay-hint">
+          <span><i class="ri-zoom-in-line"></i> Click to inspect all 150+ brand logos</span>
+        </div>
+        <img src="../assets/img/glimpse-trusted-brands.png" alt="TechBizz Integrators - Trusted by Leading Brands" class="img-fluid glimpse-main-img">
+      </div>
+
+      <!-- Frame Footer -->
+      <div class="glimpse-frame-footer">
+        <div class="d-flex align-items-center gap-2">
+          <span class="live-dot"></span>
+          <span>Includes <strong>Google, Reliance, Adani, Delhi Metro (DMRC), IDFC First Bank, Deloitte, Tata Tanishq, Republic Media</strong> and more.</span>
+        </div>
+        <span class="text-muted fst-italic">Sahibabad Assembly Unit &bull; Vasundhara HQ</span>
+      </div>
+    </div>
+
+    <!-- Industry Sectors Grid -->
+    <div class="row g-4 mt-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="glimpse-sector-card">
+          <div class="sector-icon icon-rose"><i class="ri-tv-2-line"></i></div>
+          <h5>Media &amp; Broadcast</h5>
+          <p>Zero-flicker 7,680Hz newsroom studio video walls with camera-friendly calibrations.</p>
+          <div class="sector-brands">
+            <span>Republic Bharat</span>
+            <span>Sakshi TV</span>
+            <span>ABP News</span>
+            <span>Times Now</span>
+            <span>Zee</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="glimpse-sector-card">
+          <div class="sector-icon icon-cyan"><i class="ri-bank-line"></i></div>
+          <h5>Banking &amp; Corporate</h5>
+          <p>Executive boardrooms, command centers, and digital branch customer touchpoints.</p>
+          <div class="sector-brands">
+            <span>IDFC FIRST Bank</span>
+            <span>ICICI Bank</span>
+            <span>Bank of Baroda</span>
+            <span>Deloitte</span>
+            <span>McKinsey</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="glimpse-sector-card">
+          <div class="sector-icon icon-amber"><i class="ri-subway-line"></i></div>
+          <h5>Transit &amp; Infra</h5>
+          <p>Heavy-duty outdoor DOOH screens and 24/7 public transit passenger information displays.</p>
+          <div class="sector-brands">
+            <span>Delhi Metro</span>
+            <span>GMR Group</span>
+            <span>Adani</span>
+            <span>Hindalco</span>
+            <span>Kalyani</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="glimpse-sector-card">
+          <div class="sector-icon icon-emerald"><i class="ri-shopping-bag-3-line"></i></div>
+          <h5>Retail &amp; Lifestyle</h5>
+          <p>High-contrast luxury storefronts and dynamic multi-screen store digital branding.</p>
+          <div class="sector-brands">
+            <span>Tanishq</span>
+            <span>CaratLane</span>
+            <span>Zudio</span>
+            <span>Westside</span>
+            <span>Skechers</span>
+            <span>KFC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Continuous Logo Slider Ribbon -->
+    <div class="mt-5 pt-3 text-center">
+      <h6 class="text-uppercase text-secondary fw-bold mb-3" style="letter-spacing: 2px; font-size: 12px;">Continuous Client Partners Ribbon</h6>
+      <div class="slider-container">
+          <div class="slider-track">
+              <!-- Original Logos -->
+              <img src="../assets/img/cl1.jpeg" alt="Client 1">
+              <img src="../assets/img/cl2.jpg" alt="Client 2">
+              <img src="../assets/img/cl3.png" alt="Client 3">
+              <img src="../assets/img/delhiscrop1.png" alt="Client 4">
+              <img src="../assets/img/cl5.png" alt="Client 5">
+            
+              <img src="../assets/img/cl7.webp" alt="Client 7">
+              <img src="../assets/img/cl8.webp" alt="Client 8">
+              <img src="../assets/img/cl9.png" alt="Client 9">
+              <img src="../assets/img/cl10.png" alt="Client 10">
+              <img src="../assets/img/orralogonew.jpg" alt="Client 11">
+              <img src="../assets/img/janam.png" alt="Client 12">
+              <img src="../assets/img/bmw logo.webp" alt="Client 13">
+              <img src="../assets/img/Republicbharatlogo.png" alt="Client 14">
+              <img src="../assets/img/Citroen-Logo-2009.jpg" alt="Client 15">
+              <img src="../assets/img/aclogo.jpg" alt="Client 16">
+             
+              <img src="../assets/img/unnamed (1).png" alt="Client 18">
+              <img src="../assets/img/VLCC-Franchise-Logo.webp" alt="Client 19">
+              <img src="../assets/img/vasundhara logo.jpeg" alt="Client 20">
+              <img src="../assets/img/Nippon Mutual Fund.jpg" alt="Client 21">
+              <img src="../assets/img/unimoni_ae_logo.jpeg" alt="Client 22">
+              <img src="../assets/img/akg college logo.jpeg" alt="Client 23">
+              <img src="../assets/img/Zomato_logo.png" alt="Client 24">
+
+              <!-- Duplicate Logos for seamless scrolling -->
+              <img src="../assets/img/cl1.jpeg" alt="Client 1">
+              <img src="../assets/img/cl2.jpg" alt="Client 2">
+              <img src="../assets/img/cl3.png" alt="Client 3">
+              <img src="../assets/img/delhiscrop1.png" alt="Client 4">
+              <img src="../assets/img/cl5.png" alt="Client 5">
+              
+              <img src="../assets/img/cl7.webp" alt="Client 7">
+              <img src="../assets/img/cl8.webp" alt="Client 8">
+              <img src="../assets/img/cl9.png" alt="Client 9">
+              <img src="../assets/img/cl10.png" alt="Client 10">
+              <img src="../assets/img/orralogonew.jpg" alt="Client 11">
+              <img src="../assets/img/janam.png" alt="Client 12">
+              <img src="../assets/img/bmw logo.webp" alt="Client 13">
+              <img src="../assets/img/Republicbharatlogo.png" alt="Client 14">
+              <img src="../assets/img/Citroen-Logo-2009.jpg" alt="Client 15">
+              <img src="../assets/img/aclogo.jpg" alt="Client 16">
+             
+              <img src="../assets/img/unnamed (1).png" alt="Client 18">
+              <img src="../assets/img/VLCC-Franchise-Logo.webp" alt="Client 19">
+              <img src="../assets/img/vasundhara logo.jpeg" alt="Client 20">
+              <img src="../assets/img/Nippon Mutual Fund.jpg" alt="Client 21">
+              <img src="../assets/img/unimoni_ae_logo.jpeg" alt="Client 22">
+              <img src="../assets/img/akg college logo.jpeg" alt="Client 23">
+              <img src="../assets/img/Zomato_logo.png" alt="Client 24">
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal for High-Resolution Inspection on Case Study Page -->
+<div class="modal fade" id="glimpseModalCase" tabindex="-1" aria-labelledby="glimpseModalCaseLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered glimpse-modal-dialog">
+    <div class="modal-content glimpse-modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold text-white mb-0" id="glimpseModalCaseLabel">
+            Trusted by Leading Brands
+            <span class="badge bg-info text-dark ms-2" style="font-size: 11px;">150+ Clients</span>
+          </h5>
+          <small class="text-muted">TechBizz Integrators &bull; Official Brand Trust Collage</small>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-3 p-md-4">
+        <img src="../assets/img/glimpse-trusted-brands.png" alt="TechBizz Integrators - Trusted by Leading Brands Collage" class="img-fluid rounded">
+      </div>
+      <div class="modal-footer d-flex justify-content-between align-items-center py-2 px-3 border-secondary">
+        <span class="text-muted small">Sahibabad Facility &bull; Vasundhara Corporate HQ</span>
+        <a href="https://wa.me/919910895095?text=Hello%20Techbizz%20Integrators,%20I%20saw%20your%20clients%20collage%20and%20would%20like%20to%20discuss%20a%20project." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn btn-sm btn-success rounded-pill px-3">
+          <i class="ri-whatsapp-line me-1"></i> Connect on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
